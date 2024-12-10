@@ -1,3 +1,14 @@
 <h1>Welcome, <%= @user.email %>!</h1>
 <%= link_to 'Edit Profile', edit_user_registration_path %>
 <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+
+<h2>Your Snapshots</h2>
+<%= link_to 'New Snapshot', new_snapshot_path, class: 'btn btn-primary' %>
+
+<ul>
+  <% @snapshots.each do |snapshot| %>
+    <li>
+      <%= link_to snapshot.created_at.strftime("%B %d, %Y"), snapshot_path(snapshot) %>
+    </li>
+  <% end %>
+</ul>

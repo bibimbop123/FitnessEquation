@@ -23,4 +23,21 @@
 #
 class Snapshot < ApplicationRecord
   belongs_to :user
+
+  validates :height_cm, presence: true, numericality: { greater_than: 0 }
+  validates :weight_kg, presence: true, numericality: { greater_than: 0 }
+  validates :activity_level, presence: true, inclusion: { in: %w[low moderate high] }
+  validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
+  validates :predicted_time_weeks, presence: true, numericality: { greater_than: 0 }
+  validates :calorie_deficit_per_day, presence: true, numericality: { greater_than: 0 }
+
+  def bmr
+  end
+
+  def tdee
+  end
+
+  def daily_calories
+  end
+
 end
