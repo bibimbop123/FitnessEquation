@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-
-  # This is a blank app! Pick your first screen, build out the RCAV, and go from there. E.g.:
-
-  # get "/your_first_screen" => "pages#first"
-  
+  devise_for :users
+  resources :users, only: [:show, :edit, :update] # Add this line to define user routes
+  resources :snapshots
+  root to: "users#show"
+  get 'weight_loss_predictor', to: 'snapshots#new'
+  post 'weight_loss_predictor', to: 'snapshots#create'
 end
