@@ -1,13 +1,24 @@
-
 <%= simple_form_for(@snapshot) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.association :user %>
+    <div class="form-group">
+      <%= f.label :user, "User Email" %>
+      <p><%= @snapshot.user.email %></p>
+      <%= f.hidden_field :user_id, value: @snapshot.user_id %>
+    </div>
     <%= f.input :height_cm %>
     <%= f.input :weight_kg %>
-    <%= f.input :activity_level %>
+
+    <%= f.input :activity_level, as: :select, collection: [
+      'Sedentary (Little to no physical activity)',
+      'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)',
+      'Moderately Active (Moderate exercise or sports 3-5 days per week)',
+      'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)',
+      'Super Active (Very intense exercise, physical training twice daily, or an extremely physically demanding job)'
+    ] %>
+
     <%= f.input :goal_weight_kg %>
     <%= f.input :predicted_time_weeks %>
     <%= f.input :calorie_deficit_per_day %>

@@ -26,7 +26,13 @@ class Snapshot < ApplicationRecord
 
   validates :height_cm, presence: true, numericality: { greater_than: 0 }
   validates :weight_kg, presence: true, numericality: { greater_than: 0 }
-  validates :activity_level, presence: true, inclusion: { in: %w[low moderate high] }
+  validates :activity_level, presence: true, inclusion: { in: [
+    'Sedentary (Little to no physical activity)',
+    'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)',
+    'Moderately Active (Moderate exercise or sports 3-5 days per week)',
+    'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)',
+    'Super Active (Very intense exercise, physical training twice daily, or an extremely physically demanding job)'
+  ] }
   validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
   validates :predicted_time_weeks, presence: true, numericality: { greater_than: 0 }
   validates :calorie_deficit_per_day, presence: true, numericality: { greater_than: 0 }
@@ -39,5 +45,4 @@ class Snapshot < ApplicationRecord
 
   def daily_calories
   end
-
 end

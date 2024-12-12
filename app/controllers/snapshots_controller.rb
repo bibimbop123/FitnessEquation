@@ -13,6 +13,7 @@ class SnapshotsController < ApplicationController
   # GET /snapshots/new
   def new
     @snapshot = Snapshot.new
+    @snapshot.user = current_user 
   end
 
   # GET /snapshots/1/edit
