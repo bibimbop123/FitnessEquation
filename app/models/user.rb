@@ -22,6 +22,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :snapshots
+  has_many  :snapshots, class_name: "Snapshot", foreign_key: "user_id", dependent: :destroy
   
 end

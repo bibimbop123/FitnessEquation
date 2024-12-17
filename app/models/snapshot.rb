@@ -22,7 +22,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Snapshot < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
 
   validates :height_cm, presence: true, numericality: { greater_than: 0 }
   validates :weight_kg, presence: true, numericality: { greater_than: 0 }
@@ -38,9 +38,40 @@ class Snapshot < ApplicationRecord
   validates :calorie_deficit_per_day, presence: true, numericality: { greater_than: 0 }
 
   def bmr
+    # Ensure that the associated user has gender and age defined
+    raise "Gender and age are required for BMR calculation" unless user.gender && user.age
+  
+    # Use the Mifflin-St Jeor Equation
+    if user.gender.downcase == "male"
+      (10 * weight_kg) + (6.25 * height_cm) - (5 * user.age) + 5
+    elsif user.gender.downcase == "female"
+      (10 * weight_kg) + (6.25 * height_cm) - (5 * user.age) - 161
+    else
+      raise "Unsupported gender for BMR calculation"
+    end
   end
 
   def tdee
+    # Ensure the BMR can be calculated
+    raise "BMR calculation failed" unless bmr
+
+    # Define activity multipliers
+    activity_multipliers = {
+      'Sedentary (Little to no physical activity)' => 1.2,
+      'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)' => 1.375,
+      'Moderately Active (Moderate exercise or sports 3-5 days per week)' => 1.55,
+      'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => 1.725,
+      'Super Active (Very intense exercise, physical training twice daily, or an extremely physically demanding job)' => 1.9
+    }
+
+    # Get the activity multiplier
+    activity_multiplier = activity_multipliers[activity_level]
+
+    # Raise an error if the activity level is invalid
+    raise "Invalid activity level for TDEE calculation" unless activity_multiplier
+
+    # Calculate TDEE
+    (bmr * activity_multiplier).round(2)
   end
 
   def daily_calories
