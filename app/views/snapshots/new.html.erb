@@ -28,12 +28,42 @@
               <input type="number" class="form-control" id="age" min="0" required>
             </div>
             <div class="mb-3">
-              <label for="weight" class="form-label">Weight (in kg)</label>
-              <input type="number" class="form-control" id="weight" min="0" required>
+            <label for="weight" class="form-label">Weight (in lbs)</label>
+              <div class="form-group">
+                <input type="number" class="form-control" id="weightLbs" min="0" placeholder="Weight in lbs" required>
+                <input type="hidden" id="weightKg" name="snapshot[weight_kg]">
+              </div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                  const form = document.querySelector("form");
+                  form.addEventListener("submit", function(event) {
+                    const weightLbs = parseFloat(document.getElementById("weightLbs").value) || 0;
+                    const weightKg = weightLbs * 0.453592;
+                    document.getElementById("weightKg").value = weightKg.toFixed(2);
+                  });
+                });
+              </script>
             </div>
             <div class="mb-3">
-              <label for="height" class="form-label">Height (in cm)</label>
-              <input type="number" class="form-control" id="height" min="0" required>
+            <label for="height" class="form-label">Height (in feet and inches)</label>
+              <div class="form-group">
+                <input type="number" class="form-control" id="heightFeet" min="0" placeholder="Feet" required>
+                <input type="number" class="form-control" id="heightInches" min="0" step="0.5" placeholder="Inches" required>
+                <input type="hidden" id="heightCm" name="snapshot[height_cm]">
+              </div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                  const form = document.querySelector("form");
+                  form.addEventListener("submit", function(event) {
+                    const feet = parseFloat(document.getElementById("heightFeet").value) || 0;
+                    const inches = parseFloat(document.getElementById("heightInches").value) || 0;
+                    const heightCm = (feet * 30.48) + (inches * 2.54);
+                    document.getElementById("heightCm").value = heightCm.toFixed(2);
+                  });
+                });
+              </script>
             </div>
           </form>
         </div>
