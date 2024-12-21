@@ -10,10 +10,11 @@ class SnapshotsController < ApplicationController
   def show
   end
 
-  # GET /snapshots/new
   def new
     @snapshot = Snapshot.new
     @snapshot.user = current_user 
+    @snapshots = Snapshot.where(user: current_user)
+    
   end
 
   # GET /snapshots/1/edit
@@ -23,6 +24,7 @@ class SnapshotsController < ApplicationController
   # POST /snapshots or /snapshots.json
   def create
     @snapshot = Snapshot.new(snapshot_params)
+    @snapshot.user = current_user
 
     respond_to do |format|
       if @snapshot.save
@@ -59,13 +61,12 @@ class SnapshotsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_snapshot
-      @snapshot = Snapshot.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def snapshot_params
-      params.require(:snapshot).permit(:user_id, :height_cm, :weight_kg, :activity_level, :goal_weight_kg, :predicted_time_weeks, :calorie_deficit_per_day)
-    end
+  def set_snapshot
+    @snapshot = Snapshot.find(params[:id])
+  end
+
+  def snapshot_params
+    params.require(:snapshot).permit(:height_cm, :weight_kg, :activity_level, :goal_weight_kg, :predicted_time_weeks, :calorie_deficit_per_day, :gender, :age)
+  end
 end

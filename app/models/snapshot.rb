@@ -4,7 +4,9 @@
 #
 #  id                      :bigint           not null, primary key
 #  activity_level          :string
+#  age                     :integer
 #  calorie_deficit_per_day :integer
+#  gender                  :string
 #  goal_weight_kg          :float
 #  height_cm               :float
 #  predicted_time_weeks    :integer
@@ -36,10 +38,10 @@ class Snapshot < ApplicationRecord
   validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
   validates :predicted_time_weeks, presence: true, numericality: { greater_than: 0 }
   validates :calorie_deficit_per_day, presence: true, numericality: { greater_than: 0 }
+  validates :gender, presence: true, inclusion: { in: ['male', 'female'] }
+  validates :age, presence: true, numericality: { greater_than: 0 }
 
   def bmr
-    # Ensure that the associated user has gender and age defined
-    raise "Gender and age are required for BMR calculation" unless user.gender && user.age
   
     # Use the Mifflin-St Jeor Equation
     if user.gender.downcase == "male"
