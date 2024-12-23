@@ -44,9 +44,9 @@ class Snapshot < ApplicationRecord
   def bmr
   
     # Use the Mifflin-St Jeor Equation
-    if user.gender.downcase == "male"
+    if self.gender.downcase == "male"
       (10 * weight_kg) + (6.25 * height_cm) - (5 * user.age) + 5
-    elsif user.gender.downcase == "female"
+    elsif self.gender.downcase == "female"
       (10 * weight_kg) + (6.25 * height_cm) - (5 * user.age) - 161
     else
       raise "Unsupported gender for BMR calculation"

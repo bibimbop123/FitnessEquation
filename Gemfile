@@ -98,6 +98,7 @@ group :development do
   gem "rails-erd"
   gem "rufo"
   gem "specs_to_readme"
+  gem 'bundler-audit'
 end
 
 group :development, :test do
