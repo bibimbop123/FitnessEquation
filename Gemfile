@@ -99,6 +99,7 @@ group :development do
   gem "rufo"
   gem "specs_to_readme"
   gem 'bundler-audit'
+  gem 'brakeman'
 end
 
 group :development, :test do
