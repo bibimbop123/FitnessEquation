@@ -25,16 +25,26 @@ class SnapshotsController < ApplicationController
   def create
     @snapshot = Snapshot.new(snapshot_params)
     @snapshot.user = current_user
+    @snapshot.user_id = params.fetch("user_id")
+    @snapshot.height_cm = params.fetch("height_cm")
+    @snapshot.weight_kg = params.fetch("weight_kg")
+    @snapshot.activity_level = params.fetch("activity_level")
+    @snapshot.goal_weight_kg = params.fetch("goal_weight_kg")
+    @snapshot.predicted_time_weeks = params.fetch("predicted_time_weeks")
+    @snapshot.calorie_deficit_per_day = params.fetch("calorie_deficit_per_day")
+    @snapshot.gender = params.fetch("gender")
+    @snapshot.age = params.fetch("age")
   
-    respond_to do |format|
-    if @snapshot.save
-     format.html { redirect_to snapshot_url(@snapshot), notice: "Snapshot was successfully created." }
-     format.json { render :show, status: :created, location: @snapshot }
+    if @snapshot.gender.nil?
+      flash[:alert] = "Gender is required for BMR calculation"
+      render({ :template => "snapshots/new" })
+    elsif @snapshot.save
+      # Redirect or render a success page
+      # redirect_to snapshot_path(@snapshot)
     else
-     format.html { render :new, status: :unprocessable_entity }
-     format.json { render json: @snapshot.errors, status: :unprocessable_entity }
+      # Re-render the form with errors
+      render({ :template => "snapshots/new" })
     end
-  end
 end
   
     # PATCH/PUT /snapshots/1 or /snapshots/1.json

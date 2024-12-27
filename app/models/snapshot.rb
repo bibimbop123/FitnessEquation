@@ -4,8 +4,8 @@
 #
 #  id                      :bigint           not null, primary key
 #  activity_level          :string
-#  age                     :integer
 #  calorie_deficit_per_day :integer
+#  dob                     :date
 #  gender                  :string
 #  goal_weight_kg          :float
 #  height_cm               :float
@@ -38,19 +38,24 @@ class Snapshot < ApplicationRecord
   validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
   validates :predicted_time_weeks, presence: true, numericality: { greater_than: 0 }
   validates :calorie_deficit_per_day, presence: true, numericality: { greater_than: 0 }
-  validates :gender, presence: true, inclusion: { in: ['male', 'female'] }
-  validates :age, presence: true, numericality: { greater_than: 0 }
+  validates :gender, inclusion: { in: ['male', 'female'], allow_nil: true }
+  validates :age, numericality: { greater_than: 0, allow_nil: true }
+
 
   def bmr
   
     # Use the Mifflin-St Jeor Equation
+  
+    # Use the Mifflin-St Jeor Equation
     if self.gender.downcase == "male"
-      (10 * weight_kg) + (6.25 * height_cm) - (5 * user.age) + 5
+      bmr_value = (10 * weight_kg) + (6.25 * height_cm) - (5 * user.age) + 5
     elsif self.gender.downcase == "female"
-      (10 * weight_kg) + (6.25 * height_cm) - (5 * user.age) - 161
+      bmr_value = (10 * weight_kg) + (6.25 * height_cm) - (5 * user.age) - 161
     else
       raise "Unsupported gender for BMR calculation"
     end
+  
+    return bmr_value
   end
 
   def tdee

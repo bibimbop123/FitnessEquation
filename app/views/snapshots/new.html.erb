@@ -13,15 +13,26 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for(@snapshot, html: { id: 'userForm' }) do |f| %>
-          <div class="mb-3">
-            <%= f.label :gender, "Gender", class: "form-label" %>
-            <%= f.select :gender, options_for_select([['Choose your gender', ''], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']]), {}, input_html: { class: "form-select", required: true, id: "gender"} %>
+       <%= simple_form_for(@snapshot, { :html => { :id => 'userForm' } }) do |f| %>
+        <% if @snapshot.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@snapshot.errors.count, "error") %> prohibited this snapshot from being saved:</h2>
+            <ul>
+              <% @snapshot.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
           </div>
-          <div class="mb-3">
-            <%= f.label :age, "Age (in years)", class: "form-label" %>
-            <%= f.select :age, options_for_select((1..100).to_a), {}, input_html: { class: "form-select", required: true, id: "age"} %>
-          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= f.label :gender, "Gender", { :class => "form-label" } %>
+          <%= f.select :gender, options_for_select([['Choose your gender', nil], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], @snapshot.gender), {}, { :class => "form-select", :id => "gender" } %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :age, "Age (in years)", { :class => "form-label" } %>
+          <%= f.select :age, options_for_select((1..100).to_a, @snapshot.age), {}, { :class => "form-select", :id => "age" } %>
+        </div>
           <div class="mb-3">
             <%= f.label :weight_kg, "Weight (in lbs)", class: "form-label" %>
             <div class="form-group">
