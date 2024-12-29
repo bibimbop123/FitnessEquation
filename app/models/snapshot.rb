@@ -28,6 +28,7 @@ class Snapshot < ApplicationRecord
 
   validates :height_cm, presence: true, numericality: { greater_than: 0 }
   validates :weight_kg, presence: true, numericality: { greater_than: 0 }
+  
   validates :activity_level, presence: true, inclusion: { in: [
     'Sedentary (Little to no physical activity)',
     'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)',
@@ -39,7 +40,7 @@ class Snapshot < ApplicationRecord
   validates :predicted_time_weeks, presence: true, numericality: { greater_than: 0 }
   validates :calorie_deficit_per_day, presence: true, numericality: { greater_than: 0 }
   validates :gender, inclusion: { in: ['male', 'female'], allow_nil: true }
-  validates :age, numericality: { greater_than: 0, allow_nil: true }
+  validates :dob, presence: true
 
 
   def bmr
