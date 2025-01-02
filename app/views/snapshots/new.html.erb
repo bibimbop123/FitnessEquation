@@ -1,9 +1,20 @@
-<h1>New Basal Metabolic Rate</h1>
 
+<div class="container">
+<h1>Calculate your Basal Metabolic Rate</h1>
+
+<p>The Basal Metabolic Rate (BMR) is the number of calories your body needs to perform basic life-sustaining functions (breathing, circulation, cell production, etc.) at rest.</p>
+
+<h3> Mifflin-St Jeor Equation </h3>
+
+<p> The Mifflin-St Jeor Equation is a method used to estimate the Basal Metabolic Rate (BMR) of an individual. </p>
+
+<%= image_tag 'Mifflin.png', alt: 'Mifflin-St Jeor Equation', class: 'img-fluid' %>
+</div>
+<div>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">
-  Open Form
+  Calculate BMR
 </button>
-
+</div>
 <!-- Modal -->
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -78,6 +89,7 @@
 </div>
 
 <div id="snapshots">
+<%= pp @snapshots %>
   <% @snapshots.each do |snapshot| %>
     <%= render snapshot %>
     <div>Your Snapshots Basal Metabolic Rate is <%= snapshot.bmr %></div>
