@@ -1,9 +1,13 @@
 name: "Ruby on Rails CI"
+
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - "main"
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - "main"
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -22,14 +26,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
       - name: Set up database schema
         run: bin/rails db:schema:load
-      # This runs the tests in the spec/ folder
-      - name: Run rspec tests
+
+      - name: Run tests
         run: bundle exec rspec
 
   lint:
@@ -37,24 +43,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-         with:
-          token: ${{ secrets.GH_PAT }}
+
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      # Can add more (eg bundler-audit, brakeman, etc.)
+
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
-      - name: Lint Javascript files
+
+      - name: Lint JavaScript files
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: "18" # Specify Node.js version
       - run: npm ci
       - run: npm run lint
-  workflow:
-    jobs:
-      - test
-      - lint
-
-# This is a basic workflow to help you get started with Actions
