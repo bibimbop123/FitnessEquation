@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_21_203524) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_05_002759) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,8 +24,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_21_203524) do
     t.integer "calorie_deficit_per_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "gender"
-    t.date "dob"
     t.index ["user_id"], name: "index_snapshots_on_user_id"
   end
 
@@ -37,6 +35,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_21_203524) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "dob"
+    t.string "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -27,14 +27,6 @@ class SnapshotsController < ApplicationController
     @snapshot.user = current_user
     @snapshots = Snapshot.where(user: current_user)
 
-    if @snapshot.gender.nil?
-      flash[:alert] = "Gender is required for BMR calculation"
-      render :new
-    elsif @snapshot.save
-      redirect_to @snapshot, notice: 'Snapshot was successfully created.'
-    else
-      render :new
-    end
   end
 
   # PATCH/PUT /snapshots/1 or /snapshots/1.json

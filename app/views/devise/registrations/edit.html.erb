@@ -21,6 +21,14 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
+    <div class="mb-3">
+      <%= f.label :gender, "Gender", class: "form-label" %>
+      <%= f.select :gender, options_for_select([['Choose your gender', nil], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], @user.gender), {}, class: "form-select", id: "gender" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :dob, "Date of Birth (DD/MM/YEAR)", class: "form-label" %>
+      <%= f.date_field :dob, class: "form-control", id: "dob" %>
+    </div>
   </div>
 
   <div class="form-actions">

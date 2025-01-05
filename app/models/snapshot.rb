@@ -5,8 +5,6 @@
 #  id                      :bigint           not null, primary key
 #  activity_level          :string
 #  calorie_deficit_per_day :integer
-#  dob                     :date
-#  gender                  :string
 #  goal_weight_kg          :float
 #  height_cm               :float
 #  predicted_time_weeks    :integer
@@ -39,8 +37,7 @@ class Snapshot < ApplicationRecord
   validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
   validates :predicted_time_weeks, presence: true, numericality: { greater_than: 0 }
   validates :calorie_deficit_per_day, presence: true, numericality: { greater_than: 0 }
-  validates :gender, inclusion: { in: ['male', 'female'], allow_nil: true }
-  validates :dob, presence: true
+ 
 
 
   def bmr

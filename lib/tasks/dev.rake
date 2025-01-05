@@ -1,6 +1,8 @@
 
 desc "Fill the database tables with some sample data"
 task({ :sample_data => :environment }) do
+  current_user = User.first
+
   25.times do 
     user = User.new
     user.email = Faker::Name.first_name + "@example.com"
@@ -11,7 +13,7 @@ task({ :sample_data => :environment }) do
   end
   25.times do
     snapshot = Snapshot.new
-    snapshot.user_id = User.all.sample.id
+    snapshot.user_id = current_user.id
     snapshot.height_cm = rand(150..200)
     snapshot.weight_kg = rand(50..150)
     snapshot.activity_level = ["sedentary", "lightly active", "moderately active", "very active"].sample
