@@ -1,92 +1,75 @@
-# Rails Template
+# Fitness Equation 
 
-This is a base Ruby on Rails repository configured for learning with Codespaces (and Gitpod).
-
-- Ruby version: `3.2.1`
-- Rails version: `7.1.3.3`
+## Description:
+An app that predicts the shortest amount of time to reach your goal weight.
 
 
-We've added additional Ruby gems and other software that aren't automatically available in a new Rails app, and configured 
+## Pain Point
 
-### UJS and Turbo
 
-In Rails version 7, support for Unobtrusive JavaScript (UJS) is not the default. Rather, [this has been replaced with Turbo](https://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbo).
+This project addresses the obesity epidemic in America. Can be used with all populations regardless of race, gender, religion. 
+As a personal trainer, I often couldn't tell my clients when exactly they should reach goal weight in a healthy timeline
 
-However, in AppDev, we typically want to first demonstrate UJS and then enable Turbo manually when we want it.
+## Target User Persona
 
-Therefore, UJS has been pre-configured here with these steps: 
 
-- Pin UJS + jQuery in `config/importmap.rb` by running:
+- Personal trainers
+- People who want to lose weight
+- People who want to envision a healthier reality for themselves!
 
-    ```
-    % ./bin/importmap pin @rails/ujs
-    % ./bin/importmap pin jquery
-    ```
+## Hypothesis
+If a person uses fitness equation to lose weight, they will achieve their goals in the shortest amount of time to reach their goal weight.
 
-- Add UJS + jQuery via:
 
-    ```js
-    // app/javascript/application.js
-    import jquery from "jquery";
-    window.jQuery = jquery;
-    window.$ = jquery;
-    import Rails from "@rails/ujs"
-    Rails.start();
-    ```
+## User Stories
 
-UJS and Turbo can co-exist side-by-side with [these instructions, which we already implemented here](https://github.com/hotwired/turbo-rails/blob/main/UPGRADING.md#upgrading-from-rails-ujs--turbolinks-to-turbo).
+- As a personal trainer, I want to be able to calculate the shortest amount of time to achieve goal weight, so that my clients know what to expect in their healthy weightloss timeline.
+- As a person trying to lose weight, I want to be able to convert my height from feet and inches to cm, and my weight from lbs to kg, so that I'm able to visualize my atheletic potential in different metrics.
 
-By default, Turbo is disabled via:
 
-```js
-// app/javascript/application.js
-import { Turbo } from "@hotwired/turbo-rails"
-Turbo.session.drive = false
-```
 
-Set it to `true` to enable Turbo everywhere, or you can use `data-turbo="true"` to enable Drive on a per-element basis while leaving it globally `false`.
+## Domain Model
+**ERD (Entity-Relationship Diagram):**  
+Users, Snapshots
 
-### Additional gems:
 
-- [`appdev_support`](https://github.com/firstdraft/appdev_support)
-- [`annotate`](https://github.com/ctran/annotate_models)
-- [`awesome_print`](https://github.com/awesome-print/awesome_print)
-- [`better_errors`](https://github.com/BetterErrors/better_errors)
-- [`binding_of_caller`](https://github.com/banister/binding_of_caller)
-- [`dotenv-rails`](https://github.com/bkeepers/dotenv)
-- [`draft_generators`](https://github.com/firstdraft/draft_generators/)
-- [`draft_matchers`](https://github.com/jelaniwoods/draft_matchers/)
-- [`devise`](https://github.com/heartcombo/devise)
-- [`faker`](https://github.com/faker-ruby/faker)
-- [`grade_runner`](https://github.com/firstdraft/grade_runner/)
-- [`htmlbeautifier`](https://github.com/threedaymonk/htmlbeautifier/)
-- [`http`](https://github.com/httprb/http)
-- [`pry_rails`](https://github.com/pry/pry-rails)
-- [`rails_db`](https://github.com/igorkasyanchuk/rails_db)
-- [`rails-erd`](https://github.com/voormedia/rails-erd)
-- [`rspec-html-matchers`](https://github.com/kucaahbe/rspec-html-matchers)
-- [`rspec-rails`](https://github.com/rspec/rspec-rails)
-- [`rufo`](https://github.com/ruby-formatter/rufo)
-- [`specs_to_readme`](https://github.com/firstdraft/specs_to_readme)
-- [`table_print`](https://github.com/arches/table_print)
-- [`web_git`](https://github.com/firstdraft/web_git)
-- [`webmock`](https://github.com/bblimke/webmock)
+**Pseudocode Models:**  
+Relationships Summary:
+1. Users to Snapshots: One-to-many (A user has many snapshots).
 
-### Additional software:
-- OS Ubuntu 20.04.5 LTS
-- Chromedriver
-- Fly.io's `flyctl`
-- Google Chrome (headless browser)
-- Graphviz
-- Node JS 18
-- NPM 8.19.3
-- Postgresql 12
-- Redis
-- Yarn
 
-### VS Code extensions:
-- vortizhe.simple-ruby-erb
-- mbessey.vscode-rufo
-- aliariff.vscode-erb-beautify
-- eamodio.gitlens
-- setobiralo.erb-commenter
+
+
+
+## Sketches
+Start app
+
+Login and register form
+
+After logging in it takes you to a profile page
+
+In the profile page it asks for the following
+your height in feet and inches
+And weight in pounds
+
+After collecting your weight and height in pounds and feet and inches 
+it converts and displays your height and weight to inches then to  cm and kg with the respective inches and pounds also displayed
+
+also collects
+
+Age in years
+
+Activity level
+
+And gender
+.
+
+One link to the weight loss predictor
+has two different formulas depending on whether you are female or male
+There you input your goal weight. And it will then calculate the the shortest amount of time to attain the goal weight in a healthy weightloss timeline for you. You can save your predictions in your feed
+
+
+**Reach goals**
+(There another link to the Ideal body weight
+Here you will there will be two different formulas one for female and one for male. It will take the height converted to just inches and weight in kg.)
+
