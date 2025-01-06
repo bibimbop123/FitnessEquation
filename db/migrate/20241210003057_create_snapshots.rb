@@ -8,8 +8,6 @@ class CreateSnapshots < ActiveRecord::Migration[7.1]
       t.float :goal_weight_kg
       t.integer :predicted_time_weeks
       t.integer :calorie_deficit_per_day
-      t.date :dob
-      t.gender :string
 
       t.timestamps
     end
