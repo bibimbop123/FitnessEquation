@@ -25,10 +25,24 @@ class SnapshotsController < ApplicationController
   def create
     @snapshot = Snapshot.new(snapshot_params)
     @snapshot.user = current_user
-    @snapshots = Snapshot.where(user: current_user)
-
+  
+    # Calculate predicted_time_weeks
+    weight_difference = (@snapshot.weight_kg - @snapshot.goal_weight_kg).abs
+    calorie_difference_per_week = @snapshot.calorie_deficit_or_surplus_per_day * 7 / 7700.0
+    @snapshot.predicted_time_weeks = (weight_difference / calorie_difference_per_week).ceil
+  
+    @snapshots = Snapshot.where(user_id: current_user.id)
+  
+    respond_to do |format|
+      if @snapshot.save
+        format.html { redirect_to snapshot_url(@snapshot), notice: "Snapshot was successfully created." }
+        format.json { render :show, status: :created, location: @snapshot }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @snapshot.errors, status: :unprocessable_entity }
+      end
+    end
   end
-
   # PATCH/PUT /snapshots/1 or /snapshots/1.json
   def update
     respond_to do |format|
@@ -40,7 +54,7 @@ class SnapshotsController < ApplicationController
         format.json { render json: @snapshot.errors, status: :unprocessable_entity }
       end
     end
-  end
+    end
 
   # DELETE /snapshots/1 or /snapshots/1.json
   def destroy
@@ -59,6 +73,6 @@ class SnapshotsController < ApplicationController
   end
 
   def snapshot_params
-    params.require(:snapshot).permit(:height_cm, :weight_kg, :activity_level, :goal_weight_kg, :predicted_time_weeks, :calorie_deficit_per_day, :gender, :dob)
+    params.require(:snapshot).permit(:height_cm, :weight_kg, :activity_level, :goal_weight_kg, :predicted_time_weeks, :calorie_deficit_per_day, :gender, :dob, :calorie_deficit_or_surplus_per_day)
   end
 end

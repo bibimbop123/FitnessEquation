@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_05_002759) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_06_002424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_05_002759) do
     t.string "activity_level"
     t.float "goal_weight_kg"
     t.integer "predicted_time_weeks"
-    t.integer "calorie_deficit_per_day"
+    t.integer "calorie_deficit_or_surplus_per_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_snapshots_on_user_id"
