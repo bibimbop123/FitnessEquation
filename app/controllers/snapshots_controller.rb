@@ -26,8 +26,8 @@ class SnapshotsController < ApplicationController
     @snapshot.user = current_user
 
     # Convert weight from pounds to kilograms
-    weight_lbs = params.fetch("snapshot").fetch("weightLbs").to_f
-    @snapshot.weight_kg = (weight_lbs * 0.453592).round(2)
+    @weight_lbs = params.fetch("snapshot").fetch("weightLbs").to_f
+    @snapshot.weight_kg = (@weight_lbs * 0.453592).round(2)
 
     # Convert height from feet and inches to centimeters
     height_feet = params.fetch("snapshot").fetch("heightFeet").to_i

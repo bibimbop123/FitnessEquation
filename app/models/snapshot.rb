@@ -41,7 +41,7 @@ class Snapshot < ApplicationRecord
     "lightly_active" => 1.375,
     "moderately_active" => 1.55,
     "very_active" => 1.725,
-    "extra_active" => 1.9
+    "super_active" => 1.9
   }.freeze
 
   def bmr
@@ -64,9 +64,6 @@ class Snapshot < ApplicationRecord
     bmr * ACTIVITY_FACTORS[activity_level]
   end
 
-  def age
-    ((Time.zone.now - user.birthday.to_time) / 1.year.seconds).floor
-  end
 
   def predicted_time_weeks
     weight_difference = (weight_kg - goal_weight_kg).abs
