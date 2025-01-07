@@ -59,8 +59,10 @@
           ]), {}, class: "form-select", id: "activityLevel" %>
         </div>
           <div class="mb-3">
-            <%= f.label :goal_weight_kg, "Goal Weight (in kg)", class: "form-label" %>
-            <%= f.number_field :goal_weight_kg, class: "form-control", id: "goalWeightKg", min: 0, step: 0.1 %>
+            <%= f.label :goal_weight_lbs, "Goal Weight (in lbs)", class: "form-label" %>
+            <div class="form-group d-flex">
+              <%= number_field_tag "snapshot[goal_weight_lbs]", nil, class: "form-control me-2", id: "goalWeightLbs", min: 0, placeholder: "Pounds", required: true %>
+            </div>
           </div>
           <div class="mb-3">
             <%= f.label :calorie_deficit_or_surplus_per_day, "Calorie Deficit or Surplus per Day", class: "form-label" %>

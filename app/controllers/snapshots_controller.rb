@@ -34,6 +34,8 @@ class SnapshotsController < ApplicationController
     height_inches = params.fetch("snapshot").fetch("heightInches").to_f
     total_height_inches = (height_feet * 12) + height_inches
     @snapshot.height_cm = (total_height_inches * 2.54).round(2)
+    goal_weight_lbs = params.fetch("snapshot").fetch("goal_weight_lbs").to_f
+    @snapshot.goal_weight_kg = (goal_weight_lbs * 0.453592).round(2)
 
     # how to calculate the predicted time in weeks when it's a surplus or deficit?
     weight_difference = @snapshot.weight_kg - @snapshot.goal_weight_kg
