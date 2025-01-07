@@ -13,7 +13,6 @@ class SnapshotsController < ApplicationController
   # GET /snapshots/new
   def new
     @snapshot = Snapshot.new
-    @snapshot.user = current_user
     @snapshots = Snapshot.where(user: current_user)
   end
 
@@ -25,24 +24,42 @@ class SnapshotsController < ApplicationController
   def create
     @snapshot = Snapshot.new(snapshot_params)
     @snapshot.user = current_user
-  
-    # Calculate predicted_time_weeks
-    weight_difference = (@snapshot.weight_kg - @snapshot.goal_weight_kg).abs
+
+    # Convert weight from pounds to kilograms
+    weight_lbs = params.fetch("snapshot").fetch("weightLbs").to_f
+    @snapshot.weight_kg = (weight_lbs * 0.453592).round(2)
+
+    # Convert height from feet and inches to centimeters
+    height_feet = params.fetch("snapshot").fetch("heightFeet").to_i
+    height_inches = params.fetch("snapshot").fetch("heightInches").to_f
+    total_height_inches = (height_feet * 12) + height_inches
+    @snapshot.height_cm = (total_height_inches * 2.54).round(2)
+
+    # how to calculate the predicted time in weeks when it's a surplus or deficit?
+    weight_difference = @snapshot.weight_kg - @snapshot.goal_weight_kg
     calorie_difference_per_week = @snapshot.calorie_deficit_or_surplus_per_day * 7 / 7700.0
     @snapshot.predicted_time_weeks = (weight_difference / calorie_difference_per_week).ceil
-  
+    if @snapshot.predicted_time_weeks < 0
+      @snapshot.predicted_time_weeks = (weight_difference / -calorie_difference_per_week).ceil
+    end
+
+
+
     @snapshots = Snapshot.where(user_id: current_user.id)
-  
+
     respond_to do |format|
       if @snapshot.save
         format.html { redirect_to snapshot_url(@snapshot), notice: "Snapshot was successfully created." }
         format.json { render :show, status: :created, location: @snapshot }
       else
+        # Debugging output
+        Rails.logger.debug("Snapshot save failed: #{@snapshot.errors.full_messages.join(', ')}")
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @snapshot.errors, status: :unprocessable_entity }
       end
     end
   end
+
   # PATCH/PUT /snapshots/1 or /snapshots/1.json
   def update
     respond_to do |format|
@@ -54,12 +71,11 @@ class SnapshotsController < ApplicationController
         format.json { render json: @snapshot.errors, status: :unprocessable_entity }
       end
     end
-    end
+  end
 
   # DELETE /snapshots/1 or /snapshots/1.json
   def destroy
     @snapshot.destroy!
-
     respond_to do |format|
       format.html { redirect_to snapshots_url, notice: "Snapshot was successfully destroyed." }
       format.json { head :no_content }
@@ -73,6 +89,6 @@ class SnapshotsController < ApplicationController
   end
 
   def snapshot_params
-    params.require(:snapshot).permit(:height_cm, :weight_kg, :activity_level, :goal_weight_kg, :predicted_time_weeks, :calorie_deficit_per_day, :gender, :dob, :calorie_deficit_or_surplus_per_day)
+    params.require(:snapshot).permit(:height_cm, :weight_kg, :activity_level, :goal_weight_kg, :predicted_time_weeks, :calorie_deficit_or_surplus_per_day, :gender, :dob)
   end
 end

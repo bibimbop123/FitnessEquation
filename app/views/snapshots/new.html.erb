@@ -37,21 +37,19 @@
           <% end %>
           <div class="mb-3">
             <%= f.label :weight_kg, "Weight (in lbs)", class: "form-label" %>
-            <div class="form-group">
-              <%= f.input :weight_kg, as: :hidden, input_html: { id: "weight_kg" } %>
-              <input type="number" class="form-control" id="weightLbs" min="0" placeholder="Weight (in lbs)" required>
+            <div class="form-group d-flex">
+              <%= number_field_tag "snapshot[weightLbs]", nil, class: "form-control me-2", id: "weightLbs", min: 0, placeholder: "Pounds", required: true %>
             </div>
           </div>
           <div class="mb-3">
-            <%= f.label :height_cm, "Height (in feet and inches)", class: "form-label" %>
-            <div class="form-group">
-              <input type="number" class="form-control" id="heightFeet" min="0" placeholder="Feet" required>
-              <input type="number" class="form-control" id="heightInches" min="0" step="0.5" placeholder="Inches" required>
-              <%= f.input :height_cm, as: :hidden, input_html: { id: "height_cm" } %>
+              <%= f.label :height_cm, "Height (in feet and inches)", class: "form-label" %>
+              <div class="form-group d-flex">
+                <%= number_field_tag "snapshot[heightFeet]", nil, class: "form-control me-2", id: "heightFeet", min: 0, placeholder: "Feet", required: true %>
+                <%= number_field_tag "snapshot[heightInches]", nil, class: "form-control", id: "heightInches", min: 0, step: 0.5, placeholder: "Inches", required: true %>
+              </div>
             </div>
-          </div>
           <div class="mb-3">
-          <%= f.label :activity_level, "Activity Level", class: "form-label" %>
+          <%= f.label :activity_level, "Activity Level", class: "form-label"%>
           <%= f.select :activity_level, options_for_select([
             ['Sedentary (Little to no physical activity)', 'sedentary'],
             ['Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)', 'lightly_active'],
@@ -77,21 +75,21 @@
   </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("userForm");
-    form.addEventListener("submit", function(event) {
-      const weightLbs = parseFloat(document.getElementById("weightLbs").value) || 0;
-      const weightKg = weightLbs * 0.453592;
-      document.getElementById("weight_kg").value = weightKg.toFixed(2);
+# <script>
+#   document.addEventListener("DOMContentLoaded", function() {
+#     const form = document.getElementById("userForm");
+#     form.addEventListener("submit", function(event) {
+#       const weightLbs = parseFloat(document.getElementById("weightLbs").value) || 0;
+#       const weightKg = weightLbs * 0.453592;
+#       document.getElementById("weight_kg").value = weightKg.toFixed(2);
 
-      const feet = parseFloat(document.getElementById("heightFeet").value) || 0;
-      const inches = parseFloat(document.getElementById("heightInches").value) || 0;
-      const heightCm = (feet * 30.48) + (inches * 2.54);
-      document.getElementById("height_cm").value = heightCm.toFixed(2);
-    });
-  });
-</script>
+#       const feet = parseFloat(document.getElementById("heightFeet").value) || 0;
+#       const inches = parseFloat(document.getElementById("heightInches").value) || 0;
+#       const heightCm = (feet * 30.48) + (inches * 2.54);
+#       document.getElementById("height_cm").value = heightCm.toFixed(2);
+#     });
+#   });
+# </script>
 
 <div>
   <%= link_to "Back to snapshots", snapshots_path %>
