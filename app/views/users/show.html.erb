@@ -1,11 +1,12 @@
+<div class="text-center">
+  <h2>Your Snapshots</h2>
+  <%= link_to 'New Weight Gain/Loss Prediction', new_snapshot_path, class: 'btn btn-primary' %>
 
-<h2>Your Snapshots</h2>
-<%= link_to 'New Weight Gain/Loss Prediction', new_snapshot_path, class: 'btn btn-primary' %>
-
-<ul>
-  <% @snapshots.each do |snapshot| %>
-    <li>
-      <%= link_to snapshot.created_at.strftime("%B %d, %Y"), snapshot_path(snapshot) %>
-    </li>
-  <% end %>
-</ul>
+  <ul class="list-unstyled">
+    <% @snapshots.each do |snapshot| %>
+      <li>
+        <%= link_to snapshot.created_at.strftime("%B %d, %Y"), snapshot_path(snapshot) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

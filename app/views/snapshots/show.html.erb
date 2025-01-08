@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div class="text-center">
+  <p style="color: green"><%= notice %></p>
 
-<%= render partial: 'snapshot', locals: { snapshot: @snapshot, weightLbs: (@snapshot.weight_kg / 0.453592).round(2), height_feet: (@snapshot.height_cm / 30.48).to_i, height_inches: ((@snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (@snapshot.goal_weight_kg / 0.453592).round(2) } %>
+  <%= render partial: 'snapshot', locals: { snapshot: @snapshot, weightLbs: (@snapshot.weight_kg / 0.453592).round(2), height_feet: (@snapshot.height_cm / 30.48).to_i, height_inches: ((@snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (@snapshot.goal_weight_kg / 0.453592).round(2) } %>
 
-<div>
-  <%= link_to "Edit this snapshot", edit_snapshot_path(@snapshot) %> |
-  <%= link_to "Back to snapshots", snapshots_path %>
+  <div>
+    <%= link_to "Back to snapshots", snapshots_path %>
 
-  <%= button_to "Destroy this snapshot", @snapshot, method: :delete %>
+
+    <%= button_to "Destroy this snapshot", @snapshot, method: :delete %>
+  </div>
+
+  <div> 
+  <%= link_to "Create new snapshot", new_snapshot_path %>
+  
+  </div>
 </div>
