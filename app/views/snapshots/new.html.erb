@@ -1,4 +1,4 @@
-
+<div class="custom-orange-bg">
 <div class="container text-center">
 <h3>Calculate your Basal Metabolic Rate</h3>
 
@@ -26,7 +26,7 @@
 </div>
 <div class="text-center">
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">
-  Calculate BMR
+  Calculate Weight Gain/Loss Prediction
 </button>
 </div>
 <!-- Modal -->
@@ -83,7 +83,7 @@
             <%= f.number_field :calorie_deficit_or_surplus_per_day, class: "form-control", id: "calorieDeficitorSurplusPerDay", min: 0 %>
           </div>
           <div class="form-actions">
-            <%= f.button :submit, "Calculate BMR", class: "btn btn-primary" %>
+            <%= f.button :submit, "Calculate Snapshot", class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>
@@ -96,16 +96,25 @@
   <%= link_to "Back to snapshots", snapshots_path %>
   </div>
 
-<div id="snapshots" class="text-center">
-  <%= pp @snapshots %>
-  <% @snapshots.each do |snapshot| %>
-    <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: (snapshot.weight_kg / 0.453592).round(2), height_feet: (snapshot.height_cm / 30.48).to_i, height_inches: ((snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (snapshot.goal_weight_kg / 0.453592).round(2) } %>
-    <div>Your Snapshots Basal Metabolic Rate is <%= snapshot.bmr %></div>
-    <p>
-      <%= link_to "Show this snapshot", snapshot %>
-    </p>
-  <% end %>
+
+<div id="snapshots" class="container">
+  <div class="row">
+    <% @snapshots.each do |snapshot| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: (snapshot.weight_kg / 0.453592).round(2), height_feet: (snapshot.height_cm / 30.48).to_i, height_inches: ((snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (snapshot.goal_weight_kg / 0.453592).round(2) } %>
+            <p>
+              <%= link_to "Show this snapshot", snapshot, class: "btn btn-primary" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 
+
+</div>
 </div>

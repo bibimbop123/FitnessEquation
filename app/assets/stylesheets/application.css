@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+ .custom-green-bg {
+  background-color: #32CD32 !important; /* Bootstrap's green color */
+}
+ .custom-orange-bg {
+  background-color: #FFA500 !important; /* Bootstrap's orange color *//* Bootstrap's orange color */
+}
+ .custom-red-bg {
+  background-color: #FF6347 !important;/* Bootstrap's red color */
+}
