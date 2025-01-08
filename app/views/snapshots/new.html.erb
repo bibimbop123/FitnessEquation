@@ -1,6 +1,6 @@
 
-<div class="container">
-<h1>Calculate your Basal Metabolic Rate</h1>
+<div class="container text-center">
+<h3>Calculate your Basal Metabolic Rate</h3>
 
 <p>The Basal Metabolic Rate (BMR) is the number of calories your body needs to perform basic life-sustaining functions (breathing, circulation, cell production, etc.) at rest.</p>
 
@@ -8,7 +8,7 @@
 
 <p> The Mifflin-St Jeor Equation is a method used to estimate the Basal Metabolic Rate (BMR) of an individual. </p>
 
-<p> To calculate BMR use this formula: </p>
+<h1> To calculate BMR use this formula: </h1>
 
 <%= image_tag 'Mifflin.png', alt: 'Mifflin-St Jeor Equation', class: 'img-fluid' %>
 
@@ -16,15 +16,15 @@
 
 <p> To lose weight, you need to consume fewer calories than your TDEE. To gain weight, you need to consume more calories than your TDEE. </p>
 
-<p> To calculate TDEE use this formula: </p>
+<h1> To calculate TDEE use this formula: </h1>
 
 <%= image_tag 'tdee.png', alt: 'Total Daily Energy Expenditure', class: 'img-fluid' %>
 
-<p> To calculate predicted weight loss time in weeks using this formula: </p>
+<h1> To calculate predicted weight loss time in weeks using this formula: </h1>
 
 <%= image_tag 'predictedwlosstime.png', alt: 'Predicted Weight Loss Time Formula', class: 'img-fluid'    %>
 </div>
-<div>
+<div class="text-center">
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">
   Calculate BMR
 </button>
@@ -91,34 +91,21 @@
   </div>
 </div>
 
-# <script>
-#   document.addEventListener("DOMContentLoaded", function() {
-#     const form = document.getElementById("userForm");
-#     form.addEventListener("submit", function(event) {
-#       const weightLbs = parseFloat(document.getElementById("weightLbs").value) || 0;
-#       const weightKg = weightLbs * 0.453592;
-#       document.getElementById("weight_kg").value = weightKg.toFixed(2);
 
-#       const feet = parseFloat(document.getElementById("heightFeet").value) || 0;
-#       const inches = parseFloat(document.getElementById("heightInches").value) || 0;
-#       const heightCm = (feet * 30.48) + (inches * 2.54);
-#       document.getElementById("height_cm").value = heightCm.toFixed(2);
-#     });
-#   });
-# </script>
-
-<div>
+<div class="text-center">
   <%= link_to "Back to snapshots", snapshots_path %>
-</div>
+  </div>
 
-<div id="snapshots">
-<%= pp @snapshots %>
+<div id="snapshots" class="text-center">
+  <%= pp @snapshots %>
   <% @snapshots.each do |snapshot| %>
-    <%= render snapshot %>
+    <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: (snapshot.weight_kg / 0.453592).round(2), height_feet: (snapshot.height_cm / 30.48).to_i, height_inches: ((snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (snapshot.goal_weight_kg / 0.453592).round(2) } %>
     <div>Your Snapshots Basal Metabolic Rate is <%= snapshot.bmr %></div>
     <p>
       <%= link_to "Show this snapshot", snapshot %>
     </p>
   <% end %>
+</div>
+
 
 </div>

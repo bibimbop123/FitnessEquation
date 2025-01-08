@@ -4,7 +4,7 @@
 
 <div id="snapshots">
   <% @snapshots.each do |snapshot| %>
-    <%= render snapshot %>
+    <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: (snapshot.weight_kg / 0.453592).round(2), height_feet: (snapshot.height_cm / 30.48).to_i, height_inches: ((snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (snapshot.goal_weight_kg / 0.453592).round(2) } %>
     <p>
       <%= link_to "Show this snapshot", snapshot %>
     </p>

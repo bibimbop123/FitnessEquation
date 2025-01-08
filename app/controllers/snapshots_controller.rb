@@ -3,11 +3,18 @@ class SnapshotsController < ApplicationController
 
   # GET /snapshots or /snapshots.json
   def index
-    @snapshots = Snapshot.all
+    @snapshots = Snapshot.where(user: current_user)
+    
   end
 
   # GET /snapshots/1 or /snapshots/1.json
   def show
+    @snapshot = Snapshot.find(params[:id])
+    @weightLbs = (@snapshot.weight_kg / 0.453592).round(2)
+    total_height_inches = (@snapshot.height_cm / 2.54).round(2)
+    @height_feet = (total_height_inches / 12).to_i
+    @height_inches = (total_height_inches % 12).round(2)
+    @goal_weight_lbs = (@snapshot.goal_weight_kg / 0.453592).round(2)
   end
 
   # GET /snapshots/new
@@ -15,7 +22,6 @@ class SnapshotsController < ApplicationController
     @snapshot = Snapshot.new
     @snapshots = Snapshot.where(user: current_user)
   end
-
   # GET /snapshots/1/edit
   def edit
   end
@@ -26,26 +32,24 @@ class SnapshotsController < ApplicationController
     @snapshot.user = current_user
 
     # Convert weight from pounds to kilograms
-    @weight_lbs = params.fetch("snapshot").fetch("weightLbs").to_f
-    @snapshot.weight_kg = (@weight_lbs * 0.453592).round(2)
+    @weightLbs = params.fetch("snapshot").fetch("weightLbs").to_f
+    @snapshot.weight_kg = (@weightLbs * 0.453592).round(2)
 
     # Convert height from feet and inches to centimeters
-    height_feet = params.fetch("snapshot").fetch("heightFeet").to_i
-    height_inches = params.fetch("snapshot").fetch("heightInches").to_f
-    total_height_inches = (height_feet * 12) + height_inches
+    @height_feet = params.fetch("snapshot").fetch("heightFeet").to_i
+    @height_inches = params.fetch("snapshot").fetch("heightInches").to_f
+    total_height_inches = (@height_feet * 12) + @height_inches
     @snapshot.height_cm = (total_height_inches * 2.54).round(2)
-    goal_weight_lbs = params.fetch("snapshot").fetch("goal_weight_lbs").to_f
-    @snapshot.goal_weight_kg = (goal_weight_lbs * 0.453592).round(2)
+    @goal_weight_lbs = params.fetch("snapshot").fetch("goal_weight_lbs").to_f
+    @snapshot.goal_weight_kg = (@goal_weight_lbs * 0.453592).round(2)
 
-    # how to calculate the predicted time in weeks when it's a surplus or deficit?
+    # Calculate predicted_time_weeks
     weight_difference = @snapshot.weight_kg - @snapshot.goal_weight_kg
     calorie_difference_per_week = @snapshot.calorie_deficit_or_surplus_per_day * 7 / 7700.0
     @snapshot.predicted_time_weeks = (weight_difference / calorie_difference_per_week).ceil
     if @snapshot.predicted_time_weeks < 0
       @snapshot.predicted_time_weeks = (weight_difference / -calorie_difference_per_week).ceil
     end
-
-
 
     @snapshots = Snapshot.where(user_id: current_user.id)
 
@@ -56,7 +60,7 @@ class SnapshotsController < ApplicationController
       else
         # Debugging output
         Rails.logger.debug("Snapshot save failed: #{@snapshot.errors.full_messages.join(', ')}")
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, locals: { weightLbs: @weightLbs, height_feet: @height_feet, height_inches: @height_inches, goal_weight_lbs: @goal_weight_lbs } }
         format.json { render json: @snapshot.errors, status: :unprocessable_entity }
       end
     end
