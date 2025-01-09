@@ -1,8 +1,8 @@
 <div class="text-center custom-orange-bg">
   <br/>
 
- <h1 class="fitness-font">Don't drive yourself crazy with your fitness goals, predict your future now!</h1> 
- 
+ <h1 class="fitness-font">Don't drive yourself crazy with your fitness goals</h1> 
+
 <div id="fitnessCarousel" class="carousel slide" data-bs-ride="carousel">
   <ol class="carousel-indicators">
     <li data-bs-target="#fitnessCarousel" data-bs-slide-to="0" class="active"></li>
@@ -37,10 +37,15 @@
     <span class="visually-hidden">Next</span>
   </a>
 </div>
-</p>
-  <h2>Your Snapshots</h2>
-  <%= link_to 'New Weight Gain/Loss Prediction', new_snapshot_path, class: 'btn btn-primary' %>
+<h1 class="fitness-font">Predict your future now!</h1>
 
+
+</p>
+
+  <%= link_to 'New Weight Gain/Loss Prediction', new_snapshot_path, class: 'btn btn-primary' %>
+  <br/>
+  <br/>
+  <h3 class="fitness-font">Your Snapshots</h3>
   <ul class="list-unstyled">
     <% @snapshots.each do |snapshot| %>
       <li>
