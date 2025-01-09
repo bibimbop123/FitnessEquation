@@ -1,19 +1,42 @@
-<div class="text-center">
+<div class="text-center custom-orange-bg">
   <br/>
 
-  <h1> Don't drive yourself crazy with your fitness goals, predict your future now!</h1>
-
-  <%= image_tag "beginner.webp", alt: "Zero"%>
-
-    <p> From Zero </p>
-
-  <%= image_tag "hero.webp", alt: "Hero" %>
-
-    <p> To Hero </p>
-
-  <%= image_tag "superhero.webp", alt: "Superhero" %>
-  
-      <p> To Superhero  </p>
+ <h1 class="fitness-font">Don't drive yourself crazy with your fitness goals, predict your future now!</h1> 
+ 
+<div id="fitnessCarousel" class="carousel slide" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-bs-target="#fitnessCarousel" data-bs-slide-to="0" class="active"></li>
+    <li data-bs-target="#fitnessCarousel" data-bs-slide-to="1"></li>
+    <li data-bs-target="#fitnessCarousel" data-bs-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag "beginner.webp", alt: "Zero", class: "d-block mx-auto w-75" %>
+      <div class="carousel-caption d-none d-md-block bg-dark text-light">
+        <strong>From Zero</strong>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag "hero.webp", alt: "Hero", class: "d-block mx-auto w-75" %>
+      <div class="carousel-caption d-none d-md-block bg-dark text-light">
+        <strong>To Hero</strong>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag "superhero.webp", alt: "Superhero", class: "d-block mx-auto w-75" %>
+      <div class="carousel-caption d-none d-md-block">
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#fitnessCarousel" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#fitnessCarousel" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
 </p>
   <h2>Your Snapshots</h2>
   <%= link_to 'New Weight Gain/Loss Prediction', new_snapshot_path, class: 'btn btn-primary' %>

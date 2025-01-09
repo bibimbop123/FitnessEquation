@@ -1,29 +1,17 @@
 <div class="text-center custom-orange-bg">
-  <p style="color: green"><%= notice %></p>
-
-
-
-  <div class="col-md-4 mb-4 custom-orange-bg">
-    <div class="card custom-red-border custom-red-bg">
-      <div class="card-body text-center">
-  <%= render partial: 'snapshot', locals: { snapshot: @snapshot, weightLbs: (@snapshot.weight_kg / 0.453592).round(2), height_feet: (@snapshot.height_cm / 30.48).to_i, height_inches: ((@snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (@snapshot.goal_weight_kg / 0.453592).round(2) } %>
-
-
+  <div class="d-flex justify-content-center custom-orange-bg">
+    <div class="col-md-4 mb-4 custom-orange-bg">
+      <div class="card custom-red-border custom-red-bg">
+        <div class="card-body text-center">
+          <%= render partial: 'snapshot', locals: { snapshot: @snapshot, weightLbs: (@snapshot.weight_kg / 0.453592).round(2), height_feet: (@snapshot.height_cm / 30.48).to_i, height_inches: ((@snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (@snapshot.goal_weight_kg / 0.453592).round(2) } %>
+        </div>
+      </div>
     </div>
-
-    </div>  
- </div> 
-
-  <div>
-    <%= link_to "Back to snapshots", snapshots_path %>
-
-
-    <%= button_to "Destroy this snapshot", @snapshot, method: :delete %>
   </div>
 
-  <div> 
-  <%= link_to "Create new snapshot", new_snapshot_path %>
-  
+  <div class="d-flex justify-content-center mt-4">
+    <%= link_to "Back to snapshots", snapshots_path, class: "btn btn-primary mx-2" %>
+    <%= button_to "Destroy this snapshot", @snapshot, method: :delete, class: "btn btn-danger mx-2" %>
+    <%= link_to "Create new snapshot", new_snapshot_path, class: "btn btn-success mx-2" %>
   </div>
-</div>
 </div>

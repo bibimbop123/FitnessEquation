@@ -39,3 +39,28 @@
     border-color: #32CD32;
   }
 }
+.fitness-font {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.custom-fitness-btn {
+  font-size: 1.5rem; /* Increase font size */
+  padding: 1rem 2rem; /* Add padding */
+  background-color: #28a745; /* Custom green color */
+  border: none; /* Remove border */
+  border-radius: 50px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+  transition: transform 0.2s; /* Smooth transition */
+}
+
+.custom-fitness-btn:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  background-color: #218823; /* Darker green color */
+}
+.custom-fitness-btn:active {
+  transform: scale(1); /* Return to original size */
+  background-color: #218838; /* Darker green color */
+}
+.custom-fitness-btn:focus {
+  outline: none; /* Remove focus border */
+}

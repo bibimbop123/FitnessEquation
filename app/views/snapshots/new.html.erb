@@ -1,37 +1,45 @@
-<div class="custom-orange-bg">
-<div class="container text-center">
+<div class="container custom-orange-bg">
+<div class="container text-center fitness-font">
 
 <br/>
 
-<h1>To Estimate Your Weight Gain/Loss Snapshot:</h1>
-<h3>Calculate your Basal Metabolic Rate</h3>
 
-<p>The Basal Metabolic Rate (BMR) is the number of calories your body needs to perform basic life-sustaining functions (breathing, circulation, cell production, etc.) at rest.</p>
+<button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#formModal">
+  Calculate Weight Gain/Loss Prediction
+</button>
+    
+    <br/>
+    <br/>
 
-<h3> Mifflin-St Jeor Equation </h3>
+    <h1 class="display-4">To Estimate Your Weight Gain/Loss Snapshot:</h1>
+    <h2 class="mt-4">Calculate your Basal Metabolic Rate</h2>
 
-<p> The Mifflin-St Jeor Equation is a method used to estimate the Basal Metabolic Rate (BMR) of an individual. </p>
+    <h3 class="instruction-font">The Basal Metabolic Rate (BMR) is the number of calories your body needs to perform basic life-sustaining functions (breathing, circulation, cell production, etc.) at rest.</h3>
 
-<h1> To calculate BMR use this formula: </h1>
+    <h3 class="mt-4">Mifflin-St Jeor Equation</h3>
 
-<%= image_tag 'Mifflin.png', alt: 'Mifflin-St Jeor Equation', class: 'img-fluid custom-green-border' %>
-<p> Total Daily Energy Expenditure (TDEE) is the number of calories your body needs to maintain your current weight. </p>
+    <h4 class="instruction-font">The Mifflin-St Jeor Equation is a method used to estimate the Basal Metabolic Rate (BMR) of an individual.</h4>
 
-<p> To lose weight, you need to consume fewer calories than your TDEE. To gain weight, you need to consume more calories than your TDEE. </p>
+    <h1 class="mt-4">To calculate BMR use this formula:</h1>
 
-<h1> To calculate TDEE use this formula: </h1>
+    <%= image_tag 'Mifflin.png', alt: 'Mifflin-St Jeor Equation', class: 'img-fluid custom-green-border my-4' %>
 
-<%= image_tag 'tdee.png', alt: 'Total Daily Energy Expenditure', class: 'img-fluid custom-green-border' %>
+    <h2 class="instruction-font">Total Daily Energy Expenditure (TDEE) is the number of calories your body needs to maintain your current weight.</h2>
 
-<h1> To calculate predicted weight loss time in weeks using this formula: </h1>
+    <h4 class="instruction-font">To lose weight, you need to consume fewer calories than your TDEE. To gain weight, you need to consume more calories than your TDEE.</h4>
 
-<%= image_tag 'predictedwlosstime.png', alt: 'Predicted Weight Loss Time Formula', class: 'img-fluid custom-green-border'    %>
+    <h1 class="mt-4">To calculate TDEE use this formula:</h1>
+
+    <%= image_tag 'tdee.png', alt: 'Total Daily Energy Expenditure', class: 'img-fluid custom-green-border my-4' %>
+
+    <h1 class="mt-4">To calculate predicted weight loss time in weeks using this formula:</h1>
+
+    <%= image_tag 'predictedwlosstime.png', alt: 'Predicted Weight Loss Time Formula', class: 'img-fluid custom-green-border my-4' %>
+
 </div>
 <div class="text-center">
 <br/>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">
-  Calculate Weight Gain/Loss Prediction
-</button>
+
 </div>
 <!-- Modal -->
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
@@ -105,7 +113,7 @@
 <div id="snapshots" class="container">
   <div class="row">
     <% @snapshots.each do |snapshot| %>
-      <div class="col-md-4 mb-4 custom-orange-bg">
+      <div class="col-md-4 mb-4 custom-orange-bg sans-font">
         <div class="card custom-red-bg">
           <div class="card-body text-center">
             <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: (snapshot.weight_kg / 0.453592).round(2), height_feet: (snapshot.height_cm / 30.48).to_i, height_inches: ((snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (snapshot.goal_weight_kg / 0.453592).round(2) } %>
