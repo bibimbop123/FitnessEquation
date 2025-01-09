@@ -11,31 +11,59 @@
     <br/>
     <br/>
 
-    <h1 class="display-4">To Estimate Your Weight Gain/Loss Snapshot:</h1>
-    <h2 class="mt-4">Calculate your Basal Metabolic Rate</h2>
+ <div class="container custom-orange-bg">
+  <div class="container text-center fitness-font">
 
-    <h3 class="instruction-font">The Basal Metabolic Rate (BMR) is the number of calories your body needs to perform basic life-sustaining functions (breathing, circulation, cell production, etc.) at rest.</h3>
+    <br/>
 
-    <h3 class="mt-4">Mifflin-St Jeor Equation</h3>
+    <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#infoModal">
+      The Secret to Weight Predictions
+    </button>
+    
+    <br/>
+    <br/>
 
-    <h4 class="instruction-font">The Mifflin-St Jeor Equation is a method used to estimate the Basal Metabolic Rate (BMR) of an individual.</h4>
+    <!-- Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="infoModalLabel">Weight Gain/Loss Prediction Information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h1 class="display-4">To Estimate Your Weight Gain/Loss Snapshot:</h1>
+            <h2 class="mt-4">Calculate your Basal Metabolic Rate</h2>
 
-    <h1 class="mt-4">To calculate BMR use this formula:</h1>
+            <h3 class="instruction-font">The Basal Metabolic Rate (BMR) is the number of calories your body needs to perform basic life-sustaining functions (breathing, circulation, cell production, etc.) at rest.</h3>
 
-    <%= image_tag 'Mifflin.png', alt: 'Mifflin-St Jeor Equation', class: 'img-fluid custom-green-border my-4' %>
+            <h3 class="mt-4">Mifflin-St Jeor Equation</h3>
 
-    <h2 class="instruction-font">Total Daily Energy Expenditure (TDEE) is the number of calories your body needs to maintain your current weight.</h2>
+            <h4 class="instruction-font">The Mifflin-St Jeor Equation is a method used to estimate the Basal Metabolic Rate (BMR) of an individual.</h4>
 
-    <h4 class="instruction-font">To lose weight, you need to consume fewer calories than your TDEE. To gain weight, you need to consume more calories than your TDEE.</h4>
+            <h1 class="mt-4">To calculate BMR use this formula:</h1>
 
-    <h1 class="mt-4">To calculate TDEE use this formula:</h1>
+            <%= image_tag 'Mifflin.png', alt: 'Mifflin-St Jeor Equation', class: 'img-fluid custom-green-border my-4' %>
 
-    <%= image_tag 'tdee.png', alt: 'Total Daily Energy Expenditure', class: 'img-fluid custom-green-border my-4' %>
+            <h2 class="instruction-font">Total Daily Energy Expenditure (TDEE) is the number of calories your body needs to maintain your current weight.</h2>
 
-    <h1 class="mt-4">To calculate predicted weight loss time in weeks using this formula:</h1>
+            <h4 class="instruction-font">To lose weight, you need to consume fewer calories than your TDEE. To gain weight, you need to consume more calories than your TDEE.</h4>
 
-    <%= image_tag 'predictedwlosstime.png', alt: 'Predicted Weight Loss Time Formula', class: 'img-fluid custom-green-border my-4' %>
+            <h1 class="mt-4">To calculate TDEE use this formula:</h1>
 
+            <%= image_tag 'tdee.png', alt: 'Total Daily Energy Expenditure', class: 'img-fluid custom-green-border my-4' %>
+
+            <h1 class="mt-4">To calculate predicted weight loss time in weeks using this formula:</h1>
+
+            <%= image_tag 'predictedwlosstime.png', alt: 'Predicted Weight Loss Time Formula', class: 'img-fluid custom-green-border my-4' %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="text-center">
 <br/>
