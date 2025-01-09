@@ -22,3 +22,20 @@
  .custom-red-bg {
   background-color: #FF6347 !important;/* Bootstrap's red color */
 }
+
+.custom-green-border {
+  border: 5px solid #32CD32; /* Custom green color */
+  animation: green-border-animation 2s infinite;
+}
+
+@keyframes green-border-animation {
+  0% {
+    border-color: #32CD32;
+  }
+  50% {
+    border-color: #00FF00; /* Lighter green color */
+  }
+  100% {
+    border-color: #32CD32;
+  }
+}
