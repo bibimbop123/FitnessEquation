@@ -32,16 +32,18 @@ class SnapshotsController < ApplicationController
     @snapshot.user = current_user
 
     # Convert weight from pounds to kilograms
-    @weightLbs = params.fetch("snapshot").fetch("weightLbs").to_f
-    @snapshot.weight_kg = (@weightLbs * 0.453592).round(2)
+    weight_lbs = params[:snapshot][:weightLbs].to_f
+    @snapshot.weight_kg = (weight_lbs * 0.453592).round(2)
 
     # Convert height from feet and inches to centimeters
-    @height_feet = params.fetch("snapshot").fetch("heightFeet").to_i
-    @height_inches = params.fetch("snapshot").fetch("heightInches").to_f
-    total_height_inches = (@height_feet * 12) + @height_inches
+    height_feet = params[:snapshot][:heightFeet].to_i
+    height_inches = params[:snapshot][:heightInches].to_f
+    total_height_inches = (height_feet * 12) + height_inches
     @snapshot.height_cm = (total_height_inches * 2.54).round(2)
-    @goal_weight_lbs = params.fetch("snapshot").fetch("goal_weight_lbs").to_f
-    @snapshot.goal_weight_kg = (@goal_weight_lbs * 0.453592).round(2)
+
+    # Convert goal weight from pounds to kilograms
+    goal_weight_lbs = params[:snapshot][:goal_weight_lbs].to_f
+    @snapshot.goal_weight_kg = (goal_weight_lbs * 0.453592).round(2)
 
     # Calculate predicted_time_weeks
     weight_difference = @snapshot.weight_kg - @snapshot.goal_weight_kg
@@ -59,12 +61,28 @@ class SnapshotsController < ApplicationController
         format.json { render :show, status: :created, location: @snapshot }
       else
         # Debugging output
+        customized_errors = @snapshot.errors.full_messages.map do |msg|
+          if msg.include?('Height cm')
+            height_cm = @snapshot.height_cm
+            height_feet = (height_cm / 30.48).to_i
+            height_inches = ((height_cm / 2.54) % 12).round(2)
+            msg.gsub('Height cm', "Height must be less than #{height_feet} feet #{height_inches} inches")
+          elsif msg.include?('Weight kg')
+            weight_kg = @snapshot.weight_kg
+            weight_lbs = (weight_kg / 0.453592).round(2)
+            msg.gsub('Weight kg', "Weight must be less than #{weight_lbs} lbs (#{weight_kg} kg)")
+          else
+            msg
+          end
+        end
+        flash.now[:alert] = "Snapshot save failed: #{customized_errors.join(', ')}"
         Rails.logger.debug("Snapshot save failed: #{@snapshot.errors.full_messages.join(', ')}")
-        format.html { render :new, status: :unprocessable_entity, locals: { weightLbs: @weightLbs, height_feet: @height_feet, height_inches: @height_inches, goal_weight_lbs: @goal_weight_lbs } }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @snapshot.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
   # PATCH/PUT /snapshots/1 or /snapshots/1.json
   def update

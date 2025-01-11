@@ -23,8 +23,8 @@
 class Snapshot < ApplicationRecord
   belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
 
-  validates :height_cm, presence: true, numericality: { greater_than: 0 }
-  validates :weight_kg, presence: true, numericality: { greater_than: 0 }
+  validates :height_cm, presence: true, numericality: { less_than:  228.6, greater_than: 0 }
+  validates :weight_kg, presence: true, numericality: { less_than: 226.8, greater_than: 0 }
   
   validates :activity_level, presence: true, inclusion: { in: [
     'sedentary',
@@ -35,7 +35,7 @@ class Snapshot < ApplicationRecord
   ] }
   validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
   validates :predicted_time_weeks, presence: true
-  validates :calorie_deficit_or_surplus_per_day, presence: true
+  validates :calorie_deficit_or_surplus_per_day, presence: true, numericality: { less_than: 10_000, greater_than: -10_000 }
   ACTIVITY_FACTORS = {
     "sedentary" => 1.2,
     "lightly_active" => 1.375,
