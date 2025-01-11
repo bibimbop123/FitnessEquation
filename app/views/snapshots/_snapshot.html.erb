@@ -56,6 +56,7 @@
   If you continue to be <%= snapshot.activity_level %>, you can consume <%= snapshot.tdee.round(2) + snapshot.calorie_deficit_or_surplus_per_day %> calories per day. Then you will achieve your goal weight of <%= goal_weight_lbs %> lbs in <%= snapshot.predicted_time_weeks %> weeks.
 </p>
 
+<h3>Ideal Body Weight</h3>
 <p class="font-weight-bold text-secondary bg-light p-3 rounded">
    Your ideal body weight is between <%= snapshot.ideal_body_weight_max.round(2) %> and <%= snapshot.ideal_body_weight_min.round(2) %> lbs. 
 </p>
