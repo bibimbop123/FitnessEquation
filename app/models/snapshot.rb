@@ -66,6 +66,31 @@ class Snapshot < ApplicationRecord
     bmr * ACTIVITY_FACTORS[activity_level]
   end
 
+  def ideal_body_weight_max
+    if user.gender == "male"
+      base_weight = 50 + 2.3 * ((height_cm - 152.4) / 2.54)
+      max_weight_kg = base_weight + (base_weight * 0.1) # Add 10% for maximum
+      max_weight_kg * 2.20462 # Convert to lbs
+    else
+      base_weight = 45.5 + 2.3 * ((height_cm - 152.4) / 2.54)
+      max_weight_kg = base_weight + (base_weight * 0.1) # Add 10% for maximum
+      max_weight_kg * 2.20462 # Convert to lbs
+    end
+  end
+  
+  def ideal_body_weight_min
+    if user.gender == "male"
+      base_weight = 50 + 2.3 * ((height_cm - 152.4) / 2.54)
+      min_weight_kg = base_weight - (base_weight * 0.1) # Subtract 10% for minimum
+      min_weight_kg * 2.20462 # Convert to lbs
+    else
+      base_weight = 45.5 + 2.3 * ((height_cm - 152.4) / 2.54)
+      min_weight_kg = base_weight - (base_weight * 0.1) # Subtract 10% for minimum
+      min_weight_kg * 2.20462 # Convert to lbs
+    end
+  end
+  
+  
 
   def predicted_time_weeks
     weight_difference = (weight_kg - goal_weight_kg).abs

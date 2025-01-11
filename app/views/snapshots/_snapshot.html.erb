@@ -53,7 +53,11 @@
     <%= snapshot.calorie_deficit_or_surplus_per_day %>
   </p>
 <p class="font-weight-bold text-secondary bg-light p-3 rounded">
-  If you continue to be <%= snapshot.activity_level %>, you can consume <%= snapshot.tdee + snapshot.calorie_deficit_or_surplus_per_day %> calories per day. Then you will achieve your goal weight of <%= goal_weight_lbs %> lbs in <%= snapshot.predicted_time_weeks %> weeks.
+  If you continue to be <%= snapshot.activity_level %>, you can consume <%= snapshot.tdee.round(2) + snapshot.calorie_deficit_or_surplus_per_day %> calories per day. Then you will achieve your goal weight of <%= goal_weight_lbs %> lbs in <%= snapshot.predicted_time_weeks %> weeks.
 </p>
 
+<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+  Based on your height and gender, your ideal body weight is between <%= snapshot.ideal_body_weight_max.round(2) %> and <%= snapshot.ideal_body_weight_min.round(2) %> lbs. 
+</p>
+<p>The Ideal body weight adjusted by 10% to account for variations in body frames with muscle mass and bone density.</p>
 </div>
