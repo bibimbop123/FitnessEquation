@@ -36,6 +36,8 @@ class Snapshot < ApplicationRecord
   validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
   validates :predicted_time_weeks, presence: true
   validates :calorie_deficit_or_surplus_per_day, presence: true, numericality: { less_than: 10_000, greater_than: -10_000 }
+  validate :calorie_deficit_or_surplus_must_be_positive_if_weight_less_than_goal_weight
+  validate :calorie_deficit_or_surplus_per_day_must_be_negative_if_weight_greater_than_goal_weight
   ACTIVITY_FACTORS = {
     "sedentary" => 1.2,
     "lightly_active" => 1.375,
@@ -69,5 +71,16 @@ class Snapshot < ApplicationRecord
     weight_difference = (weight_kg - goal_weight_kg).abs
     calorie_difference_per_week = calorie_deficit_or_surplus_per_day * 7 / 7700.0
     (weight_difference / calorie_difference_per_week).ceil
+  end
+  def calorie_deficit_or_surplus_must_be_positive_if_weight_less_than_goal_weight
+    if weight_kg < goal_weight_kg && calorie_deficit_or_surplus_per_day <= 0
+      errors.add(:calorie_deficit_or_surplus_per_day, "must be positive in order to gain weight")
+    end
+  end
+
+  def calorie_deficit_or_surplus_per_day_must_be_negative_if_weight_greater_than_goal_weight
+    if weight_kg > goal_weight_kg && calorie_deficit_or_surplus_per_day >= 0
+      errors.add(:calorie_deficit_or_surplus_per_day, "must be negative in order to lose weight")
+    end
   end
 end
