@@ -89,7 +89,16 @@ class Snapshot < ApplicationRecord
       min_weight_kg * 2.20462 # Convert to lbs
     end
   end
-  
+  #use boer equation to calculate lean body mass
+  def lean_body_mass
+    if user.gender == "male"
+      lean_mass = (0.407 * weight_kg) + (0.267 * height_cm) - 19.2
+      lean_mass * 2.20462
+    else
+      lean_mass = (0.252 * weight_kg) + (0.473 * height_cm) - 48.3
+      lean_mass * 2.20462
+    end
+  end
   
 
   def predicted_time_weeks

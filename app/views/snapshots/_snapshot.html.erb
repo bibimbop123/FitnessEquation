@@ -60,4 +60,14 @@
 <p class="font-weight-bold text-secondary bg-light p-3 rounded">
    Your ideal body weight is between <%= snapshot.ideal_body_weight_max.round(2) %> and <%= snapshot.ideal_body_weight_min.round(2) %> lbs. 
 </p>
+
+<h3>Lean Body Mass</h3>
+<p>(weight of a person's muscles, bones, ligaments, tendons, and water—essentially everything in the body except fat)</p>
 </div>
+<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+  Your lean body mass is <%= snapshot.lean_body_mass.round(2) %> lbs.
+</p>
+<h3>Body Fat Percentage</h3>
+<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+  You have <%= (((weightLbs - snapshot.lean_body_mass.round(2)) / weightLbs) * 100).round(2) %> % Body Fat
+</p>
