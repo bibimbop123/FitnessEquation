@@ -75,7 +75,7 @@ class SnapshotsController < ApplicationController
             msg
           end
         end
-        flash.now[:alert] = "Snapshot save failed: #{customized_errors.join(', ')}"
+        flash[:alert] = "Snapshot save failed: #{customized_errors.join(', ')}"
         Rails.logger.debug("Snapshot save failed: #{@snapshot.errors.full_messages.join(', ')}")
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @snapshot.errors, status: :unprocessable_entity }
