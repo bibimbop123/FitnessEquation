@@ -1,43 +1,60 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <div class="form-inputs">
+      <div class="mb-3">
+        <%= f.input :email, required: true, autofocus: true, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+      </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p class="text-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <% end %>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
-    <div class="mb-3">
-      <%= f.label :gender, "Gender", class: "form-label" %>
-      <%= f.select :gender, options_for_select([['Choose your gender', nil], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], @user.gender), {}, class: "form-select", id: "gender" %>
+      <div class="mb-3">
+        <%= f.input :password,
+                    hint: "Leave it blank if you don't want to change it",
+                    required: false,
+                    input_html: { autocomplete: "new-password", class: 'form-control' },
+                    label_html: { class: 'form-label' } %>
+      </div>
+      <div class="mb-3">
+        <%= f.input :password_confirmation,
+                    required: false,
+                    input_html: { autocomplete: "new-password", class: 'form-control' },
+                    label_html: { class: 'form-label' } %>
+      </div>
+      <div class="mb-3">
+        <%= f.input :current_password,
+                    hint: "We need your current password to confirm your changes",
+                    required: true,
+                    input_html: { autocomplete: "current-password", class: 'form-control' },
+                    label_html: { class: 'form-label' } %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :gender, "Gender", class: "form-label" %>
+        <%= f.select :gender, options_for_select([['Choose your gender', nil], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], @user.gender), {}, class: "form-select", id: "gender" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :dob, "Date of Birth (DD/MM/YEAR)", class: "form-label" %>
+        <%= f.date_field :dob, class: "form-control", id: "dob" %>
+      </div>
     </div>
-    <div class="mb-3">
-      <%= f.label :dob, "Date of Birth (DD/MM/YEAR)", class: "form-label" %>
-      <%= f.date_field :dob, class: "form-control", id: "dob" %>
+
+    <div class="form-actions text-center">
+      <%= f.button :submit, "Update", class: "btn btn-primary btn-lg" %>
     </div>
+  <% end %>
+
+  <h3 class="mt-5">Cancel my account</h3>
+
+  <div class="mb-3">
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+  <div class="text-center">
+    <%= link_to "Back", :back, class: "btn btn-secondary" %>
   </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>
