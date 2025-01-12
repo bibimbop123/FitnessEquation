@@ -1,6 +1,8 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4">Edit <%= resource_name.to_s.humanize %></h2>
-
+  <div class="alert alert-info text-center" role="alert">
+    <strong>Note:</strong> Please input your gender and date of birth accurately to get the best results.
+  </div>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| %>
     <%= f.error_notification %>
 
