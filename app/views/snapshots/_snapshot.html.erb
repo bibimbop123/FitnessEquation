@@ -35,7 +35,7 @@
 
   <p>
     <strong>Basal Metabolic Rate:</strong>
-    <%= snapshot.bmr %> calories per day
+    <%= snapshot.bmr.round(2) %> calories per day
   </p>
 
    <p>
@@ -45,11 +45,11 @@
 
   <p>
     <strong> Total Daily Energy Expenditure:</strong>
-    <%= snapshot.tdee %> calories per day
+    <%= snapshot.tdee.round(2) %> calories per day
   </p>
 
   <p>
-    <strong>Calorie deficit or Surplus per day:</strong>
+    <strong>Calorie Deficit or Surplus per day:</strong>
     <%= snapshot.calorie_deficit_or_surplus_per_day %>
   </p>
 <p class="font-weight-bold text-secondary bg-light p-3 rounded">
@@ -67,7 +67,7 @@
 <p class="font-weight-bold text-secondary bg-light p-3 rounded">
   Your lean body mass is <%= snapshot.lean_body_mass.round(2) %> lbs.
 </p>
-<h3>Body Fat Percentage</h3>
+<h3>Body Fat Mass</h3>
 <p class="font-weight-bold text-secondary bg-light p-3 rounded">
-  You have <%= (((weightLbs - snapshot.lean_body_mass.round(2)) / weightLbs) * 100).round(2) %> % Body Fat
+  Your body fat mass is <%= (weightLbs - snapshot.lean_body_mass).round(2) %> lbs. You have <%= ((weightLbs - snapshot.lean_body_mass) / weightLbs * 100).round(2) %> % Body Fat
 </p>
