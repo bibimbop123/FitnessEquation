@@ -1,0 +1,26 @@
+<div class="text-center custom-orange-bg">
+  <div class="d-flex justify-content-center custom-orange-bg">
+    <div class="col-md-4 mb-4 custom-orange-bg">
+      <div class="card custom-red-border custom-green-bg">
+        <div class="card-body text-center">
+          <h3 class="card-title"><%= @one_rep_max.exercise %></h3>
+          <p class="card-text">
+            <strong>Weight Lifted:</strong> <%= @one_rep_max.weight_lbs %> lbs
+          </p>
+          <p class="card-text">
+            <strong>Repetitions:</strong> <%= @one_rep_max.reps %>
+          </p>
+          <p class="card-text">
+            <strong>One-Rep Max:</strong> <%= @one_rep_max.one_rep_max %> lbs
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= link_to "Back to One-Rep Maxes", one_rep_maxes_path, class: "btn btn-primary mx-2" %>
+    <%= button_to "Destroy this One-Rep Max", @one_rep_max, method: :delete, class: "btn btn-danger mx-2" %>
+    <%= link_to "Create new One-Rep Max", new_one_rep_max_path, class: "btn btn-success mx-2" %>
+  </div>
+</div>

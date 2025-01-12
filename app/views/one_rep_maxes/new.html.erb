@@ -1,0 +1,96 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Calculate Your One-Rep Max</h2>
+
+  <h3>What is a One-Rep Max?</h3>
+  <p>
+    A one-repetition maximum (1RM) is the maximum amount of weightLbs that a person can possibly lift for one repetition.
+  </p>
+  <p>
+  This tool calculates your 1RM for any given exercise after taking in the amount in weightLbs lifted and the number of repetitions performed(1-10).
+  </p>
+  <br/>
+
+<div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#secretSauceModal">
+      The Secret Sauce
+    </button>
+  </div>
+
+  <!-- Secret Sauce Modal -->
+  <div class="modal fade" id="secretSauceModal" tabindex="-1" aria-labelledby="secretSauceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="secretSauceModalLabel">The Secret Sauce</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h3>How to Calculate Your One-Rep Max: </h3>
+          <div class="d-flex justify-content-center">
+            <%= image_tag 'Epley.png', alt: 'Epley', class: 'img-fluid my-5 w-100' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<br/>
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#formModal">
+      Calculate One-Rep Max
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalLabel">Input Your Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-info" role="alert">
+            <strong>Note:</strong> Please input your details accurately to get the best one-rep max prediction.
+          </div>
+
+          <%= simple_form_for(@one_rep_max) do |f| %>
+            <% if @one_rep_max.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@one_rep_max.errors.count, "error") %> prohibited this record from being saved:</h2>
+                <ul>
+                  <% @one_rep_max.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="mb-3">
+              <%= f.label :exercise, "Exercise", class: "form-label" %>
+              <div class="form-group d-flex">
+                <%= f.text_field :exercise, class: "form-control me-2", id: "exercise", placeholder: "Exercise", required: true %>
+              </div>
+            </div>
+            <div class="mb-3">
+              <%= f.label :weight_lbs, "Weight Lifted (in lbs)", class: "form-label" %>
+              <div class="form-group d-flex">
+                <%= f.number_field :weight_lbs, class: "form-control me-2", id: "weight_lbs", min: 0, placeholder: "Pounds", required: true %>
+              </div>
+            </div>
+            <div class="mb-3">
+              <%= f.label :reps, "Number of Repetitions", class: "form-label" %>
+              <div class="form-group d-flex">
+                <%= f.number_field :reps, class: "form-control me-2", id: "reps", min: 1, max: 10, placeholder: "Reps", required: true %>
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.button :submit, "Calculate 1RM", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

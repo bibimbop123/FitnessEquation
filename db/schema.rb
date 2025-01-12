@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_06_002424) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_12_041936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "one_rep_maxes", force: :cascade do |t|
+    t.string "exercise"
+    t.float "weight_lbs"
+    t.integer "reps"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "one_rep_max"
+    t.index ["user_id"], name: "index_one_rep_maxes_on_user_id"
+  end
 
   create_table "snapshots", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -41,5 +52,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_06_002424) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "one_rep_maxes", "users"
   add_foreign_key "snapshots", "users"
 end
