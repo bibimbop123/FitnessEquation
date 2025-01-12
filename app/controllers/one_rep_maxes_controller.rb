@@ -10,6 +10,8 @@ class OneRepMaxesController < ApplicationController
 
   def new
     @one_rep_max = OneRepMax.new
+    @one_rep_max.user = current_user
+    @one_rep_maxes = OneRepMax.where(user: current_user)
   end
   
   def show
