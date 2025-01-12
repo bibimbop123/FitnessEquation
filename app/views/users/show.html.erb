@@ -49,8 +49,9 @@
   <%= link_to 'One Rep Max Calculator', new_one_rep_max_path, class: 'btn btn-primary' %>
   <br/>
   <br/>
-  <h3 class="fitness-font">Your Snapshots</h3>
+
     <div class="container mt-5">
+      <h3 class="fitness-font">Your Snapshots</h3>
       <ul class="list-group">
         <% @snapshots.each do |snapshot| %>
           <li class="list-group-item custom-green-bg">
