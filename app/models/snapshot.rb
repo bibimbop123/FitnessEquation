@@ -99,7 +99,41 @@ class Snapshot < ApplicationRecord
       lean_mass * 2.20462
     end
   end
+
+  def body_mass_index
+    weight_kg / (height_cm / 100.0) ** 2
+  end
+
+  def bmi_category
+    bmi = body_mass_index
+    case
+    when bmi < 18.5
+      "Underweight"
+    when bmi >= 18.5 && bmi < 24.9
+      "Normal weight"
+    when bmi >= 25 && bmi < 29.9
+      "Overweight"
+    else
+      "Obesity"
+    end
+  end
   
+  def recommended_protein_intake_per_day(activity_level)
+    case activity_level
+    when :sedentary
+      weight_kg * 0.8
+    when :moderate_exercise, :endurance_athlete
+      weight_kg * 1.2
+    when :strength_training
+      weight_kg * 1.6
+    when :older_adult
+      weight_kg * 1.0
+    when :weight_loss
+      weight_kg * 2.0
+    else
+      weight_kg * 0.8
+    end
+  end
 
   def predicted_time_weeks
     weight_difference = (weight_kg - goal_weight_kg).abs
