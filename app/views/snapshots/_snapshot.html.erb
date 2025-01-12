@@ -69,5 +69,7 @@
 </p>
 <h3>Body Fat Mass</h3>
 <p class="font-weight-bold text-secondary bg-light p-3 rounded">
-  Your body fat mass is <%= (weightLbs - snapshot.lean_body_mass).round(2) %> lbs. You have <%= ((weightLbs - snapshot.lean_body_mass) / weightLbs * 100).round(2) %> % Body Fat
+  Your body fat mass is <%= (weightLbs - snapshot.lean_body_mass).round(2) %> lbs.
+  <br/>
+You have <%= ((weightLbs - snapshot.lean_body_mass) / weightLbs * 100).round(2) %> % Body Fat
 </p>
