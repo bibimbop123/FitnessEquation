@@ -114,7 +114,7 @@ class Snapshot < ApplicationRecord
     when bmi >= 25 && bmi < 29.9
       "Overweight"
     else
-      "Obesity"
+      "Obese"
     end
   end
   
