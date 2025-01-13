@@ -62,6 +62,12 @@
    Your ideal body weight is between <%= snapshot.ideal_body_weight_max.round(0) %> and <%= snapshot.ideal_body_weight_min.round(0) %> lbs. 
 </p>
 
+<h4>Recommend Daily Protein Intake</h4>
+<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+  Your recommended daily protein intake is <%= (snapshot.recommended_protein_intake_per_day(snapshot.activity_level)).round(0) %> grams per day to maintain your lean body mass.
+</p>
+
+
 <h4>Lean Body Mass</h4>
 <p>(weight of a person's muscles, bones, ligaments, tendons, and water—essentially everything in the body except fat)</p>
 </div>
@@ -79,9 +85,4 @@ You have <%= ((weightLbs - snapshot.lean_body_mass) / weightLbs * 100).round(0) 
 <p class="font-weight-bold text-secondary bg-light p-3 rounded">
   Your Body Mass Index (BMI) is <%= snapshot.body_mass_index.round(0) %>.<br/>
   You are <%= snapshot.bmi_category %>.
-</p>
-
-<h4>Recommend Daily Protein Intake</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded">
-  Your recommended daily protein intake is <%= (snapshot.recommended_protein_intake_per_day(snapshot.activity_level)).round(0) %> grams per day to maintain your lean body mass.
 </p>
