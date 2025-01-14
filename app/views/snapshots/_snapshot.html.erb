@@ -3,6 +3,10 @@
     <strong>User:</strong>
     <%= snapshot.user_id %>
   </p>
+<p>
+  <strong>Age:</strong>
+  <%= calculate_age(snapshot.user.dob) if snapshot.user.dob.present? %>
+</p>
 
   <p>
     <strong>Height cm:</strong>
