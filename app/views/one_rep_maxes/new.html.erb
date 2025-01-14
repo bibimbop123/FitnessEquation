@@ -2,49 +2,6 @@
   <div class="d-flex justify-content-center custom-green-bg">
     <div class="col-md-4 mb-4 custom-green-bg">
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Calculate Your One-Rep Max</h2>
-
-  <%= image_tag 'funnytest.webp', alt: 'What`s the point of this test?', class: 'img-fluid my-5 w-80' %>
-  <br/>
-
-<div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#secretSauceModal">
-      The Secret to the One-Rep Max
-    </button>
-  </div>
-
-  <!-- Secret Sauce Modal -->
-  <div class="modal fade" id="secretSauceModal" tabindex="-1" aria-labelledby="secretSauceModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="secretSauceModalLabel">The Secret Sauce</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-
-  <h3>What is a One-Rep Max?</h3>
- 
-  <p>
-    A one-repetition maximum (1RM) is the maximum amount of weightLbs that a person can possibly lift for one repetition.
-  </p>
-  <p>
-  This tool calculates your 1RM for any given exercise after taking in the amount in weightLbs lifted and the number of repetitions performed.
-  </p>
-
-  <p> Please input the maximum amount of weight for your given range(1-10) to get the most accurate results</p>
-          <h3>How to Calculate Your One-Rep Max: </h3>
-          <div class="d-flex justify-content-center">
-            <%= image_tag 'Epley.png', alt: 'Epley', class: 'img-fluid my-5 w-100' %>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<br/>
   <div class="d-flex justify-content-center">
     <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#formModal">
       Calculate One-Rep Max
@@ -102,9 +59,52 @@
     </div>
   </div>
 </div>
+
+  <%= image_tag 'funnytest.webp', alt: 'What`s the point of this test?', class: 'img-fluid my-5 w-80' %>
+  <br/>
+
+<div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#secretSauceModal">
+      The Secret to the One-Rep Max
+    </button>
+  </div>
+
+  <!-- Secret Sauce Modal -->
+  <div class="modal fade" id="secretSauceModal" tabindex="-1" aria-labelledby="secretSauceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="secretSauceModalLabel">The Secret Sauce</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+  <h3>What is a One-Rep Max?</h3>
+ 
+  <p>
+    A one-repetition maximum (1RM) is the maximum amount of weightLbs that a person can possibly lift for one repetition.
+  </p>
+  <p>
+  This tool calculates your 1RM for any given exercise after taking in the amount in weightLbs lifted and the number of repetitions performed.
+  </p>
+
+  <p> Please input the maximum amount of weight for your given range(1-10) to get the most accurate results</p>
+          <h3>How to Calculate Your One-Rep Max: </h3>
+          <div class="d-flex justify-content-center">
+            <%= image_tag 'Epley.png', alt: 'Epley', class: 'img-fluid my-5 w-100' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <br/>
 
-<h2> List of One Rep Maxes </h2>
+<br/>
+
+<h2 class="fitness-font"> List of One Rep Maxes </h2>
   <div class="d-flex justify-content-center">
     <table class="table table-striped w-auto bg-light">
       <thead>

@@ -67,3 +67,8 @@
 .custom-fitness-btn:focus {
   outline: none; /* Remove focus border */
 }
+.bungee-tint-regular {
+  font-family: "Bungee Tint", serif;
+  font-weight: 400;
+  font-style: normal;
+}

@@ -53,17 +53,17 @@
     <%= snapshot.calorie_deficit_or_surplus_per_day %>
   </p>
   <h4>Weight Prediction</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
   If you continue to be <%= snapshot.activity_level %>, you can consume <%= snapshot.tdee.round(0) + snapshot.calorie_deficit_or_surplus_per_day %> calories per day.<br/> Then you will achieve your goal weight of <%= goal_weight_lbs.round(0) %> lbs in <%= snapshot.predicted_time_weeks %> weeks.
 </p>
 
 <h4>Ideal Body Weight</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
    Your ideal body weight is between <%= snapshot.ideal_body_weight_max.round(0) %> and <%= snapshot.ideal_body_weight_min.round(0) %> lbs. 
 </p>
 
 <h4>Recommend Daily Protein Intake</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
   Your recommended daily protein intake is <%= (snapshot.recommended_protein_intake_per_day(snapshot.activity_level)).round(0) %> grams per day to maintain your lean body mass.
 </p>
 
@@ -71,18 +71,18 @@
 <h4>Lean Body Mass</h4>
 <p>(weight of a person's muscles, bones, ligaments, tendons, and water—essentially everything in the body except fat)</p>
 </div>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
   Your lean body mass is <%= snapshot.lean_body_mass.round(0) %> lbs.
 </p>
 <h4>Body Fat Mass</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
   Your body fat mass is <%= (weightLbs - snapshot.lean_body_mass).round(0) %> lbs.
   <br/>
 You have <%= ((weightLbs - snapshot.lean_body_mass) / weightLbs * 100).round(0) %>% Body Fat
 </p>
 
 <h4>Body Mass Index</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded">
+<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
   Your Body Mass Index (BMI) is <%= snapshot.body_mass_index.round(0) %>.<br/>
   You are <%= snapshot.bmi_category %>.
 </p>
