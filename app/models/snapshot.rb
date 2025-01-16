@@ -23,21 +23,22 @@
 class Snapshot < ApplicationRecord
   belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
 
-  validates :height_cm, presence: true, numericality: { less_than:  228.6, greater_than: 0 }
-  validates :weight_kg, presence: true, numericality: { less_than: 226.8, greater_than: 0 }
+  validates :height_cm, presence: { message: "cannot be nil" }, numericality: { less_than: 228.6, greater_than: 0 }
+  validates :weight_kg, presence: { message: "cannot be nil" }, numericality: { less_than: 226.8, greater_than: 0 }
   
-  validates :activity_level, presence: true, inclusion: { in: [
+  validates :activity_level, presence: { message: "cannot be nil" }, inclusion: { in: [
     'sedentary',
     'lightly_active',
     'moderately_active',
     'very_active',
     'super_active'
   ] }
-  validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
-  validates :predicted_time_weeks, presence: true
-  validates :calorie_deficit_or_surplus_per_day, presence: true, numericality: { less_than: 10_000, greater_than: -10_000 }
+  validates :goal_weight_kg, presence: { message: "cannot be nil" }, numericality: { greater_than: 0 }
+  validates :predicted_time_weeks, presence: { message: "cannot be nil" }
+  validates :calorie_deficit_or_surplus_per_day, presence: { message: "cannot be nil" }, numericality: { less_than: 10_000, greater_than: -10_000 }
   validate :calorie_deficit_or_surplus_must_be_positive_if_weight_less_than_goal_weight
   validate :calorie_deficit_or_surplus_per_day_must_be_negative_if_weight_greater_than_goal_weight
+
   ACTIVITY_FACTORS = {
     "sedentary" => 1.2,
     "lightly_active" => 1.375,
