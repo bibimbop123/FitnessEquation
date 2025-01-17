@@ -45,17 +45,17 @@ class SnapshotsController < ApplicationController
     goal_weight_lbs = params[:snapshot][:goal_weight_lbs].to_f
     @snapshot.goal_weight_kg = (goal_weight_lbs * 0.453592).round(2)
 
-    # Calculate predicted_time_weeks
-    if @snapshot.calorie_deficit_or_surplus_per_day.nil?
-      @snapshot.errors.add(:calorie_deficit_or_surplus_per_day, "cannot be nil")
-    else
-      weight_difference = @snapshot.weight_kg - @snapshot.goal_weight_kg
-      calorie_difference_per_week = @snapshot.calorie_deficit_or_surplus_per_day * 7 / 7700.0
-      @snapshot.predicted_time_weeks = (weight_difference / calorie_difference_per_week).ceil
-      if @snapshot.predicted_time_weeks < 0
-        @snapshot.predicted_time_weeks = (weight_difference / -calorie_difference_per_week).ceil
-      end
-    end
+    # # Calculate predicted_time_weeks
+    # if @snapshot.calorie_deficit_or_surplus_per_day.nil?
+    #   @snapshot.errors.add(:calorie_deficit_or_surplus_per_day, "cannot be nil")
+    # else
+    #   weight_difference = @snapshot.weight_kg - @snapshot.goal_weight_kg
+    #   calorie_difference_per_week = @snapshot.calorie_deficit_or_surplus_per_day * 7 / 7700.0
+    #   @snapshot.predicted_time_weeks = (weight_difference / calorie_difference_per_week).ceil
+    #   if @snapshot.predicted_time_weeks < 0
+    #     @snapshot.predicted_time_weeks = (weight_difference / -calorie_difference_per_week).ceil
+    #   end
+    # end
 
 
     @snapshots = Snapshot.where(user_id: current_user.id)

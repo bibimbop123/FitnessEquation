@@ -23,22 +23,20 @@
 class Snapshot < ApplicationRecord
   belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
 
-  validates :height_cm, presence: { message: "cannot be nil" }, numericality: { less_than: 228.6, greater_than: 0 }
-  validates :weight_kg, presence: { message: "cannot be nil" }, numericality: { less_than: 226.8, greater_than: 0 }
+  validates :height_cm, presence: true, numericality: { less_than: 228.6, greater_than: 0 }
+  validates :weight_kg, presence: true, numericality: { less_than: 226.8, greater_than: 0 }
   
-  validates :activity_level, presence: { message: "cannot be nil" }, inclusion: { in: [
+  validates :activity_level, presence: true, inclusion: { in: [
     'sedentary',
     'lightly_active',
     'moderately_active',
     'very_active',
     'super_active'
   ] }
-  validates :goal_weight_kg, presence: { message: "cannot be nil" }, numericality: { greater_than: 0 }
-  validates :predicted_time_weeks, presence: { message: "cannot be nil" }
-  validates :calorie_deficit_or_surplus_per_day, presence: { message: "cannot be nil" }, numericality: { less_than: 10_000, greater_than: -10_000 }
+  validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
+  validates :calorie_deficit_or_surplus_per_day, presence: true, numericality: { less_than: 10_000, greater_than: -10_000 }
   validate :calorie_deficit_or_surplus_must_be_positive_if_weight_less_than_goal_weight
   validate :calorie_deficit_or_surplus_per_day_must_be_negative_if_weight_greater_than_goal_weight
-  validate :check_for_nil_values
 
   ACTIVITY_FACTORS = {
     "sedentary" => 1.2,
@@ -67,15 +65,6 @@ class Snapshot < ApplicationRecord
     weight_difference = (weight_kg - goal_weight_kg).abs
     calorie_difference_per_week = calorie_deficit_or_surplus_per_day * 7 / 7700.0
     (weight_difference / calorie_difference_per_week).ceil
-  end
-  
-  def check_for_nil_values
-    errors.add(:height_cm, "cannot be nil") if height_cm.nil?
-    errors.add(:weight_kg, "cannot be nil") if weight_kg.nil?
-    errors.add(:activity_level, "cannot be nil") if activity_level.nil?
-    errors.add(:goal_weight_kg, "cannot be nil") if goal_weight_kg.nil?
-    errors.add(:predicted_time_weeks, "cannot be nil") if predicted_time_weeks.nil?
-    errors.add(:calorie_deficit_or_surplus_per_day, "cannot be nil") if calorie_deficit_or_surplus_per_day.nil?
   end
   
   def bmr
