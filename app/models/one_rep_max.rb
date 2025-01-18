@@ -34,7 +34,9 @@ class OneRepMax < ApplicationRecord
   end
 
   def calculate_relative_strength
-    user_weight = user.snapshots.last&.weight_kg
+    user_weight_kg = user.snapshots.last&.weight_kg
+    # convert user_weight to lbs
+    user_weight = user_weight_kg.nil? ? nil : user_weight_kg * 2.20462
     if user_weight.nil?
       self.relative_strength = nil
     else
