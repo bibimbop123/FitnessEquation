@@ -13,10 +13,14 @@
           <p class="card-text">
             <strong>One-Rep Max:</strong> <%= @one_rep_max.calculate_one_rep_max %> lbs
           </p>
+          <p class="card-text">
+            <strong> Relative Strength:</strong> <%= @one_rep_max.calculate_relative_strength %> lbs
+          </p>
         </div>
       </div>
     </div>
   </div>
+    <p>(relative strength is calculated by the last snapshots weight)</p>
 
   <div class="d-flex justify-content-center mt-4">
     <%= link_to "Back to One-Rep Maxes", one_rep_maxes_path, class: "btn btn-primary mx-2" %>

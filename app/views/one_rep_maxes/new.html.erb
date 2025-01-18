@@ -105,6 +105,7 @@
 <br/>
 
 <h2 class="fitness-font"> List of One Rep Maxes </h2>
+  <p>(relative strength is calculated by the last snapshots weight)</p>
   <div class="d-flex justify-content-center">
     <table class="table table-striped w-auto bg-light">
       <thead>
@@ -113,6 +114,7 @@
           <th>Weight (lbs)</th>
           <th>Reps</th>
           <th>One-Rep Max (lbs)</th>
+          <th>Relative Strength (lbs)</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -123,6 +125,7 @@
             <td><%= one_rep_max.weight_lbs %></td>
             <td><%= one_rep_max.reps %></td>
             <td><%= one_rep_max.calculate_one_rep_max %></td>
+            <td><%= one_rep_max.calculate_relative_strength %></td>
             <td>
               <%= link_to 'Show', one_rep_max %>
               <%= link_to 'Destroy', one_rep_max, method: :delete, data: { confirm: 'Are you sure?' } %>
