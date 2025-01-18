@@ -13,6 +13,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Completed</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -20,6 +21,9 @@
     <% @workout_routines.each do |routine| %>
       <tr>
         <td><%= routine.name %></td>
+        <td>
+          <input type="checkbox" class="exercise-checkbox" data-routine-id="<%= routine.id %>">
+        </td>
         <td>
           <%= link_to 'Show', workout_routine_path(routine), class: 'btn btn-secondary' %>
           <%= link_to 'Edit', edit_workout_routine_path(routine), class: 'btn btn-warning' %>

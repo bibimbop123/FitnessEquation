@@ -13,7 +13,9 @@
       <th>Sets</th>
       <th>Weight</th>
       <th>Volume</th>
+      <th>Completed</th>
       <th>Actions</th>
+
     </tr>
   </thead>
   <tbody>
@@ -24,6 +26,9 @@
         <td><%= exercise.sets %></td>
         <td><%= exercise.weight %></td>
         <td><%= exercise.volume %> lbs</td>
+         <td>
+          <input type="checkbox" class="exercise-checkbox" data-routine-id="<%= @workout_routine.id %>">
+        </td>
         <td>
           <%= link_to 'Show', [@workout_routine, exercise], class: 'btn btn-secondary' %>
           <%= link_to 'Edit', edit_workout_routine_exercise_path(@workout_routine, exercise), class: 'btn btn-warning' %>
