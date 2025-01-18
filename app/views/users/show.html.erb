@@ -51,27 +51,28 @@
   <br/>
    <%= link_to 'Weight Lifting Log', workout_routines_path, class: 'btn btn-primary' %>
 
-    <div class="container mt-5">
-      <h3 class="fitness-font">Your Snapshots</h3>
-      <ul class="list-group">
-        <% @snapshots.each do |snapshot| %>
-          <li class="list-group-item custom-green-bg">
-            <%= link_to snapshot.created_at.strftime("%B %d, %Y"), snapshot_path(snapshot), class: "text-decoration-none text-black" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+<div class="container mt-5 d-flex justify-content-between">
+  <div class="flex-fill me-3">
+    <h3 class="fitness-font">Your Snapshots</h3>
+    <ul class="list-group">
+      <% @snapshots.each do |snapshot| %>
+        <li class="list-group-item custom-green-bg">
+          <%= link_to snapshot.created_at.strftime("%B %d, %Y"), snapshot_path(snapshot), class: "text-decoration-none text-black" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
-      <div class="container mt-5">
-      <h3 class="fitness-font">Your Workout Routines</h3>
-      <ul class="list-group">
-        <% @workout_routines.each do |workout_routine| %>
-          <li class="list-group-item custom-green-bg">
-            <%= link_to workout_routine.created_at.strftime("%B %d, %Y"), workout_routine_path(workout_routine), class: "text-decoration-none text-black" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+  <div class="flex-fill ms-3">
+    <h3 class="fitness-font">Your Workout Routines</h3>
+    <ul class="list-group">
+      <% @workout_routines.each do |workout_routine| %>
+        <li class="list-group-item custom-green-bg">
+          <%= link_to workout_routine.created_at.strftime("%B %d, %Y"), workout_routine_path(workout_routine), class: "text-decoration-none text-black" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 </div>
