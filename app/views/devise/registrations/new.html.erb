@@ -1,4 +1,6 @@
-<div class="container mt-5">
+<div class="text-center custom-orange-bg fitness-font">
+  <div class="d-flex justify-content-center custom-orange-bg">
+    <div class=" custom-orange-bg">
   <h2 class="text-center mb-4">Sign up</h2>
 
   <div class="alert alert-info text-center" role="alert">
@@ -13,7 +15,7 @@
         <%= f.input :email,
                     required: true,
                     autofocus: true,
-                    input_html: { autocomplete: "email", class: 'form-control' },
+                    input_html: { autocomplete: "email", class: 'form-control sans-font' },
                     label_html: { class: 'form-label' } %>
       </div>
       <div class="mb-3">
@@ -47,4 +49,7 @@
   <div class="text-center mt-3">
     <%= render "devise/shared/links" %>
   </div>
+</div>
+</div>
+</div>
 </div>

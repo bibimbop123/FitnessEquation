@@ -1,4 +1,6 @@
-<div class="container mt-5">
+<div class="text-center custom-orange-bg fitness-font">
+  <div class="d-flex justify-content-center custom-orange-bg">
+    <div class=" custom-orange-bg">
   <h2 class="text-center mb-4">Edit <%= resource_name.to_s.humanize %></h2>
   <div class="alert alert-info text-center" role="alert">
     <strong>Note:</strong> Please input your gender and date of birth accurately to get the best results. If you change your gender or birth, your previous snapshots will be recalculated.
@@ -8,7 +10,7 @@
 
     <div class="form-inputs">
       <div class="mb-3">
-        <%= f.input :email, required: true, autofocus: true, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+        <%= f.input :email, required: true, autofocus: true, input_html: { class: 'form-control sans-font' }, label_html: { class: 'form-label' } %>
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -19,20 +21,20 @@
         <%= f.input :password,
                     hint: "Leave it blank if you don't want to change it",
                     required: false,
-                    input_html: { autocomplete: "new-password", class: 'form-control' },
+                    input_html: { autocomplete: "new-password", class: 'form-control sans-font' },
                     label_html: { class: 'form-label' } %>
       </div>
       <div class="mb-3">
         <%= f.input :password_confirmation,
                     required: false,
-                    input_html: { autocomplete: "new-password", class: 'form-control' },
+                    input_html: { autocomplete: "new-password", class: 'form-control sans-font' },
                     label_html: { class: 'form-label' } %>
       </div>
       <div class="mb-3">
         <%= f.input :current_password,
                     hint: "We need your current password to confirm your changes",
                     required: true,
-                    input_html: { autocomplete: "current-password", class: 'form-control' },
+                    input_html: { autocomplete: "current-password", class: 'form-control sans-font' },
                     label_html: { class: 'form-label' } %>
       </div>
       <div class="mb-3">
@@ -59,4 +61,8 @@
   <div class="text-center">
     <%= link_to "Back", :back, class: "btn btn-secondary" %>
   </div>
+</div>
+
+</div>
+</div>
 </div>
