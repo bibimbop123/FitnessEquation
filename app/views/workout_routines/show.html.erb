@@ -1,0 +1,41 @@
+<div class="text-center custom-orange-bg">
+  <div class="d-flex justify-content-center custom-orange-bg">
+    <div class=" custom-orange-bg">
+<h1><%= @workout_routine.name %></h1>
+
+<%= link_to 'New Exercise', new_workout_routine_exercise_path(@workout_routine), class: 'btn btn-primary' %>
+
+<table class="table mt-3 bg-light">
+  <thead>
+    <tr>
+      <th>Exercise</th>
+      <th>Reps</th>
+      <th>Sets</th>
+      <th>Weight</th>
+      <th>Volume</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @workout_routine.exercises.each do |exercise| %>
+      <tr>
+        <td><%= exercise.name %></td>
+        <td><%= exercise.reps %></td>
+        <td><%= exercise.sets %></td>
+        <td><%= exercise.weight %></td>
+        <td><%= exercise.volume %> lbs</td>
+        <td>
+          <%= link_to 'Show', [@workout_routine, exercise], class: 'btn btn-secondary' %>
+          <%= link_to 'Edit', edit_workout_routine_exercise_path(@workout_routine, exercise), class: 'btn btn-warning' %>
+          <%= link_to 'Destroy', [@workout_routine, exercise], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h1>Total Volume Lifted: <%= @workout_routine.total_volume %> Lbs </h1>
+
+<%= link_to 'Back', workout_routines_path, class: 'btn btn-secondary' %>
+</div>
+</div>
+</div>

@@ -1,0 +1,9 @@
+<div class="custom-orange-bg">
+<div class="container custom-orange-bg text-center">
+<h1>Edit Exercise</h1>
+
+<%= render 'form', workout_routine: @workout_routine, exercise: @exercise %>
+
+<%= link_to 'Back', workout_routine_exercises_path(@workout_routine), class: 'btn btn-secondary' %>
+</div>
+<div>

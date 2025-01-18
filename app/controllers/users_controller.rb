@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @snapshots = @user.snapshots
+    @workout_routines = @user.workout_routines
   end
 
   def edit

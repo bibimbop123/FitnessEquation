@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_12_041936) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_17_234547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exercises", force: :cascade do |t|
+    t.string "name"
+    t.integer "reps"
+    t.integer "sets"
+    t.float "weight"
+    t.bigint "workout_routine_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["workout_routine_id"], name: "index_exercises_on_workout_routine_id"
+  end
 
   create_table "one_rep_maxes", force: :cascade do |t|
     t.string "exercise"
@@ -52,6 +63,28 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_12_041936) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "weightlifting_logs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "exercise"
+    t.float "weight"
+    t.integer "reps"
+    t.integer "volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_weightlifting_logs_on_user_id"
+  end
+
+  create_table "workout_routines", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_workout_routines_on_user_id"
+  end
+
+  add_foreign_key "exercises", "workout_routines"
   add_foreign_key "one_rep_maxes", "users"
   add_foreign_key "snapshots", "users"
+  add_foreign_key "weightlifting_logs", "users"
+  add_foreign_key "workout_routines", "users"
 end
