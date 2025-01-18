@@ -34,9 +34,10 @@ class Snapshot < ApplicationRecord
     'super_active'
   ] }
   validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
-  validates :calorie_deficit_or_surplus_per_day, presence: true, numericality: { less_than: 10_000, greater_than: -10_000 }
+  validates :calorie_deficit_or_surplus_per_day, presence: true, numericality: { less_than: 10_000 }
   validate :calorie_deficit_or_surplus_must_be_positive_if_weight_less_than_goal_weight
   validate :calorie_deficit_or_surplus_per_day_must_be_negative_if_weight_greater_than_goal_weight
+  validate :calorie_deficit_within_bmr_range
 
   ACTIVITY_FACTORS = {
     "sedentary" => 1.2,
@@ -156,6 +157,15 @@ class Snapshot < ApplicationRecord
     end
   end
 
+  private
+
+  def calorie_deficit_within_bmr_range
+    if calorie_deficit_or_surplus_per_day.present? && bmr.present?
+      if calorie_deficit_or_surplus_per_day < 0 && calorie_deficit_or_surplus_per_day.abs > bmr
+        errors.add(:calorie_deficit_or_surplus_per_day, "must be less than the basal metabolic rate (BMR) when in deficit")
+      end
+    end
+  end
   def calorie_deficit_or_surplus_must_be_positive_if_weight_less_than_goal_weight
     if weight_kg.present? && goal_weight_kg.present? && calorie_deficit_or_surplus_per_day.present?
       if weight_kg < goal_weight_kg && calorie_deficit_or_surplus_per_day <= 0
