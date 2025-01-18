@@ -28,7 +28,7 @@ class OneRepMaxesController < ApplicationController
 
     respond_to do |format|
       if @one_rep_max.save
-        format.html { redirect_to one_rep_maxes_url, notice: "One rep max was successfully created." }
+        format.html { redirect_to @one_rep_max, notice: "One rep max was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
