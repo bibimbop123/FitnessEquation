@@ -6,8 +6,8 @@
       <br/>
       <p>Here you can view your progress over time.</p>
       <br/>
-      <h2> Time to Reach Goal Weight(Weeks) vs. Snapshot Weight(Lbs)</h2>
-      <%= line_chart @predicted_time_data, xtitle: "Time to Reach Goal Weight (days)", ytitle: "Snapshot weight(Lbs)"%>
+      <h2> Snapshot Weight(Lbs) vs. Time to Reach Goal Weight(Weeks)</h2>
+      <%= line_chart @predicted_time_data, xtitle: "Snapshot weight(Lbs)", ytitle: "Time to Reach Goal Weight (days)"%>
       <br/>
       <h2> Time to Reach Goal Weight(Weeks) vs. Calorie Deficit or Surplus</h2>
       <%= line_chart @predicted_time_calorie_data, xtitle: "Time to Reach Goal Weight (weeks)" , ytitle: "Calorie_deficit_or_surplus" %>
