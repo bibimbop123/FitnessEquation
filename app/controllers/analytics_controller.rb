@@ -8,7 +8,6 @@ class AnalyticsController < ApplicationController
 
     # Chartkick data
     @weight_data = @snapshots.map { |snapshot| [snapshot.created_at, (snapshot.weight_kg / 0.453592).round(2)] }
-    @one_rep_max_data = @one_rep_maxes.map { |one_rep_max| [one_rep_max.created_at, one_rep_max.calculate_one_rep_max] }
     @one_rep_max_count_data = @one_rep_maxes.group_by_day(:created_at).count
     @snapshots_data = @snapshots.map { |snapshot| [snapshot.created_at, (snapshot.weight_kg / 0.453592).round(2)] }
     @snapshots_count_data = @snapshots.group_by_day(:created_at).count
