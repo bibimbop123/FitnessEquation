@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'activities/index'
   get 'analytics/index'
   devise_for :users
   resources :users, only: [:show, :edit, :update] # Add this line to define user routes
@@ -12,7 +13,5 @@ Rails.application.routes.draw do
   post 'weight_loss_predictor', to: 'snapshots#create'
 
   get 'analytics', to: 'analytics#index'
-
   get 'ahoyanalytics', to: 'analytics#ahoyanalytics'
-
 end

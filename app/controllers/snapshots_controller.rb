@@ -1,4 +1,5 @@
 class SnapshotsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_snapshot, only: %i[ show edit update destroy ]
 
   # GET /snapshots or /snapshots.json
@@ -62,6 +63,7 @@ class SnapshotsController < ApplicationController
 
     respond_to do |format|
       if @snapshot.save
+        @snapshot.create_activity(key: 'snapshot.create',owner: current_user)
         format.html { redirect_to snapshot_url(@snapshot), notice: "Snapshot was successfully created." }
         format.json { render :show, status: :created, location: @snapshot }
       else

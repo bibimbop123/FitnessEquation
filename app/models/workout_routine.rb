@@ -17,12 +17,32 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class WorkoutRoutine < ApplicationRecord
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller && controller.current_user }
   belongs_to :user
   has_many :exercises, dependent: :destroy
+  after_create :track_creation
+  after_destroy :track_deletion
 
   validates :name, presence: true
 
   def total_volume
     exercises.sum(&:volume)
+  end
+
+  def track_creation
+    PublicActivity::Activity.create(
+      key: 'workout.created',
+      owner: user,
+      trackable: self
+    )
+  end
+
+  def track_deletion
+    PublicActivity::Activity.create(
+      key: 'workout.deleted',
+      owner: user,
+      trackable: self
+    )
   end
 end

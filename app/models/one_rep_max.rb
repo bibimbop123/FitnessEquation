@@ -21,7 +21,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class OneRepMax < ApplicationRecord
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller && controller.current_user }
   belongs_to :user
+  after_create :track_creation
+  after_destroy :track_deletion
 
   # Validations
   validates :exercise, presence: true
@@ -46,5 +50,20 @@ class OneRepMax < ApplicationRecord
 
   def relative_strength_display
     relative_strength.nil? ? "N/A" : relative_strength
+  end
+  def track_creation
+    PublicActivity::Activity.create(
+      key: 'onerepmax.created',
+      owner: user,
+      trackable: self
+    )
+  end
+
+  def track_deletion
+    PublicActivity::Activity.create(
+      key: 'onerepmax.deleted',
+      owner: user,
+      trackable: self
+    )
   end
 end

@@ -50,6 +50,27 @@
   <br/>
   <br/>
    <%= link_to 'Weight Lifting Log', workout_routines_path, class: 'btn btn-primary' %>
+  <br/>
+  <div class="container mt-5">
+    <h2>Public Activities</h2>
+    <p>Here you can view the latest activities from all users.</p>
+
+  <% if @activity_owners.present? %>
+    <ul class="list-group">
+      <% @activity_owners.each do |activity_owner| %>
+        <li class="list-group-item">
+          <% if activity_owner[:owner].present? %>
+            <strong><%= activity_owner[:owner].email %></strong> <%= activity_owner[:activity].key.split('.').last %> a <%= activity_owner[:activity].trackable_type.downcase %> at <%= activity_owner[:activity].created_at.strftime("%B %d, %Y %H:%M") %>
+          <% else %>
+            <strong>Unknown User</strong> <%= activity_owner[:activity].key.split('.').last %> a <%= activity_owner[:activity].trackable_type.downcase %> at <%= activity_owner[:activity].created_at.strftime("%B %d, %Y %H:%M") %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No activities found.</p>
+  <% end %>
+</div>
 
 <div class="container mt-5 d-flex justify-content-between">
   <div class="flex-fill me-3">

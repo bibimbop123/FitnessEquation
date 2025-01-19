@@ -24,6 +24,7 @@ class WorkoutRoutinesController < ApplicationController
   def create
     @workout_routine = current_user.workout_routines.new(workout_routine_params)
     if @workout_routine.save
+      @workout.create_activity(key: 'workout_routine.create', owner: current_user)
       redirect_to @workout_routine, notice: 'Workout routine was successfully created.'
     else
       render :new

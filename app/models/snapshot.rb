@@ -21,7 +21,11 @@
 #
 #  fk_rails_...  (user_id => users.id)
 class Snapshot < ApplicationRecord
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller && controller.current_user }
   belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
+  after_create :track_creation
+  after_destroy :track_deletion
 
   validates :height_cm, presence: true, numericality: { less_than: 228.6, greater_than: 0 }
   validates :weight_kg, presence: true, numericality: { less_than: 226.8, greater_than: 0 }
@@ -180,5 +184,20 @@ class Snapshot < ApplicationRecord
         errors.add(:calorie_deficit_or_surplus_per_day, "must be negative in order to lose weight")
       end
     end
+  end
+  def track_creation
+    PublicActivity::Activity.create(
+      key: 'snapshot.created',
+      owner: user,
+      trackable: self
+    )
+  end
+
+  def track_deletion
+    PublicActivity::Activity.create(
+      key: 'snapshot.deleted',
+      owner: user,
+      trackable: self
+    )
   end
 end

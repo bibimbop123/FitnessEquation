@@ -1,4 +1,5 @@
 class OneRepMaxesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @one_rep_maxes = OneRepMax.where(user: current_user)
 
@@ -28,6 +29,7 @@ class OneRepMaxesController < ApplicationController
 
     respond_to do |format|
       if @one_rep_max.save
+        @one_rep_max.create_activity(key: 'one_rep_max.create',owner: current_user)
         format.html { redirect_to @one_rep_max, notice: "One rep max was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
