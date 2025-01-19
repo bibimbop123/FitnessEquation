@@ -16,16 +16,15 @@
       <%= line_chart @weight_data, xtitle: "Time (Days)", ytitle: "Weight (lbs)" %>
       <br/>
 
-      <h2> Time(Days) vs. One Rep Max(Lbs)</h2>
-      <%= line_chart @one_rep_max_data, xtitle: "Time (Days)", ytitle: "One Rep Max (lbs)" %>
-      <br/>
-  
       <h2> Time(Days) vs. Total Volume Lifted(Lbs)</h2>
       <%= column_chart @workout_routines_data, xtitle: "Time (Days)", ytitle: "Total Volume (lbs)" %>  
       <br/>
 
       <h2>Activity levels Counts of Snapshots </h2>
       <%= pie_chart @activity_level_data, xtitle: "Activity Level", ytitle: "Count" %>
+      <br/>
+      <h2> Time(Days) vs. One Rep Max(Lbs)</h2>
+      <%= line_chart @one_rep_max_data, xtitle: "Time (Days)", ytitle: "One Rep Max (lbs)" %>
       <br/>
       <h2> Time(Days) vs. One Rep Max Count</h2> 
       <%= line_chart @one_rep_max_count_data, xtitle: "Time (Days)", ytitle: "One Rep Max Count" %>
