@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.1"
 
 gem "active_link_to"
+gem 'ahoy_matey'
 gem "appdev_support"
 gem "awesome_print"
 gem "bootsnap", require: false

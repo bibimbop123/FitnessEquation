@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   post 'weight_loss_predictor', to: 'snapshots#create'
 
   get 'analytics', to: 'analytics#index'
+
+  get 'ahoyanalytics', to: 'analytics#ahoyanalytics'
+
 end

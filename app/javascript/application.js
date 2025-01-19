@@ -40,3 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 import "chartkick"
 import "Chart.bundle"
+document.addEventListener("DOMContentLoaded", function() {
+  ahoy.track("Viewed Analytics Page");
+});
