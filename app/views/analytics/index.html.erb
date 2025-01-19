@@ -1,0 +1,40 @@
+<div class="text-center custom-orange-bg">
+  <div class="d-flex justify-content-center custom-orange-bg">
+    <div class="col-12 col-md-10 col-lg-8 mb-5 custom-orange-bg">
+      <br/>
+      <h1>Fitness Analytics</h1>
+      <br/>
+      <p>Here you can view your progress over time.</p>
+      <br/>
+      <h2> Snapshot weight vs predicted time to reach goal weight</h2>
+      <%= line_chart @predicted_time_data, xtitle: "Date", ytitle: "Time to Reach Goal Weight (days)" %>
+      <br/>
+      <h2>Weight(lbs) from Snapshots vs. Time</h2>
+      <%= line_chart @weight_data, xtitle: "Date", ytitle: "Weight (lbs)" %>
+      <br/>
+
+      <h2>One Rep Max vs. Time</h2>
+      <%= line_chart @one_rep_max_data, xtitle: "Date", ytitle: "One Rep Max (lbs)" %>
+      <br/>
+  
+      <br/>
+      <h2>Total Volume Lifted per day</h2>
+      <%= line_chart @workout_routines_data, xtitle: "Date", ytitle: "Total Volume (lbs)" %>  
+      <br/>
+
+      <h2> predicted time in weeks vs. calorie deficit</h2>
+      <%= line_chart @predicted_time_calorie_data, xtitle: "Time to Reach Goal Weight (weeks)" , ytitle: "Calorie_deficit_or_surplus" %>
+      <br/>
+      <h2> Activity levels of Snapshots </h2>
+      <%= pie_chart @activity_level_data, xtitle: "Activity Level", ytitle: "Count" %>
+      <br/>
+      <h2>One Rep Max Count vs. Time</h2> 
+      <%= line_chart @one_rep_max_count_data, xtitle: "Date", ytitle: "Count" %>
+      <br/>
+      <h2>Snapshot Count vs. Time</h2>
+      <%= column_chart @snapshots_count_data, xtitle: "Date", ytitle: "Count" %>
+
+      <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+</div>

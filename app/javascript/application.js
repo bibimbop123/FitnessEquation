@@ -37,3 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+import "chartkick"
+import "Chart.bundle"
