@@ -5,7 +5,9 @@
       <h1>Fitness Analytics</h1>
       <br/>
       <p>Here you can view your progress over time.</p>
-      <br/>
+
+        <%= image_tag 'graph.gif', alt: 'What`s the point of all these graphs?', class: 'img-fluid my-5 w-80' %>
+        <br/>
       <h2> Snapshot Weight(Lbs) vs. Time to Reach Goal Weight(Weeks)</h2>
       <%= line_chart @predicted_time_data, xtitle: "Snapshot weight(Lbs)", ytitle: "Time to Reach Goal Weight (days)"%>
       <br/>
