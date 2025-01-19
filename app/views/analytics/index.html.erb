@@ -6,10 +6,13 @@
       <br/>
       <p>Here you can view your progress over time.</p>
       <br/>
-      <h2> Snapshot weight vs predicted time to reach goal weight</h2>
-      <%= line_chart @predicted_time_data, xtitle: "Date", ytitle: "Time to Reach Goal Weight (days)" %>
+      <h2> Snapshot Weight(Lbs) vs Time to Reach Goal Weight(Weeks)</h2>
+      <%= line_chart @predicted_time_data, xtitle: "Time to Reach Goal Weight (days)", ytitle: "Snapshot weight(Lbs)"%>
       <br/>
-      <h2>Weight(lbs) from Snapshots vs. Time</h2>
+      <h2> Predicted time in weeks vs. Calorie deficit</h2>
+      <%= line_chart @predicted_time_calorie_data, xtitle: "Time to Reach Goal Weight (weeks)" , ytitle: "Calorie_deficit_or_surplus" %>
+      <br/>
+      <h2>Weight(Lbs) vs. Time</h2>
       <%= line_chart @weight_data, xtitle: "Date", ytitle: "Weight (lbs)" %>
       <br/>
 
@@ -18,13 +21,10 @@
       <br/>
   
       <br/>
-      <h2>Total Volume Lifted per day</h2>
+      <h2>Total Volume Lifted vs. Time</h2>
       <%= line_chart @workout_routines_data, xtitle: "Date", ytitle: "Total Volume (lbs)" %>  
       <br/>
 
-      <h2> predicted time in weeks vs. calorie deficit</h2>
-      <%= line_chart @predicted_time_calorie_data, xtitle: "Time to Reach Goal Weight (weeks)" , ytitle: "Calorie_deficit_or_surplus" %>
-      <br/>
       <h2> Activity levels of Snapshots </h2>
       <%= pie_chart @activity_level_data, xtitle: "Activity Level", ytitle: "Count" %>
       <br/>
