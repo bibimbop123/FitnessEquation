@@ -21,9 +21,6 @@ class AnalyticsController < ApplicationController
 
   def ahoyanalytics
     @ahoy_events = Ahoy::Event.all
-  end
-
-  def ahoyvisits
     @ahoy_visits = Ahoy::Visit.all
 
     # Chartkick data for visits
@@ -31,4 +28,5 @@ class AnalyticsController < ApplicationController
     @visits_by_week = @ahoy_visits.group_by_week(:started_at).count
     @visits_by_month = @ahoy_visits.group_by_month(:started_at).count
   end
+
 end
