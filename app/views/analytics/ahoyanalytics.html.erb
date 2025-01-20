@@ -2,6 +2,7 @@
   <h1>Ahoy Analytics</h1>
   <p>Here you can view the events tracked by Ahoy.</p>
 
+
   <table class="table table-striped">
     <thead>
       <tr>
@@ -18,7 +19,7 @@
           <td><%= event.name %></td>
           <td><%= event.properties %></td>
           <td><%= event.time %></td>
-          <td><%= event.user_id %></td>
+          <td><%= event.user.present? ? event.user.email : 'Unknown User' %></td>
           <td><%= event.visit_id %></td>
         </tr>
       <% end %>
