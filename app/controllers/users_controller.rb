@@ -3,10 +3,7 @@ class UsersController < ApplicationController
     @user = current_user
     @snapshots = @user.snapshots
     @workout_routines = @user.workout_routines
-    @activities = PublicActivity::Activity
-    .select('DISTINCT ON (activities.id) activities.*') 
-    .order('activities.id, activities.created_at ASC')
-    .limit(10)
+    @activities = PublicActivity::Activity.order(created_at: :desc).limit(10)
 
     # Fetch the owners of the activities
     @activity_owners = @activities.map do |activity|
