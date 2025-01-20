@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @workout_routines = @user.workout_routines
     @activities = PublicActivity::Activity
     .select('DISTINCT ON (activities.id) activities.*') 
-    .order('activities.id, activities.created_at DESC')
+    .order('activities.id, activities.created_at ASC')
     .limit(10)
 
     # Fetch the owners of the activities
