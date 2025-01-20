@@ -19,6 +19,7 @@
 class WorkoutRoutine < ApplicationRecord
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
+  
   belongs_to :user
   has_many :exercises, dependent: :destroy
   after_create :track_creation

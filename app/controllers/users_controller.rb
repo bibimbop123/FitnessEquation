@@ -1,15 +1,16 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   def show
     @user = current_user
     @snapshots = @user.snapshots
     @workout_routines = @user.workout_routines
-    @activities = PublicActivity::Activity.order(created_at: :desc).limit(10)
+    @activities = PublicActivity::Activity.order(created_at: :desc).limit(10).uniq { |activity| activity.id }
 
     # Fetch the owners of the activities
     @activity_owners = @activities.map do |activity|
       owner = User.find_by(id: activity.owner_id)
       { activity: activity, owner: owner }
-    end.uniq { |activity_owner| activity_owner[:activity].id }
+    end
   end
 
   def edit

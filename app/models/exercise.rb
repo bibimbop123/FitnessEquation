@@ -30,5 +30,5 @@ class Exercise < ApplicationRecord
   def volume
     reps * sets * weight
   end
-  
+
 end
