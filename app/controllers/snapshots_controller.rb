@@ -4,7 +4,7 @@ class SnapshotsController < ApplicationController
 
   # GET /snapshots or /snapshots.json
   def index
-    @snapshots = Snapshot.where(user: current_user)
+    @snapshots = Snapshot.where(user: current_user).includes([:user])
     
   end
 
@@ -21,7 +21,7 @@ class SnapshotsController < ApplicationController
   # GET /snapshots/new
   def new
     @snapshot = Snapshot.new
-    @snapshots = Snapshot.where(user: current_user)
+    @snapshots = Snapshot.where(user: current_user).includes([:user])
   end
   # GET /snapshots/1/edit
   def edit
@@ -59,7 +59,7 @@ class SnapshotsController < ApplicationController
     # end
 
 
-    @snapshots = Snapshot.where(user_id: current_user.id)
+    @snapshots = Snapshot.where(user_id: current_user.id).includes([:user])
 
     respond_to do |format|
       if @snapshot.save

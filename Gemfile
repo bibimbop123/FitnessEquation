@@ -48,6 +48,7 @@ end
 group :development do
   gem "annotate"
   gem "better_errors"
+  gem 'bullet'
   gem "binding_of_caller"
   gem "dev_toolbar"
   gem "draft_generators"

@@ -86,4 +86,17 @@ Rails.application.configure do
   # Allow POST authenticity on Codespaces in dev
   config.action_controller.forgery_protection_origin_check = false
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.after_initialize do
+    Bullet.enable = true                           # Enable Bullet
+    Bullet.alert = true                            # Pop-up alerts in the browser
+    Bullet.bullet_logger = true                   # Log to the Bullet log file
+    Bullet.console = true                         # Log warnings to the browser console
+    Bullet.rails_logger = true                    # Log warnings to the Rails logger
+    Bullet.add_footer = true                      # Add Bullet notifications to the HTML response
+
+    # Optional: Enable or disable checks
+    Bullet.n_plus_one_query_enable = true         # Detect N+1 queries
+    Bullet.unused_eager_loading_enable = true     # Detect unused eager loading
+    Bullet.counter_cache_enable = true            # Detect missing counter cache
+  end
 end
