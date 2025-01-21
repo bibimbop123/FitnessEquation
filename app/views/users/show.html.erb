@@ -68,18 +68,20 @@
 <% end %>
 </div>
 
-<div class="container mt-5 d-flex justify-content-between">
-  <div class="flex-fill me-3">
-    <h3 class="fitness-font">Your Snapshots</h3>
-    <div id="snapshots">
-      <%= render 'snapshots' %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 col-md-6 mb-4">
+      <h3 class="fitness-font">Your Snapshots</h3>
+      <div id="snapshots">
+        <%= render 'snapshots' %>
+      </div>
     </div>
-  </div>
 
-  <div class="flex-fill ms-3">
-    <h3 class="fitness-font">Your Workout Routines</h3>
-    <div id="workout_routines">
-      <%= render 'workout_routines' %>
+    <div class="col-12 col-md-6 mb-4">
+      <h3 class="fitness-font">Your Workout Routines</h3>
+      <div id="workout_routines">
+        <%= render 'workout_routines' %>
+      </div>
     </div>
   </div>
 </div>
