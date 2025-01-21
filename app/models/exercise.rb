@@ -20,7 +20,7 @@
 #  fk_rails_...  (workout_routine_id => workout_routines.id)
 #
 class Exercise < ApplicationRecord
-  belongs_to :workout_routine
+  belongs_to :workout_routine, touch: true
 
   validates :name, presence: true
   validates :reps, presence: true, numericality: { only_integer: true, greater_than: 0 }

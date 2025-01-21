@@ -22,17 +22,19 @@
   </thead>
   <tbody>
     <% @workout_routines.each do |routine| %>
-      <tr>
-        <td><%= routine.name %></td>
-        <td>
-          <input type="checkbox" class="exercise-checkbox" data-routine-id="<%= routine.id %>">
-        </td>
-        <td>
-          <%= link_to 'Show', workout_routine_path(routine), class: 'btn btn-secondary' %>
-          <%= link_to 'Edit', edit_workout_routine_path(routine), class: 'btn btn-warning' %>
-          <%= link_to 'Destroy', workout_routine_path(routine), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </td>
-      </tr>
+      <% cache(routine) do %>
+        <tr>
+          <td><%= routine.name %></td>
+          <td>
+            <input type="checkbox" class="exercise-checkbox" data-routine-id="<%= routine.id %>">
+          </td>
+          <td>
+            <%= link_to 'Show', workout_routine_path(routine), class: 'btn btn-secondary' %>
+            <%= link_to 'Edit', edit_workout_routine_path(routine), class: 'btn btn-warning' %>
+            <%= link_to 'Destroy', workout_routine_path(routine), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

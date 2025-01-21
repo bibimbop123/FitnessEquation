@@ -1,8 +1,10 @@
 <ul class="list-group">
   <% @workout_routines.each do |workout_routine| %>
-    <li class="list-group-item custom-green-bg">
-      <%= link_to workout_routine.created_at.strftime("%B %d, %Y"), workout_routine_path(workout_routine), class: "text-decoration-none text-black" %>
-    </li>
+    <%= cache(workout_routine) do %>
+      <li class="list-group-item custom-green-bg">
+        <%= link_to workout_routine.created_at.strftime("%B %d, %Y"), workout_routine_path(workout_routine), class: "text-decoration-none text-black" %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 <div class="d-flex justify-content-center mt-3">

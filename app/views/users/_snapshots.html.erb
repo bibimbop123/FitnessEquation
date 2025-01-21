@@ -1,8 +1,10 @@
 <ul class="list-group">
   <% @snapshots.each do |snapshot| %>
-    <li class="list-group-item custom-green-bg">
-      <%= link_to snapshot.created_at.strftime("%B %d, %Y"), snapshot_path(snapshot), class: "text-decoration-none text-black" %>
-    </li>
+    <%= cache(snapshot) do %>
+      <li class="list-group-item custom-green-bg">
+        <%= link_to snapshot.created_at.strftime("%B %d, %Y"), snapshot_path(snapshot), class: "text-decoration-none text-black" %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 <div class="d-flex justify-content-center mt-3">

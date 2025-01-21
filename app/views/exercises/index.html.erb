@@ -5,36 +5,36 @@
 
 <%= link_to 'New Exercise', new_workout_routine_exercise_path(@workout_routine), class: 'btn btn-primary' %>
 
-<table class="table mt-3 bg-light">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Weight</th>
-      <th>Reps</th>
-      <th>Sets</th>
-      <th>Volume</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @exercises.each do |exercise| %>
+  <table class="table mt-3 bg-light">
+    <thead>
       <tr>
-        <td><%= exercise.name %></td>
-        <td><%= exercise.weight %></td>
-        <td><%= exercise.reps %></td>
-        <td><%= exercise.sets %></td>
-        <td><%= exercise.volume %>
-  
-        <td>
-          <%= link_to 'Show', workout_routine_exercise_path(@workout_routine, exercise), class: 'btn btn-secondary' %>
-          <%= link_to 'Edit', edit_workout_routine_exercise_path(@workout_routine, exercise), class: 'btn btn-warning' %>
-          <%= link_to 'Destroy', workout_routine_exercise_path(@workout_routine, exercise), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </td>
+        <th>Name</th>
+        <th>Weight</th>
+        <th>Reps</th>
+        <th>Sets</th>
+        <th>Volume</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
+    </thead>
+    <tbody>
+      <% @exercises.each do |exercise| %>
+        <% cache(exercise) do %>
+          <tr>
+            <td><%= exercise.name %></td>
+            <td><%= exercise.weight %></td>
+            <td><%= exercise.reps %></td>
+            <td><%= exercise.sets %></td>
+            <td><%= exercise.volume %></td>
+            <td>
+              <%= link_to 'Show', workout_routine_exercise_path(@workout_routine, exercise), class: 'btn btn-secondary' %>
+              <%= link_to 'Edit', edit_workout_routine_exercise_path(@workout_routine, exercise), class: 'btn btn-warning' %>
+              <%= link_to 'Destroy', workout_routine_exercise_path(@workout_routine, exercise), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 <%= link_to 'Back to Workout Routines', workout_routines_path, class: 'btn btn-secondary' %>
 </div>
 </div>

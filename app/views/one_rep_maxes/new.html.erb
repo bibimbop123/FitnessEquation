@@ -114,33 +114,35 @@
 
       <div class="container-fluid mt-5"> <!-- Use container-fluid for better responsiveness -->
         <div class="table-responsive"> <!-- Ensures horizontal scrolling for the table -->
-          <table class="table table-striped table-bordered mt-3 bg-light">
-      <thead>
-        <tr>
-          <th>Exercise</th>
-          <th>Weight (lbs)</th>
-          <th>Reps</th>
-          <th>One-Rep Max (lbs)</th>
-          <th>Relative Strength (lbs)</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @one_rep_maxes.each do |one_rep_max| %>
-          <tr>
-            <td><%= one_rep_max.exercise %></td>
-            <td><%= one_rep_max.weight_lbs %></td>
-            <td><%= one_rep_max.reps %></td>
-            <td><%= one_rep_max.calculate_one_rep_max %></td>
-            <td><%= one_rep_max.calculate_relative_strength %></td>
-            <td>
-              <%= link_to 'Show', one_rep_max, class: 'btn btn-secondary btn-sm' %>
-              <%= link_to 'Destroy', one_rep_max, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+          <% cache @one_rep_maxes do %>
+        <table class="table table-striped table-bordered mt-3 bg-light">
+          <thead>
+            <tr>
+              <th>Exercise</th>
+              <th>Weight (lbs)</th>
+              <th>Reps</th>
+              <th>One-Rep Max (lbs)</th>
+              <th>Relative Strength (lbs)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @one_rep_maxes.each do |one_rep_max| %>
+              <tr>
+                <td><%= one_rep_max.exercise %></td>
+                <td><%= one_rep_max.weight_lbs %></td>
+                <td><%= one_rep_max.reps %></td>
+                <td><%= one_rep_max.calculate_one_rep_max %></td>
+                <td><%= one_rep_max.calculate_relative_strength %></td>
+                <td>
+                  <%= link_to 'Show', one_rep_max, class: 'btn btn-secondary btn-sm' %>
+                  <%= link_to 'Destroy', one_rep_max, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
   </div>
 </div>
 </div>

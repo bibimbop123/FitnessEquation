@@ -23,8 +23,8 @@
 class Snapshot < ApplicationRecord
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
-  
-  belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
+
+  belongs_to :user, required: true, class_name: "User", foreign_key: "user_id", touch: true
   after_create :track_creation
   after_destroy :track_deletion
 
