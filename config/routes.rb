@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ahoy::Engine => "/ahoy"
   get 'activities/index'
   get 'analytics/index'
   devise_for :users
