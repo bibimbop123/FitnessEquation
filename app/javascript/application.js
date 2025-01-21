@@ -10,6 +10,8 @@ window.$ = jquery;
 import Rails from "@rails/ujs"
 Rails.start();
 
+import "ahoy"
+
 document.addEventListener("DOMContentLoaded", function() {
   const checkboxes = document.querySelectorAll(".exercise-checkbox");
 

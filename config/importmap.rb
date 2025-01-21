@@ -9,3 +9,4 @@ pin "@rails/ujs", to: "@rails--ujs.js" # @7.0.8
 pin "jquery" # @3.7.1
 pin "chartkick", to: "chartkick.js"
 pin "Chart.bundle", to: "Chart.bundle.js"
+pin "ahoy", to: "ahoy.js"
