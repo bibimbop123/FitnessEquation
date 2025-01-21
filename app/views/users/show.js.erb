@@ -1,0 +1,14 @@
+<% if params[:snapshot_page] %>
+  console.log("Updating snapshots with page <%= params[:snapshot_page] %>");
+  $("#snapshots").html("<%= j render 'snapshots' %>");
+<% elsif params[:workout_routine_page] %>
+  console.log("Updating workout routines with page <%= params[:workout_routine_page] %>");
+  $("#workout_routines").html("<%= j render 'workout_routines' %>");
+<% end %>
+
+// Use event delegation to handle pagination links
+$(document).off('click', '#snapshots .pagination a, #workout_routines .pagination a').on('click', '#snapshots .pagination a, #workout_routines .pagination a', function(event) {
+  event.preventDefault();
+  console.log("Pagination link clicked: " + this.href);
+  $.getScript(this.href);
+});

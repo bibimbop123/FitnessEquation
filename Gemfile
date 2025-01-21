@@ -18,6 +18,8 @@ gem "htmlbeautifier"
 gem "http"
 gem "importmap-rails"
 gem "jbuilder"
+gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 gem "pg", "~> 1.1"
 gem 'public_activity'
 gem "puma"
