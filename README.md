@@ -25,7 +25,11 @@ If a person uses fitness equation to lose weight, they will achieve their goals 
 
 - As a personal trainer, I want to be able to calculate the shortest amount of time to achieve goal weight, so that my clients know what to expect in their healthy weightloss timeline.
 - As a person trying to lose weight, I want to be able to convert my height from feet and inches to cm, and my weight from lbs to kg, so that I'm able to visualize my atheletic potential in different metrics.
-
+- As a person trying to get gain weight, I want to calculate my healthy weight gain time line.
+- As a person trying to lose weight, I want to calculate my healthy weight loss time line.
+- As a person trying to get stronger, I want to calculate my One Rep Max for any exercise I do.
+- As a person trying to get stronger, I want to log my weight lifting routines with various exercises and calculate my total volume lifted.
+- As a person trying to visualize my progress, I want to be able to check out various charts on my fitness progress, such as Time(Days) vs. Weight(Lbs), Time(Days) vs. Total Volume Lifted(Lbs), many more!
 
 
 ## Domain Model
