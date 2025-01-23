@@ -30,46 +30,25 @@ If a person uses fitness equation to lose weight, they will achieve their goals 
 
 ## Domain Model
 **ERD (Entity-Relationship Diagram):**  
-Users, Snapshots
+![image](https://github.com/user-attachments/assets/7eed69dc-222f-4e05-8ca6-ae5256b8f556)
+
 
 
 **Pseudocode Models:**  
 Relationships Summary:
 1. Users to Snapshots: One-to-many (A user has many snapshots).
+2. Users to One-Rep-Max: One-to-many (A user has many one rep maxes).
+3. Users to Workout Routine: One-to-many (A user has many workout routines).
+4. Workout Routine to Exercise: One to many (A workout routine has many exercises
 
 
-
-
-
-## Sketches
-Start app
-
-Login and register form
-
-After logging in it takes you to a profile page
-
-In the profile page it asks for the following
-your height in feet and inches
-And weight in pounds
-
-After collecting your weight and height in pounds and feet and inches 
-it converts and displays your height and weight to inches then to  cm and kg with the respective inches and pounds also displayed
-
-also collects
-
-Age in years
-
-Activity level
-
-And gender
-.
-
-One link to the weight loss predictor
-has two different formulas depending on whether you are female or male
-There you input your goal weight. And it will then calculate the the shortest amount of time to attain the goal weight in a healthy weightloss timeline for you. You can save your predictions in your feed
 
 
 **Reach goals**
-(There another link to the Ideal body weight
-Here you will there will be two different formulas one for female and one for male. It will take the height converted to just inches and weight in kg.)
+Optimize speed
+Fix pagination first button
+fix activity rendering twice in the activity feed
+fix ahoy tracking page
+donation page xD
+
 
