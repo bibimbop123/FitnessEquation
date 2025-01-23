@@ -45,10 +45,10 @@ Relationships Summary:
 
 
 **Reach goals**
-Optimize speed
-Fix pagination first button
-fix activity rendering twice in the activity feed
-fix ahoy tracking page
-donation page xD
+1. Optimize speed
+2. Fix pagination first button
+3. fix activity rendering twice in the activity feed
+4. fix ahoy tracking page
+5. donation page xD
 
 
