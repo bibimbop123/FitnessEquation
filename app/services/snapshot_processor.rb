@@ -1,5 +1,5 @@
 class SnapshotProcessor
-  def initialize(snapshot, params)
+  def initialize(snapshot, params = {})
     @snapshot = snapshot
     @params = params
   end
@@ -7,9 +7,9 @@ class SnapshotProcessor
   def call
     puts "Processing snapshot with params: #{@params.inspect}"
 
-    convert_weight
-    convert_height
-    convert_goal_weight
+    convert_weight if @params[:weightLbs]
+    convert_height if @params[:heightFeet] && @params[:heightInches]
+    convert_goal_weight if @params[:goal_weight_lbs]
     assign_other_attributes
   end
 
@@ -31,8 +31,23 @@ class SnapshotProcessor
   end
 
   def assign_other_attributes
-    @snapshot.activity_level = @params[:activity_level]
-    @snapshot.predicted_time_weeks = @params[:predicted_time_weeks]
-    @snapshot.calorie_deficit_or_surplus_per_day = @params[:calorie_deficit_or_surplus_per_day].to_s.gsub(/[^\d-]/, '').to_i
+    @snapshot.activity_level = @params[:activity_level] if @params[:activity_level]
+    @snapshot.predicted_time_weeks = @params[:predicted_time_weeks] if @params[:predicted_time_weeks]
+    @snapshot.calorie_deficit_or_surplus_per_day = @params[:calorie_deficit_or_surplus_per_day].to_s.gsub(/[^\d-]/, '').to_i if @params[:calorie_deficit_or_surplus_per_day]
+  end
+
+  def calculate_show_values
+    weight_lbs = (@snapshot.weight_kg / 0.453592).round(2)
+    total_height_inches = (@snapshot.height_cm / 2.54).round(2)
+    height_feet = (total_height_inches / 12).to_i
+    height_inches = (total_height_inches % 12).round(2)
+    goal_weight_lbs = (@snapshot.goal_weight_kg / 0.453592).round(2)
+
+    {
+      weight_lbs: weight_lbs,
+      height_feet: height_feet,
+      height_inches: height_inches,
+      goal_weight_lbs: goal_weight_lbs
+    }
   end
 end
