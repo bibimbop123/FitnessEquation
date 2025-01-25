@@ -16,7 +16,7 @@ class ExercisesController < ApplicationController
   def create
     @exercise = @workout_routine.exercises.new(exercise_params)
     if @exercise.save
-      redirect_to [@workout_routine], notice: 'Exercise was successfully created.'
+      redirect_to @workout_routine, notice: 'Exercise was successfully created.'
     else
       render :new
     end
@@ -49,6 +49,6 @@ class ExercisesController < ApplicationController
   end
 
   def exercise_params
-    params.require(:exercise).permit(:name, :reps, :sets, :weight)
+    params.require(:exercise).permit(:name, :weight, :reps, :sets, :volume)
   end
 end
