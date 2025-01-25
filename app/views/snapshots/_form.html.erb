@@ -8,8 +8,10 @@
       <p><%= @snapshot.user.email %></p>
       <%= f.hidden_field :user_id, value: @snapshot.user_id %>
     </div>
-    <%= f.input :height_cm %>
-    <%= f.input :weight_kg %>
+    <%= f.input :weightLbs, label: "Weight (lbs)" %>
+    <%= f.input :heightFeet, label: "Height (feet)" %>
+    <%= f.input :heightInches, label: "Height (inches)" %>
+    <%= f.input :goal_weight_lbs, label: "Goal Weight (lbs)" %>
 
     <%= f.input :activity_level, as: :select, collection: [
       'Sedentary (Little to no physical activity)',
@@ -21,7 +23,7 @@
 
     <%= f.input :goal_weight_kg %>
     <%= f.input :predicted_time_weeks %>
-    <%= f.input :calorie_deficit_per_day %>
+    <%= f.input :calorie_deficit_or_surplus_per_day, label: "Calorie Deficit/Surplus per Day" %>
   </div>
 
   <div class="form-actions">

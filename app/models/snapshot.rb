@@ -201,4 +201,8 @@ class Snapshot < ApplicationRecord
       trackable: self
     )
   end
+
+  def dob
+    user.dob
+  end
 end
