@@ -1,58 +1,52 @@
-# Fitness Equation 
 
-## Description:
+# Project Title
+
+Fitness Equation
+
+## Description
+
 An app that predicts the shortest amount of time to reach your goal weight.
 
+This project addresses the obesity epidemic in America. Can be used with all populations regardless of race, gender, religion. As a personal trainer, I often couldn't tell my clients when exactly they should reach goal weight in a healthy timeline
 
-## Pain Point
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
+## Installation
 
-This project addresses the obesity epidemic in America. Can be used with all populations regardless of race, gender, religion. 
-As a personal trainer, I often couldn't tell my clients when exactly they should reach goal weight in a healthy timeline
+1. Clone the repository:
+`git clone https://github.com/yourusername/yourproject.git`
 
-## Target User Persona
+2. Navigate to the project directory:
+`cd yourproject`
 
+3. Install the required gems:
+`bundle install`
 
-- Personal trainers
-- People who want to lose weight
-- People who want to envision a healthier reality for themselves!
+4. Set up the database:
+`rails db:setup`
 
-## Hypothesis
-If a person uses fitness equation to lose weight, they will achieve their goals in the shortest amount of time to reach their goal weight.
+5. Start the Rails server:
+`rails server`
 
+## Contributing
 
-## User Stories
+Contributions are welcome! Please follow these guidelines:
 
-- As a personal trainer, I want to be able to calculate the shortest amount of time to achieve goal weight, so that my clients know what to expect in their healthy weightloss timeline.
-- As a person trying to lose weight, I want to be able to convert my height from feet and inches to cm, and my weight from lbs to kg, so that I'm able to visualize my atheletic potential in different metrics.
-- As a person trying to get gain weight, I want to calculate my healthy weight gain time line.
-- As a person trying to lose weight, I want to calculate my healthy weight loss time line.
-- As a person trying to get stronger, I want to calculate my One Rep Max for any exercise I do.
-- As a person trying to get stronger, I want to log my weight lifting routines with various exercises and calculate my total volume lifted.
-- As a person trying to visualize my progress, I want to be able to check out various charts on my fitness progress, such as Time(Days) vs. Weight(Lbs), Time(Days) vs. Total Volume Lifted(Lbs), many more!
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-branch`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature-branch`)
+5. Open a pull request
 
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## Domain Model
-**ERD (Entity-Relationship Diagram):**  
-![image](https://github.com/user-attachments/assets/7eed69dc-222f-4e05-8ca6-ae5256b8f556)
+## Contact
 
-
-
-**Pseudocode Models:**  
-Relationships Summary:
-1. Users to Snapshots: One-to-many (A user has many snapshots).
-2. Users to One-Rep-Max: One-to-many (A user has many one rep maxes).
-3. Users to Workout Routine: One-to-many (A user has many workout routines).
-4. Workout Routine to Exercise: One to many (A workout routine has many exercises
-
-
-
-
-**Reach goals**
-1. Optimize speed
-2. Fix pagination first button
-3. fix activity rendering twice in the activity feed
-4. fix ahoy tracking page
-5. donation page xD
-
-
+Your Name - [Brian Kim
+Project Github: [https://github.com/bibimbop123/FitnessEquation](https://github.com/bibimbop123/FitnessEquation)
+Project Link: [https://fitness-equation.onrender.com/]
