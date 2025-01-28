@@ -32,6 +32,14 @@ This project addresses the obesity epidemic in America. Can be used with all pop
 5. Start the Rails server:
 `rails server`
 
+## Usage
+
+1. Start the Rails server:
+`rails server`
+
+2. Open your browser and navigate to http://localhost:3000
+Follow the on-screen instructions to use the application
+
 ## Contributing
 
 Contributions are welcome! Please follow these guidelines:
