@@ -54,7 +54,6 @@ Contributions are welcome! Please follow these guidelines:
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
-
-Your Name - [Brian Kim
+Name: Brian Kim
 Project Github: [https://github.com/bibimbop123/FitnessEquation](https://github.com/bibimbop123/FitnessEquation)
 Project Link: [https://fitness-equation.onrender.com/]
