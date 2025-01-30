@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SnapshotProcessor
   def initialize(snapshot, params = {})
     @snapshot = snapshot
@@ -33,7 +35,10 @@ class SnapshotProcessor
   def assign_other_attributes
     @snapshot.activity_level = @params[:activity_level] if @params[:activity_level]
     @snapshot.predicted_time_weeks = @params[:predicted_time_weeks] if @params[:predicted_time_weeks]
-    @snapshot.calorie_deficit_or_surplus_per_day = @params[:calorie_deficit_or_surplus_per_day].to_s.gsub(/[^\d-]/, '').to_i if @params[:calorie_deficit_or_surplus_per_day]
+    return unless @params[:calorie_deficit_or_surplus_per_day]
+
+    @snapshot.calorie_deficit_or_surplus_per_day = @params[:calorie_deficit_or_surplus_per_day].to_s.gsub(/[^\d-]/,
+                                                                                                          '').to_i
   end
 
   def calculate_show_values

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WorkoutRoutinesController < ApplicationController
   include WorkoutRoutineConcern
   before_action :authenticate_user!
@@ -6,8 +8,7 @@ class WorkoutRoutinesController < ApplicationController
     @workout_routines = current_user.workout_routines
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @workout_routine = current_user.workout_routines.new
@@ -22,8 +23,7 @@ class WorkoutRoutinesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @workout_routine.update(workout_routine_params)

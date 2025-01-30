@@ -1,4 +1,8 @@
-class Ahoy::Store < Ahoy::DatabaseStore
+# frozen_string_literal: true
+
+module Ahoy
+  class Store < Ahoy::DatabaseStore
+  end
 end
 
 # set to true for JavaScript tracking
@@ -8,4 +12,3 @@ Ahoy.api = false
 # we recommend configuring local geocoding as well
 # see https://github.com/ankane/ahoy#geocoding
 Ahoy.geocode = false
-

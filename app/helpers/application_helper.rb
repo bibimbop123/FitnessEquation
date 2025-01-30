@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def calculate_age(dob)
     now = Time.now.utc.to_date

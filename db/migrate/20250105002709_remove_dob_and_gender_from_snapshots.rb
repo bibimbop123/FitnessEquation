@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveDobAndGenderFromSnapshots < ActiveRecord::Migration[7.1]
   def change
     remove_column :snapshots, :dob, :date
