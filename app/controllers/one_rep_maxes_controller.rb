@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OneRepMaxesController < ApplicationController
   include SetOneRepMaxConcern
   before_action :authenticate_user!
@@ -17,8 +19,7 @@ class OneRepMaxesController < ApplicationController
     @one_rep_maxes = OneRepMax.where(user: current_user).includes([:user])
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @one_rep_max = OneRepMax.new(one_rep_max_params)
@@ -33,8 +34,7 @@ class OneRepMaxesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @one_rep_max.update(one_rep_max_params)

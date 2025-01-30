@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class ExercisesController < ApplicationController
   before_action :set_workout_routine
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy]
+  before_action :set_exercise, only: %i[show edit update destroy]
 
-  def index 
+  def index
     @exercises = @workout_routine.exercises
-    render "/exercises/index"
+    render '/exercises/index'
   end
-  def show
-  end
+
+  def show; end
 
   def new
     @exercise = @workout_routine.exercises.new
@@ -22,8 +24,7 @@ class ExercisesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @exercise.update(exercise_params)

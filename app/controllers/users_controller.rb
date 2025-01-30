@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
@@ -5,7 +7,7 @@ class UsersController < ApplicationController
     @user = current_user
     @snapshots = @user.snapshots.page(params[:snapshot_page]).per(5).order(created_at: :desc)
     @workout_routines = @user.workout_routines.page(params[:workout_routine_page]).per(5).order(created_at: :desc)
-    @activities = PublicActivity::Activity.order(created_at: :desc).limit(10).uniq { |activity| activity.id }
+    @activities = PublicActivity::Activity.order(created_at: :desc).limit(10).uniq(&:id)
 
     # Fetch the owners of the activities
     @activity_owners = @activities.map do |activity|
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
       format.js
     end
   end
-  
+
   def edit
     @user = current_user
   end

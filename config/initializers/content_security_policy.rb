@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Define an application-wide content security policy.
@@ -26,6 +28,6 @@
 
 Rails.application.configure do
   config.content_security_policy do |policy|
-    policy.frame_ancestors :self, "https://envoy.firstdraft.com"
+    policy.frame_ancestors :self, 'https://envoy.firstdraft.com'
   end
 end

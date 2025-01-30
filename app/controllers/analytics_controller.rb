@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class AnalyticsController < ApplicationController
   def index
-    ahoy.track "Viewed Analytics Page"
+    ahoy.track 'Viewed Analytics Page'
     @snapshots = Snapshot.where(user: current_user)
 
     @workout_routines = WorkoutRoutine.where(user: current_user)
@@ -14,9 +16,13 @@ class AnalyticsController < ApplicationController
     @snapshots_data = @snapshots.map { |snapshot| [snapshot.created_at, (snapshot.weight_kg / 0.453592).round(2)] }
     @snapshots_count_data = @snapshots.group_by_day(:created_at).count
     @workout_routines_data = @workout_routines.joins(:exercises).group_by_day('workout_routines.created_at').sum('exercises.sets * exercises.reps * exercises.weight')
-    @predicted_time_data = @snapshots.map { |snapshot| [(snapshot.weight_kg / 0.453592).round(2), snapshot.predicted_time_weeks.abs ] }.compact
+    @predicted_time_data = @snapshots.map do |snapshot|
+      [(snapshot.weight_kg / 0.453592).round(2), snapshot.predicted_time_weeks.abs]
+    end.compact
     @activity_level_data = @snapshots.group(:activity_level).count
-    @predicted_time_calorie_data = @snapshots.map { |snapshot| [snapshot.predicted_time_weeks.abs, snapshot.calorie_deficit_or_surplus_per_day] }
+    @predicted_time_calorie_data = @snapshots.map do |snapshot|
+      [snapshot.predicted_time_weeks.abs, snapshot.calorie_deficit_or_surplus_per_day]
+    end
   end
 
   def ahoyanalytics

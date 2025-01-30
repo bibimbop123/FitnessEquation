@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOneRepMaxes < ActiveRecord::Migration[7.1]
   def change
     create_table :one_rep_maxes do |t|

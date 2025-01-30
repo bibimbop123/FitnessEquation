@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: one_rep_maxes
@@ -22,7 +24,7 @@
 #
 class OneRepMax < ApplicationRecord
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller && controller.current_user }
+  tracked owner: ->(controller, _model) { controller && controller.current_user }
 
   belongs_to :user, touch: true
   after_create :track_creation
@@ -42,16 +44,17 @@ class OneRepMax < ApplicationRecord
     user_weight_kg = user.snapshots.last&.weight_kg
     # convert user_weight to lbs
     user_weight = user_weight_kg.nil? ? nil : user_weight_kg * 2.20462
-    if user_weight.nil?
-      self.relative_strength = nil
-    else
-      self.relative_strength = (one_rep_max / user_weight).round(2)
-    end
+    self.relative_strength = if user_weight.nil?
+                               nil
+                             else
+                               (one_rep_max / user_weight).round(2)
+                             end
   end
 
   def relative_strength_display
-    relative_strength.nil? ? "N/A" : relative_strength
+    relative_strength.nil? ? 'N/A' : relative_strength
   end
+
   def track_creation
     PublicActivity::Activity.create(
       key: 'onerepmax.created',

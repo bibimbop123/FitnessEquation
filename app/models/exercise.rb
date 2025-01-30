@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: exercises
@@ -30,5 +32,4 @@ class Exercise < ApplicationRecord
   def volume
     reps * sets * weight
   end
-
 end
