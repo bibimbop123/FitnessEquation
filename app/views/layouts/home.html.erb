@@ -1,15 +1,44 @@
 
 <body>
- </nav>
+<div class="text-center custom-orange-bg">
+  <div class="d-flex justify-content-center custom-orange-bg">
+    <div class="col-md-4 mb-4 custom-orange-bg">
+   <div class="container mt-5 text-center">
+        <div class="jumbotron bg-light p-5 rounded">
+            <h1 class="display-4">Welcome to Fitness Equation</h1>
+            <br/>
+            <p class="lead">No matter your goal—losing or gaining weight—predict your progress and stay motivated every step of the way!</p>
+            <%= image_tag 'simpsonfitness.jpeg', alt: 'A Fresh New Start', class: 'img-fluid my-5 w-60' %>
 
-  <div class="container mt-5">
-    <div class="jumbotron">
-      <h1 class="display-4">Welcome to Fitness Equation</h1>
-      <p class="lead">Your ultimate fitness companion. Track your workouts, monitor your progress, and achieve your fitness goals.</p>
-      <hr class="my-4">
-      <p>Sign up today and start your fitness journey with us.</p>
-      <a class="btn btn-primary btn-lg" href="<%= new_user_registration_path %>" role="button">Sign Up</a>
-      <a class="btn btn-secondary btn-lg" href="<%= new_user_session_path %>" role="button">Log In</a>
+            <hr class="my-4">
+            <p>Sign up today and start tracking your fitness journey with powerful analytics.</p>
+            <a class="btn btn-primary btn-lg" href="<%= new_user_registration_path %>" role="button">Sign Up</a>
+            <a class="btn btn-secondary btn-lg" href="<%= new_user_session_path %>" role="button">Log In</a>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h3>Weight Timeline Prediction</h3>
+                <p>Use scientifically backed formulas to predict your weight loss or gain progress.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>One-Rep Max Calculator</h3>
+                <p>Calculate your one-rep max for any exercise and optimize your strength training.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Workout Volume Tracking</h3>
+                <p>Record your workout routines and track total volume lifted over time.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 text-center">
+        <h2>Advanced Analytics</h2>
+        <p>Track your progress with in-depth analytics to make data-driven decisions about your fitness journey.</p>
     </div>
   </div>
+</div>
+</div>
 </body>
