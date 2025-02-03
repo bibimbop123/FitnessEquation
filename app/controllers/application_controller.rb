@@ -2,9 +2,13 @@
 
 class ApplicationController < ActionController::Base
   include DeviseParameterSanitizer
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:home]
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :track_action
+  def home
+    render 'layouts/home'
+  end
+
 
   def after_sign_in_path_for(resource)
     user_path(resource) # Redirect to the profile page
