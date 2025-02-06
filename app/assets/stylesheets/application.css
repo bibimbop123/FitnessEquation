@@ -76,3 +76,26 @@
   text-decoration: line-through;
   background-color: #d4edda;
 }
+@media (max-width: 576px) {
+  .custom-home-image {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .custom-home-image {
+    width: 75%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 769px) {
+  .custom-home-image {
+    width: 60%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
