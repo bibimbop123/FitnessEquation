@@ -1,6 +1,6 @@
 
 
-Fitness Equation
+## Fitness Equation
 
 This is an app that
 1. Predicts your weight loss/gain timeline!
