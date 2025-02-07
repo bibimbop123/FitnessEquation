@@ -1,11 +1,11 @@
 
-# Project Title
 
 Fitness Equation
 
-## Description
-
-An app that 1. Predicts your weight loss/gain timeline! 2. Calculate your one rep max for any exercise for any body part or compound lifts! 3.Record your weightlifting routines to track your progress over time!
+This is an app that
+1. Predicts your weight loss/gain timeline!
+2. Calculates your one rep max for any exercise for any body part or compound lifts!
+3. Records your weightlifting routines to track your progress over time!
 
 This project addresses the obesity epidemic in America. Can be used with all populations regardless of race, gender, religion. As a personal trainer, I often couldn't tell my clients when exactly they should reach goal weight in a healthy timeline
 
