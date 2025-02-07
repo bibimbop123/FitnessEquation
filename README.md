@@ -9,6 +9,9 @@ This is an app that
 
 This project addresses the obesity epidemic in America. Can be used with all populations regardless of race, gender, religion. As a personal trainer, I often couldn't tell my clients when exactly they should reach goal weight in a healthy timeline
 
+## ERD
+![image](https://github.com/user-attachments/assets/7eed69dc-222f-4e05-8ca6-ae5256b8f556)
+
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
