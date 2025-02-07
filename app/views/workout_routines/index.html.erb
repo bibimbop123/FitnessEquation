@@ -2,55 +2,54 @@
   <div class="d-flex justify-content-center custom-orange-bg">
     <div class=" custom-orange-bg">
 
-<br/>
-<h1>Workout Routines</h1>
-<br/>
+      <br/>
+      <h1>Workout Routines</h1>
+      <br/>
 
-<%= link_to 'New Workout Routine', new_workout_routine_path, class: 'btn btn-primary' %>
-<div>
-  <%= image_tag 'dumbbell.gif', alt: 'lifting weights', class: 'img-fluid my-5 w-80' %>
-</div>
+      <%= link_to 'New Workout Routine', new_workout_routine_path, class: 'btn btn-primary' %>
+      <div>
+        <%= image_tag 'dumbbell.gif', alt: 'lifting weights', class: 'img-fluid my-5 w-80' %>
+      </div>
 
-
-<table class="table mt-3 bg-light">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Completed</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @workout_routines.each do |routine| %>
-      <% cache(routine) do %>
-        <tr>
-          <td><%= routine.name %></td>
-          <td>
-            <input type="checkbox" class="exercise-checkbox" data-routine-id="<%= routine.id %>">
-          </td>
-          <td>
-            <%= link_to 'Show', workout_routine_path(routine), class: 'btn btn-secondary' %>
-            <%= link_to 'Edit', edit_workout_routine_path(routine), class: 'btn btn-warning' %>
-            <%= link_to 'Destroy', workout_routine_path(routine), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-<br/>
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <h2>Volume Based on Training Effort</h2>
-      <%= image_tag 'volume_based_on_training_effort.png', alt: 'Volume based on Training Effort', class: 'img-fluid' %>
-    </div>
-    <div class="col-md-6 mb-3">
-      <h2>Volume Based on Training Goal</h2>
-      <%= image_tag 'volume_based_training_goal.png', alt: 'Volume based on Training Goal', class: 'img-fluid' %>
+      <table class="table mt-3 bg-light">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Completed</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @workout_routines.each do |routine| %>
+            <% cache(routine) do %>
+              <tr>
+                <td><%= routine.name %></td>
+                <td>
+                  <input type="checkbox" class="exercise-checkbox" data-routine-id="<%= routine.id %>">
+                </td>
+                <td>
+                  <%= link_to 'Show', workout_routine_path(routine), class: 'btn btn-secondary' %>
+                  <%= link_to 'Edit', edit_workout_routine_path(routine), class: 'btn btn-warning' %>
+                  <%= link_to 'Destroy', workout_routine_path(routine), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <br/>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <h2>Volume Based on Training Effort</h2>
+            <%= image_tag 'volume_based_on_training_effort.png', alt: 'Volume based on Training Effort', class: 'img-fluid' %>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h2>Volume Based on Training Goal</h2>
+            <%= image_tag 'volume_based_training_goal.png', alt: 'Volume based on Training Goal', class: 'img-fluid' %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
-</div>
 </div>

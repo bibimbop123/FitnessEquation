@@ -8,7 +8,7 @@
 
 // Use event delegation to handle pagination links
 $(document).off('click', '#snapshots .pagination a, #workout_routines .pagination a').on('click', '#snapshots .pagination a, #workout_routines .pagination a', function(event) {
-  event.preventDefault();
-  console.log("Pagination link clicked: " + this.href);
-  $.getScript(this.href);
+event.preventDefault();
+console.log("Pagination link clicked: " + this.href);
+$.getScript(this.href);
 });

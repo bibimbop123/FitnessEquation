@@ -1,148 +1,148 @@
 <div class="text-center custom-green-bg fitness-font">
   <div class="d-flex justify-content-center custom-green-bg">
     <div class="col-12 col-md-10 col-lg-8 mb-5  custom-green-bg">
-<div class="container mt-5">
-  <div class="d-flex justify-content-center fitness-font">
-    <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#formModal">
-      Calculate One-Rep Max
-    </button>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade fitness-font" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="formModalLabel">Input Your Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="container mt-5">
+        <div class="d-flex justify-content-center fitness-font">
+          <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#formModal">
+            Calculate One-Rep Max
+          </button>
         </div>
-        <div class="modal-body">
-          <div class="alert alert-info" role="alert">
-            <strong>Note:</strong> Please input your details accurately to get the best one-rep max prediction. The fewer the repetitions, the more accurate the prediction.
-          </div>
 
-          <%= simple_form_for(@one_rep_max) do |f| %>
-            <% if @one_rep_max.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@one_rep_max.errors.count, "error") %> prohibited this record from being saved:</h2>
-                <ul>
-                  <% @one_rep_max.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
+        <!-- Modal -->
+        <div class="modal fade fitness-font" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content text-center">
+              <div class="modal-header">
+                <h5 class="modal-title" id="formModalLabel">Input Your Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="alert alert-info" role="alert">
+                  <strong>Note:</strong> Please input your details accurately to get the best one-rep max prediction. The fewer the repetitions, the more accurate the prediction.
+                </div>
+
+                <%= simple_form_for(@one_rep_max) do |f| %>
+                  <% if @one_rep_max.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@one_rep_max.errors.count, "error") %> prohibited this record from being saved:</h2>
+                      <ul>
+                        <% @one_rep_max.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    </div>
                   <% end %>
-                </ul>
-              </div>
-            <% end %>
-            <div class="mb-3">
-              <%= f.label :exercise, "Exercise", class: "form-label" %>
-              <div class="form-group d-flex">
-                <%= f.text_field :exercise, class: "form-control me-2", id: "exercise", placeholder: "Exercise(ex. bicep curls)", required: true %>
+                  <div class="mb-3">
+                    <%= f.label :exercise, "Exercise", class: "form-label" %>
+                    <div class="form-group d-flex">
+                      <%= f.text_field :exercise, class: "form-control me-2", id: "exercise", placeholder: "Exercise(ex. bicep curls)", required: true %>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.label :weight_lbs, "Weight Lifted (in lbs)", class: "form-label" %>
+                    <div class="form-group d-flex">
+                      <%= f.number_field :weight_lbs, class: "form-control me-2", id: "weight_lbs", min: 0, placeholder: "Pounds", required: true %>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.label :reps, "Number of Repetitions", class: "form-label" %>
+                    <div class="form-group d-flex">
+                      <%= f.number_field :reps, class: "form-control me-2", id: "reps", min: 1, max: 10, placeholder: "Reps", required: true %>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <%= f.button :submit, "Calculate 1RM", class: "btn btn-primary" %>
+                  </div>
+                <% end %>
               </div>
             </div>
-            <div class="mb-3">
-              <%= f.label :weight_lbs, "Weight Lifted (in lbs)", class: "form-label" %>
-              <div class="form-group d-flex">
-                <%= f.number_field :weight_lbs, class: "form-control me-2", id: "weight_lbs", min: 0, placeholder: "Pounds", required: true %>
-              </div>
-            </div>
-            <div class="mb-3">
-              <%= f.label :reps, "Number of Repetitions", class: "form-label" %>
-              <div class="form-group d-flex">
-                <%= f.number_field :reps, class: "form-control me-2", id: "reps", min: 1, max: 10, placeholder: "Reps", required: true %>
-              </div>
-            </div>
-            <div class="form-actions">
-              <%= f.button :submit, "Calculate 1RM", class: "btn btn-primary" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <%= image_tag 'funnytest.webp', alt: 'What`s the point of this test?', class: 'img-fluid my-5 w-80' %>
-  <br/>
-
-<div class="d-flex justify-content-center fitness-font">
-    <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#secretSauceModal">
-      The Secret to the One-Rep Max
-    </button>
-  </div>
-
-  <!-- Secret Sauce Modal -->
-  <div class="modal fade" id="secretSauceModal" tabindex="-1" aria-labelledby="secretSauceModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="secretSauceModalLabel">The Secret Sauce</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-
-  <h3>What is a One-Rep Max?</h3>
- 
-  <p>
-    A one-repetition maximum (1RM) is the maximum amount of weightLbs that a person can possibly lift for one repetition.
-  </p>
-  <p>
-  This tool calculates your 1RM for any given exercise after taking in the amount in weightLbs lifted and the number of repetitions performed.
-  </p>
-
-  <p> Please input the maximum amount of weight for your given range(1-10) to get the most accurate results</p>
-          <h3>How to Calculate Your One-Rep Max: </h3>
-          <div class="d-flex justify-content-center">
-            <%= image_tag 'Epley.png', alt: 'Epley', class: 'img-fluid my-5 w-100' %>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+
+      <%= image_tag 'funnytest.webp', alt: 'What`s the point of this test?', class: 'img-fluid my-5 w-80' %>
+      <br/>
+
+      <div class="d-flex justify-content-center fitness-font">
+        <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#secretSauceModal">
+          The Secret to the One-Rep Max
+        </button>
+      </div>
+
+      <!-- Secret Sauce Modal -->
+      <div class="modal fade" id="secretSauceModal" tabindex="-1" aria-labelledby="secretSauceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="secretSauceModalLabel">The Secret Sauce</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <h3>What is a One-Rep Max?</h3>
+
+              <p>
+                A one-repetition maximum (1RM) is the maximum amount of weightLbs that a person can possibly lift for one repetition.
+              </p>
+              <p>
+                This tool calculates your 1RM for any given exercise after taking in the amount in weightLbs lifted and the number of repetitions performed.
+              </p>
+
+              <p> Please input the maximum amount of weight for your given range(1-10) to get the most accurate results</p>
+              <h3>How to Calculate Your One-Rep Max: </h3>
+              <div class="d-flex justify-content-center">
+                <%= image_tag 'Epley.png', alt: 'Epley', class: 'img-fluid my-5 w-100' %>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-<br/>
-<div class="container mt-5">
+      <br/>
+      <div class="container mt-5">
 
-  <div class="col-md-6 mb-3 container-fluid">
-      <h2>Relative Strength Chart</h2>
-      <%= image_tag 'relative_strength_chart.png', alt: 'Relative Strength Chart', class: 'img-fluid my-5 w-100' %>
-  </div>
+        <div class="col-md-6 mb-3 container-fluid">
+          <h2>Relative Strength Chart</h2>
+          <%= image_tag 'relative_strength_chart.png', alt: 'Relative Strength Chart', class: 'img-fluid my-5 w-100' %>
+        </div>
 
-  <h2 class="fitness-font">List of One Rep Maxes</h2>
-  <p>Relative strength refers to the amount of strength an individual has in proportion to their body weight.</p>
-  <p>(Relative strength is calculated by the last snapshot's weight)</p>
+        <h2 class="fitness-font">List of One Rep Maxes</h2>
+        <p>Relative strength refers to the amount of strength an individual has in proportion to their body weight.</p>
+        <p>(Relative strength is calculated by the last snapshot's weight)</p>
 
-      <div class="container-fluid mt-5"> <!-- Use container-fluid for better responsiveness -->
-        <div class="table-responsive"> <!-- Ensures horizontal scrolling for the table -->
-          <% cache @one_rep_maxes do %>
-        <table class="table table-striped table-bordered mt-3 bg-light">
-          <thead>
-            <tr>
-              <th>Exercise</th>
-              <th>Weight (lbs)</th>
-              <th>Reps</th>
-              <th>One-Rep Max (lbs)</th>
-              <th>Relative Strength (lbs)</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @one_rep_maxes.each do |one_rep_max| %>
-              <tr>
-                <td><%= one_rep_max.exercise %></td>
-                <td><%= one_rep_max.weight_lbs %></td>
-                <td><%= one_rep_max.reps %></td>
-                <td><%= one_rep_max.calculate_one_rep_max %></td>
-                <td><%= one_rep_max.calculate_relative_strength %></td>
-                <td>
-                  <%= link_to 'Show', one_rep_max, class: 'btn btn-secondary btn-sm' %>
-                  <%= link_to 'Destroy', one_rep_max, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-                </td>
-              </tr>
+        <div class="container-fluid mt-5"> <!-- Use container-fluid for better responsiveness -->
+          <div class="table-responsive"> <!-- Ensures horizontal scrolling for the table -->
+            <% cache @one_rep_maxes do %>
+              <table class="table table-striped table-bordered mt-3 bg-light">
+                <thead>
+                  <tr>
+                    <th>Exercise</th>
+                    <th>Weight (lbs)</th>
+                    <th>Reps</th>
+                    <th>One-Rep Max (lbs)</th>
+                    <th>Relative Strength (lbs)</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @one_rep_maxes.each do |one_rep_max| %>
+                    <tr>
+                      <td><%= one_rep_max.exercise %></td>
+                      <td><%= one_rep_max.weight_lbs %></td>
+                      <td><%= one_rep_max.reps %></td>
+                      <td><%= one_rep_max.calculate_one_rep_max %></td>
+                      <td><%= one_rep_max.calculate_relative_strength %></td>
+                      <td>
+                        <%= link_to 'Show', one_rep_max, class: 'btn btn-secondary btn-sm' %>
+                        <%= link_to 'Destroy', one_rep_max, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
             <% end %>
-          </tbody>
-        </table>
-      <% end %>
-  </div>
-</div>
-</div>
+          </div>
+        </div>
+      </div>
