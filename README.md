@@ -1,13 +1,16 @@
 
-# Project Title
 
-Fitness Equation
+## Fitness Equation
 
-## Description
-
-An app that predicts the shortest amount of time to reach your goal weight.
+This is an app that
+1. Predicts your weight loss/gain timeline!
+2. Calculates your one rep max for any exercise for any body part or compound lifts!
+3. Records your weightlifting routines to track your progress over time!
 
 This project addresses the obesity epidemic in America. Can be used with all populations regardless of race, gender, religion. As a personal trainer, I often couldn't tell my clients when exactly they should reach goal weight in a healthy timeline
+
+## ERD
+![image](https://github.com/user-attachments/assets/7eed69dc-222f-4e05-8ca6-ae5256b8f556)
 
 ## Table of Contents
 - [Installation](#installation)
