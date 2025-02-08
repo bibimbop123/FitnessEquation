@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class OneRepMaxesController < ApplicationController
+class OneRepMaxesController < ApplicationController # rubocop:disable Style/Documentation
   include SetOneRepMaxConcern
   before_action :authenticate_user!
 
   def index
-    @one_rep_maxes = OneRepMax.where(user: current_user).order(created_at: :desc).limit(10)
+    @one_rep_maxes = @one_rep_maxes = OneRepMax.where(user: current_user).order(weight_lbs: :desc).limit(10)
 
     respond_to do |format|
       format.html
