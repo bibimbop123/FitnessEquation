@@ -6,14 +6,8 @@ services:
     buildCommand: "./bin/render-build.sh"
     startCommand: "./bin/render-start.sh"
     envVars:
-      - key: SECRET_KEY_BASE
-        generateValue: true
-      - key: DATABASE_URL
-        fromDatabase:
-          name: brian
-          property: connectionString
-      - key: WEB_CONCURRENCY
-        value: 2
+    - key: "DATABASE_URL"
+      value: "postgresql://brian:199613@localhost:5432/db"
 
 databases:
   - name: brian
