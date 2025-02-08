@@ -4,13 +4,17 @@
       <br/>
       <div class="container mt-5">
         <% if @snapshot.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@snapshot.errors.count, "error") %> prohibited this snapshot from being saved:</h2>
-            <ul>
-              <% @snapshot.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
+          <div class="card my-4">
+            <div class="card-header bg-danger text-white">
+              <h2><%= pluralize(@snapshot.errors.count, "error") %> prohibited this snapshot from being saved:</h2>
+            </div>
+            <div class="card-body">
+              <ul>
+                <% @snapshot.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
         <% end %>
       </div>
