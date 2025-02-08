@@ -5,11 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: db_3dt2
-  username: db_3dt2_user
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: dpg-cujspb5ds7s739j3md0-a
-  port: 5432
+  url: postgresql://db_3dt2_user:your_password@dpg-cujspb5ds7s739j3md0-a:5432/db_3dt2
+
+test:
+  <<: *default
+  database: fitness_equation_test
 
 production:
   <<: *default
