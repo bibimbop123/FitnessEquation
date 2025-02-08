@@ -1,4 +1,4 @@
-<div class="text-center custom-orange-bg">
+<div class="text-center">
   <br/>
 
   <h1 class="bungee-tint-regular">Don't drive yourself crazy with your fitness goals</h1>
@@ -57,7 +57,7 @@
   <% if @activity_owners.present? %>
     <ul class="list-group">
       <% @activity_owners.select { |activity_owner| activity_owner[:owner].present? }.uniq { |activity_owner| activity_owner[:activity].id }.each do |activity_owner| %>
-        <li class="list-group-item">
+        <li class="list-group-item custom-iron-white-bg">
           <strong><%= activity_owner[:owner].email %></strong> <%= activity_owner[:activity].key.split('.').last %> a <%= activity_owner[:activity].trackable_type.downcase %> at <%= activity_owner[:activity].created_at.strftime("%B %d, %Y %H:%M") %>
         </li>
       <% end %>

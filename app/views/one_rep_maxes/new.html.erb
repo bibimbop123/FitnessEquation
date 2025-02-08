@@ -1,13 +1,28 @@
-<div class="text-center custom-green-bg fitness-font">
-  <div class="d-flex justify-content-center custom-green-bg">
-    <div class="col-12 col-md-10 col-lg-8 mb-5  custom-green-bg">
+<div class="text-center custom-mist-red-bg fitness-font">
+  <div class="d-flex justify-content-center custom-mist-red-bg">
+    <div class="col-12 col-md-10 col-lg-8 mb-5  custom-mist-red-bg">
       <div class="container mt-5">
+        <br/>
+        <br/>
         <div class="d-flex justify-content-center fitness-font">
+          <br/>
+              <% if @one_rep_max.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@one_rep_max.errors.count, "error") %> prohibited this record from being saved:</h2>
+                      <ul>
+                        <% @one_rep_max.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+          <br/>
           <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#formModal">
             Calculate One-Rep Max
           </button>
         </div>
 
+<br/>
         <!-- Modal -->
         <div class="modal fade fitness-font" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -60,7 +75,8 @@
         </div>
       </div>
 
-      <%= image_tag 'funnytest.webp', alt: 'What`s the point of this test?', class: 'img-fluid my-5 w-80' %>
+      <%= image_tag 'funnytest.webp', alt: 'What`s the point of this test?', class: 'img-fluid my-5 w-80', style: 'border-radius: 15px;' %>
+      <br/>
       <br/>
 
       <div class="d-flex justify-content-center fitness-font">

@@ -13,14 +13,37 @@
  *= require_tree .
  *= require_self
  */
- .custom-green-bg {
-  background-color: #32CD32 !important; /* Bootstrap's green color */
+
+ .custom-navbar-text-white {
+  color: white !important;
 }
- .custom-orange-bg {
-  background-color: #FFA500 !important; /* Bootstrap's orange color *//* Bootstrap's orange color */
+
+.custom-stealthblack-bg {
+  background-color: #000 !important; /* Adjust the background color as needed */
+  color: white !important;
 }
- .custom-red-bg {
-  background-color: #FF6347 !important;/* Bootstrap's red color */
+
+ .custom-iron-white-bg {
+  background-color: #F2F2F2 !important; /* Bootstrap's orange color *//* Bootstrap's orange color */
+}
+.custom-rose-red-bg {
+  background-color: #C94C4C !important; /* Bootstrap's red color */
+}
+.custom-clay-red-bg {
+  background-color: #B85750!important; /* Bootstrap's red color */
+} 
+.custom-energize-green-bg {
+  background-color: #4CAF50 !important; /* Bootstrap's green color */
+}
+
+.custom-mist-red-bg {
+  background-color: #D64545 !important; /* Bootstrap's red color */
+}
+ .custom-power-red-bg {
+  background-color: #D50000 !important;/* Bootstrap's red color */
+}
+.custom-adrenaline-red-bg {
+  background-color: #FF0000 !important; /* Bootstrap's red color */
 }
 
 .custom-green-border {
@@ -98,4 +121,12 @@
     margin-top: 40px;
     margin-bottom: 40px;
   }
+}
+
+.custom-home-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: auto;
 }
