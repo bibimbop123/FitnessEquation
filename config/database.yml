@@ -5,11 +5,14 @@ default: &default
 
 development:
   <<: *default
-  url: postgresql://db_3dt2_user:your_password@dpg-cujspb5ds7s739j3md0-a:5432/db_3dt2
+  host: dpg-cujspb5ds7s739j3md0-a
+  port: 5432
+  database: db_3dt2
+  username: db_3dt2_user
 
 test:
   <<: *default
-  database: fitness_equation_test
+  database: db_3dt2_test
 
 production:
   <<: *default

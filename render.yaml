@@ -9,7 +9,9 @@ services:
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: DATABASE_URL
-        value: postgresql://db_3dt2_user:your_password@dpg-cujspb5ds7s739j3md0-a:5432/db_3dt2
+        fromDatabase:
+          name: db
+          property: connectionString
       - key: WEB_CONCURRENCY
         value: 2
 
