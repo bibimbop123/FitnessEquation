@@ -16,4 +16,4 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>  # This will now be set from Render's DATABASE_URL
