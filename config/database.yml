@@ -9,9 +9,7 @@ services:
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: DATABASE_URL
-        fromDatabase:
-          name: fitness_equation
-          property: https://fitness-equation.onrender.com/ # Ensure this is properly set by Render
+        value: "postgres://user:password@localhost:5432/fitness_equation"  # Replace with your actual connection string
       - key: WEB_CONCURRENCY
         value: 2
 
