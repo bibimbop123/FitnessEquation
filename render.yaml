@@ -19,3 +19,4 @@ databases:
   - name: db
     plan: free
     ipAllowList: []
+

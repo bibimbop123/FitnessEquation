@@ -1,9 +1,21 @@
-development:
+default: &default
   adapter: postgresql
-  database: db_3dt2
-  username: db_3dt2_user
-  host: dpg-cujspb5ds7s739j3md0-a
-  port: 5432
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['FITNESS_EQUATION_DATABASE_USERNAME'] %>
+  password: <%= ENV['FITNESS_EQUATION_DATABASE_PASSWORD'] %>
+  host: localhost
+
+development:
+  <<: *default
+  database: fitness_equation_development
+
+test:
+  <<: *default
+  database: fitness_equation_test
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  database: fitness_equation_production
+  username: <%= ENV["FITNESS_EQUATION_DATABASE_USERNAME"] %>
+  password: <%= ENV["FITNESS_EQUATION_DATABASE_PASSWORD"] %>
