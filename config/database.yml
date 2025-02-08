@@ -9,7 +9,7 @@ services:
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: DATABASE_URL
-        value: "postgres://user:password@localhost:5432/fitness_equation"  # Replace with your actual connection string
+        value: ""  # Leave this blank if Render is auto-generating the DATABASE_URL
       - key: WEB_CONCURRENCY
         value: 2
 
