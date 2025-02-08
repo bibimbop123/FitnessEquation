@@ -1,12 +1,12 @@
-<div class="text-center custom-orange-bg fitness-font">
-  <div class="d-flex justify-content-center custom-orange-bg">
-    <div class="col-12 col-md-10 col-lg-8 mb-5 custom-orange-bg">
+<div class="text-center custom-energize-green-bg fitness-font">
+  <div class="d-flex justify-content-center custom-energize-green-bg">
+    <div class="col-12 col-md-10 col-lg-8 mb-5 custom-iron-white-bg">
       <br/>
       <h1>Fitness Analytics</h1>
       <br/>
       <p>Here you can view your progress over time.</p>
 
-        <%= image_tag 'graph.gif', alt: 'What`s the point of all these graphs?', class: 'img-fluid my-5 w-80' %>
+        <%= image_tag 'graph.gif', alt: 'What`s the point of all these graphs?', class: 'img-fluid my-5 w-80', style: 'border-radius: 15px;' %>
         <br/>
       <h2> Snapshot Weight(Lbs) vs. Time to Reach Goal Weight(Weeks)</h2>
       <%= line_chart @predicted_time_data, xtitle: "Snapshot weight(Lbs)", ytitle: "Time to Reach Goal Weight (days)"%>

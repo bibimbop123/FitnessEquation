@@ -1,73 +1,71 @@
-<div class="text-center custom-orange-bg">
+<div class="text-center">
   <br/>
 
- <h1 class="bungee-tint-regular">Don't drive yourself crazy with your fitness goals</h1> 
+  <h1 class="bungee-tint-regular">Don't drive yourself crazy with your fitness goals</h1>
 
-<div id="fitnessCarousel" class="carousel slide" data-bs-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-bs-target="#fitnessCarousel" data-bs-slide-to="0" class="active"></li>
-    <li data-bs-target="#fitnessCarousel" data-bs-slide-to="1"></li>
-    <li data-bs-target="#fitnessCarousel" data-bs-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <%= image_tag "beginner.webp", alt: "Zero", class: "d-block mx-auto w-75" %>
-      <div class="carousel-caption d-none d-md-block bg-dark text-light">
-        <strong>From Zero</strong>
+  <div id="fitnessCarousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-bs-target="#fitnessCarousel" data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#fitnessCarousel" data-bs-slide-to="1"></li>
+      <li data-bs-target="#fitnessCarousel" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= image_tag "beginner.webp", alt: "Zero", class: "d-block mx-auto w-75" %>
+        <div class="carousel-caption d-none d-md-block bg-dark text-light">
+          <strong>From Zero</strong>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag "hero.webp", alt: "Hero", class: "d-block mx-auto w-75" %>
+        <div class="carousel-caption d-none d-md-block bg-dark text-light">
+          <strong>To Hero</strong>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag "superhero.webp", alt: "Superhero", class: "d-block mx-auto w-75" %>
+        <div class="carousel-caption d-none d-md-block">
+        </div>
       </div>
     </div>
-    <div class="carousel-item">
-      <%= image_tag "hero.webp", alt: "Hero", class: "d-block mx-auto w-75" %>
-      <div class="carousel-caption d-none d-md-block bg-dark text-light">
-        <strong>To Hero</strong>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <%= image_tag "superhero.webp", alt: "Superhero", class: "d-block mx-auto w-75" %>
-      <div class="carousel-caption d-none d-md-block">
-      </div>
-    </div>
+    <a class="carousel-control-prev" href="#fitnessCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#fitnessCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
   </div>
-  <a class="carousel-control-prev" href="#fitnessCarousel" role="button" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#fitnessCarousel" role="button" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </a>
-</div>
-<br/>
-<h1 class="bungee-tint-regular">Predict your future now!</h1>
-
+  <br/>
+  <h1 class="bungee-tint-regular">Predict your future now!</h1>
 
 </p>
 
-  <%= link_to 'New Weight Gain/Loss Prediction', new_snapshot_path, class: 'btn btn-primary' %>
-  <br/>
-  <br/>
-  <%= link_to 'One Rep Max Calculator', new_one_rep_max_path, class: 'btn btn-primary' %>
-  <br/>
-  <br/>
-   <%= link_to 'Weight Lifting Log', workout_routines_path, class: 'btn btn-primary' %>
-  <br/>
-  <div class="container mt-5">
-    <h2>Public Activities</h2>
-    <p>Here you can view the latest activities from all users.</p>
+<%= link_to 'New Weight Gain/Loss Prediction', new_snapshot_path, class: 'btn btn-primary' %>
+<br/>
+<br/>
+<%= link_to 'One Rep Max Calculator', new_one_rep_max_path, class: 'btn btn-primary' %>
+<br/>
+<br/>
+<%= link_to 'Weight Lifting Log', workout_routines_path, class: 'btn btn-primary' %>
+<br/>
+<div class="container mt-5">
+  <h2>Public Activities</h2>
+  <p>Here you can view the latest activities from all users.</p>
 
-<% if @activity_owners.present? %>
-  <ul class="list-group">
-    <% @activity_owners.select { |activity_owner| activity_owner[:owner].present? }.uniq { |activity_owner| activity_owner[:activity].id }.each do |activity_owner| %>
-      <li class="list-group-item">
-        <strong><%= activity_owner[:owner].email %></strong> <%= activity_owner[:activity].key.split('.').last %> a <%= activity_owner[:activity].trackable_type.downcase %> at <%= activity_owner[:activity].created_at.strftime("%B %d, %Y %H:%M") %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No activities found.</p>
-<% end %>
+  <% if @activity_owners.present? %>
+    <ul class="list-group">
+      <% @activity_owners.select { |activity_owner| activity_owner[:owner].present? }.uniq { |activity_owner| activity_owner[:activity].id }.each do |activity_owner| %>
+        <li class="list-group-item custom-iron-white-bg">
+          <strong><%= activity_owner[:owner].email %></strong> <%= activity_owner[:activity].key.split('.').last %> a <%= activity_owner[:activity].trackable_type.downcase %> at <%= activity_owner[:activity].created_at.strftime("%B %d, %Y %H:%M") %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No activities found.</p>
+  <% end %>
 </div>
-
 
 <div class="container mt-5">
   <div class="row">

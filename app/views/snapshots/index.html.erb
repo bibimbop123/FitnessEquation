@@ -1,31 +1,31 @@
-<div class="text-center custom-orange-bg fitness-font">
-<br/>
+<div class="text-center custom-rose-red-bg fitness-font">
+  <br/>
   <h1>Weight Gain/Loss Snapshots</h1>
-  
+
   <br/>
 
-   <%= image_tag "moe.webp", alt: "moe", class:"img-fluid my-5 w-80"%>
-   <br/>
-<br/>
-<div id="snapshots" class="container">
-<br/>
-  <div class="row sans-font">
-    <% @snapshots.each do |snapshot| %>
-      <div class="col-md-4 mb-4 custom-orange-bg">
-        <div class="card custom-red-border custom-green-bg">
-          <div class="card-body text-center">
-            <% cache(snapshot) do %>
-              <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: (snapshot.weight_kg / 0.453592).round(2), height_feet: (snapshot.height_cm / 30.48).to_i, height_inches: ((snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (snapshot.goal_weight_kg / 0.453592).round(2) } %>
-              <p>
-                <%= link_to "Show this snapshot", snapshot, class: "btn btn-primary" %>
-              </p>
-            <% end %>
+  <%= image_tag "moe.webp", alt: "moe", class:"img-fluid my-5 w-80", style: 'border-radius: 15px;'%>
+  <br/>
+  <br/>
+  <div id="snapshots" class="container">
+    <br/>
+    <div class="row sans-font">
+      <% @snapshots.each do |snapshot| %>
+        <div class="col-md-4 mb-4 custom-rose-red-bg">
+          <div class="card custom-red-border custom-energize-green-bg">
+            <div class="card-body text-center">
+              <% cache(snapshot) do %>
+                <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: (snapshot.weight_kg / 0.453592).round(2), height_feet: (snapshot.height_cm / 30.48).to_i, height_inches: ((snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (snapshot.goal_weight_kg / 0.453592).round(2) } %>
+                <p>
+                  <%= link_to "Show this snapshot", snapshot, class: "btn btn-primary" %>
+                </p>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
 
   <%= link_to "New snapshot", new_snapshot_path %>
 </div>
