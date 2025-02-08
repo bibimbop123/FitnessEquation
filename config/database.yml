@@ -15,6 +15,6 @@ services:
       - key: WEB_CONCURRENCY
         value: 2
 databases: # this section provides some additional database configuration
-  - name: db
+  - name: fitness_equation # the name of this database, you should change this
     plan: free
     ipAllowList: []
