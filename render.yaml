@@ -7,7 +7,7 @@ services:
     startCommand: "./bin/render-start.sh"
     envVars:
       - key: "DATABASE_URL"
-        value: <% DATABASE_URL %>
+        value: "postgresql://brian:199613@localhost:5432/db"
 
 databases:
   - name: brian
