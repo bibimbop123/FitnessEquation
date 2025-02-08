@@ -8,14 +8,15 @@ default: &default
 
 development:
   <<: *default
-  database: fitness_equation_development
+  database: brian
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
 
 test:
   <<: *default
-  database: fitness_equation_test
-
+  database: brian
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
 production:
   <<: *default
-  database: fitness_equation_production
+  url: <%= ENV['DATABASE_URL'] %>
   username: <%= ENV["FITNESS_EQUATION_DATABASE_USERNAME"] %>
   password: <%= ENV["FITNESS_EQUATION_DATABASE_PASSWORD"] %>
