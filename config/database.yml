@@ -1,19 +1,9 @@
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
 development:
-  <<: *default
-  host: dpg-cujspb5ds7s739j3md0-a
-  port: 5432
+  adapter: postgresql
   database: db_3dt2
   username: db_3dt2_user
-
-test:
-  <<: *default
-  database: db_3dt2_test
+  host: dpg-cujspb5ds7s739j3md0-a
+  port: 5432
 
 production:
-  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
