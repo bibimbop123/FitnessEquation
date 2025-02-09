@@ -19,3 +19,4 @@ production:
   database: fitness_equations_production
   username: <%= ENV["FITNESS_EQUATION_DATABASE_USERNAME"] %>
   password: <%= ENV["FITNESS_EQUATION_DATABASE_PASSWORD"] %>
+  sslmode: require
