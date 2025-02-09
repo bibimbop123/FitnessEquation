@@ -1,24 +1,18 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['FITNESS_EQUATION_DATABASE_USERNAME'] %>
-  password: <%= ENV['FITNESS_EQUATION_DATABASE_PASSWORD'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
+  pool: 5
+  url: <%= ENV['DATABASE_URL'] %>
+
+development:
+  <<: *default
+  database: fitness_equation_development
 
 test:
   <<: *default
   database: fitness_equation_test
 
-development:
-  <<: *default
-  database: fitness_equation_development
-  username: <%= ENV['FITNESS_EQUATION_DATABASE_USERNAME'] %>
-  password: <%= ENV['FITNESS_EQUATION_DATABASE_PASSWORD'] %>
-  host: localhost
-
 production:
   <<: *default
+  database: fitness_equation_production
   url: <%= ENV['DATABASE_URL'] %>
-  pool: 5
-  timeout: 5000
