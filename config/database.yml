@@ -1,32 +1,24 @@
+# config/database.yml
+
 default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['FITNESS_EQUATION_DATABASE_USERNAME'] %>
   password: <%= ENV['FITNESS_EQUATION_DATABASE_PASSWORD'] %>
-  host: localhost
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
 
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: db
-  pool: 5
-  username: brian
-  password: password
-  host: localhost
-  port: 5432
+  <<: *default
+  database: <%= ENV['DATABASE_NAME'] || 'db' %>
 
 test:
   <<: *default
-  database: fitness_equation_test
+  database: <%= ENV['DATABASE_NAME'] || 'fitness_equation_test' %>
 
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  database: fitness_equations_production
-  username: <%= ENV["FITNESS_EQUATION_DATABASE_USERNAME"] %>
-  password: <%= ENV["FITNESS_EQUATION_DATABASE_PASSWORD"] %>
-  url: <%= ENV['DATABASE_URL_PRODUCTION'] %>
-  port: 5432
-  sslmode: require
+  database: <%= ENV['DATABASE_NAME'] || 'fitness_equations_production' %>
+  url: <%= ENV['DATABASE_URL'] %>  # Make sure this is correctly set in your environment
+  sslmode: disable  # Disable SSL if your database doesn't require it. Change to 'require' if it does
