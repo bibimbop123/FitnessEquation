@@ -7,7 +7,7 @@ services:
     startCommand: "./bin/render-start.sh"
     envVars:
       - key: "DATABASE_URL"
-        value: "postgres://brian:199613@db-production.host.render.com:5432/fitness_equation"  # Use the actual Render DB URL
+        value: "postgres://brian:199613@dpg-cujspb5ds78s739j3md0-a:5432/fitness_equation"  # Use the actual Render DB URL
       - key: "SECRET_KEY_BASE"
         generateValue: true
       - key: "WEB_CONCURRENCY"
