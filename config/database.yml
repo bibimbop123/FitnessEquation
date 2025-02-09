@@ -2,23 +2,15 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['FITNESS_EQUATION_DATABASE_USERNAME'] %>
-  password: <%= ENV['FITNESS_EQUATION_DATABASE_PASSWORD'] %>
-  host: localhost
+  url: <%= ENV['DATABASE_URL'] %>  # Automatically uses Render's DATABASE_URL
 
 development:
   <<: *default
-  database: brian
-  username: brian
-  password: 199613
-  host: localhost
+  database: fitness_equation_development
 
 test:
   <<: *default
-  database: brian
-  username: brian
-  password: 199613
-  host: localhost
+  database: fitness_equation_test
 
 production:
   <<: *default
