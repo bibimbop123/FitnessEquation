@@ -9,11 +9,17 @@ default: &default
 development:
   <<: *default
   database: brian
+  username: brian
+  password: 199613
+  host: localhost
 
 test:
   <<: *default
   database: brian
+  username: brian
+  password: 199613
+  host: localhost
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>  # Automatically uses the DATABASE_URL from Render
+  url: <%= ENV['DATABASE_URL'] %>
