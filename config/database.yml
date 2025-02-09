@@ -1,20 +1,22 @@
-services:
-  - type: web
-    name: Fitness Equation # the name of this service, you should change this
-    runtime: ruby # this app is written in ruby
-    plan: free # make sure to set this to free or you'll get billed $$$
-    buildCommand: "./bin/render-build.sh" # we already created these two files for you
-    startCommand: "./bin/render-start.sh"
-    envVars: # this section sets some ENV variables needed by Render for deployment
-      - key: SECRET_KEY_BASE
-        generateValue: true
-      - key: DATABASE_URL
-        fromDatabase:
-          name: db
-          property: connectionString
-      - key: WEB_CONCURRENCY
-        value: 2
-databases: # this section provides some additional database configuration
-  - name: fitness_equation # the name of this database, you should change this
-    plan: free
-    ipAllowList: []
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['FITNESS_EQUATION_DATABASE_USERNAME'] %>
+  password: <%= ENV['FITNESS_EQUATION_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+
+test:
+  <<: *default
+  database: fitness_equation_test
+
+development:
+  <<: *default
+  database: fitness_equation_development
+  username: <%= ENV['FITNESS_EQUATION_DATABASE_USERNAME'] %>
+  password: <%= ENV['FITNESS_EQUATION_DATABASE_PASSWORD'] %>
+  host: localhost
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>  # Ensure the DATABASE_URL for production points to the remote database
