@@ -13,6 +13,6 @@ test:
   database: fitness_equation_test
 
 production:
-  <<: *default
-  database: fitness_equation_production
   url: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  timeout: 5000
