@@ -7,8 +7,14 @@ default: &default
   host: localhost
 
 development:
-  <<: *default
-  database: fitness_equation_development
+  adapter: postgresql
+  encoding: unicode
+  database: db
+  pool: 5
+  username: brian
+  password: password
+  host: localhost
+  port: 5432
 
 test:
   <<: *default
