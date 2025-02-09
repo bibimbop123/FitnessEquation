@@ -19,4 +19,6 @@ development:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>  # Ensure the DATABASE_URL for production points to the remote database
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  timeout: 5000
