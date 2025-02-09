@@ -6,12 +6,10 @@ services:
     buildCommand: "./bin/render-build.sh"
     startCommand: "./bin/render-start.sh"
     envVars:
+      - key: "DATABASE_URL"
+        value: "postgres://brian:199613@dpg-cujspb5ds78s739j3md0-a:5432/fitness_equation"  # Replace with your actual Render DB connection string
       - key: "SECRET_KEY_BASE"
         generateValue: true
-      - key: "DATABASE_URL"
-        fromDatabase:
-          name: db
-          property: connectionString
       - key: "WEB_CONCURRENCY"
         value: 2
 
