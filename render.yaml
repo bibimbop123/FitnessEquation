@@ -9,6 +9,6 @@ services:
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: DATABASE_URL
-        value: "postgresql://db_zel3_user:mjhNqbHjVZ5pgfeEBsfXT7IDO7v6xh02@dpg-cuk0fcrtq21c73e2p0j0-a.oregon-postgres.render.com/db_zel3"
+        value: postgresql://db_zel3_user:mjhNqbHjVZ5pgfeEBsfXT7IDO7v6xh02@dpg-cuk0fcrtq21c73e2p0j0-a.oregon-postgres.render.com/db_zel3
       - key: WEB_CONCURRENCY
         value: 2
