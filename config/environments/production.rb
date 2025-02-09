@@ -99,4 +99,5 @@ Rails.application.configure do
   config.cache_store = :mem_cache_store, 'cache-1.example.com', 'cache-2.example.com'
   # or
   config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
+  config.require_master_key = true
 end
