@@ -1,24 +1,21 @@
-# config/database.yml
-
 default: &default
   adapter: postgresql
   encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['FITNESS_EQUATION_DATABASE_USERNAME'] %>
-  password: <%= ENV['FITNESS_EQUATION_DATABASE_PASSWORD'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
-  port: <%= ENV['DATABASE_PORT'] %>
 
 development:
   <<: *default
-  database: <%= ENV['DATABASE_NAME'] || 'db' %>
+  database: fitness_equation_development
+
 
 test:
   <<: *default
-  database: <%= ENV['DATABASE_NAME'] || 'fitness_equation_test' %>
+  database: fitness_equation_test
 
 production:
   <<: *default
-  database: <%= ENV['DATABASE_NAME'] || 'fitness equation' %>
-  url: <%= ENV['DATABASE_URL'] %>  # Make sure this is correctly set in your environment
-  sslmode: require # Disable SSL if your database doesn't require it. Change to 'require' if it does
+  database: fitness_equation_production
+  username: fitness_equation
+  password: <%= ENV["FITNESS_EQUATION_DATABASE_PASSWORD"] %>
