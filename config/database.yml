@@ -21,4 +21,4 @@ production:
   <<: *default
   database: <%= ENV['DATABASE_NAME'] || 'fitness equation' %>
   url: <%= ENV['DATABASE_URL'] %>  # Make sure this is correctly set in your environment
-  sslmode: true  # Disable SSL if your database doesn't require it. Change to 'require' if it does
+  sslmode: require # Disable SSL if your database doesn't require it. Change to 'require' if it does
