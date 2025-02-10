@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: Fitness Equation # the name of this service, you should change this
+    name: fitnessequation # the name of this service, you should change this
     runtime: ruby # this app is written in ruby
     plan: free # make sure to set this to free or you'll get billed $$$
     buildCommand: "./bin/render-build.sh" # we already created these two files for you
@@ -10,11 +10,13 @@ services:
         generateValue: true
       - key: DATABASE_URL
         fromDatabase:
-          name: db
+          name: fitnessequation
           property: connectionString
       - key: WEB_CONCURRENCY
         value: 2
-databases: # this section provides some additional database configuration
-  - name: db
+
+databases:
+  - name: fitnessequation
+    databaseName: mysite
+    user: fitnessequation
     plan: free
-    ipAllowList: []
