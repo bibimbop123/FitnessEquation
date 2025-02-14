@@ -3,18 +3,20 @@
     <div class="container text-center fitness-font custom-rose-red-bg">
       <br/>
       <div class="container mt-5">
-        <div class="card my-4">
-          <div class="card-header bg-danger text-white">
-            <h2><%= pluralize(@snapshot.errors.count, "error") %> prohibited this snapshot from being saved:</h2>
+        <% if @snapshot.errors.any? %>
+          <div class="card my-4">
+            <div class="card-header bg-danger text-white">
+              <h2><%= pluralize(@snapshot.errors.count, "error") %> prohibited this snapshot from being saved:</h2>
+            </div>
+            <div class="card-body">
+              <ul>
+                <% @snapshot.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
-          <div class="card-body">
-            <ul>
-              <% @snapshot.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
+        <% end %>
         <br/>
         <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#formModal">
           Calculate Weight Gain/Loss Prediction
