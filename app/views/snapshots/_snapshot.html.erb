@@ -29,8 +29,8 @@
  
 
   <p>
-    <strong>Predicted time weeks (- or + = losing weight or gaining weight):</strong>
-    <%= snapshot.predicted_time_weeks %>
+    <strong>Predicted time (- or + = losing weight or gaining weight):</strong>
+    <%= snapshot.predicted_time %>
   </p>
 
   <p>
@@ -54,7 +54,7 @@
   </p>
   <h4>Weight Prediction</h4>
 <p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
-  If you continue to be <%= snapshot.activity_level %>, you can consume <%= snapshot.tdee.round(0) + snapshot.calorie_deficit_or_surplus_per_day %> calories per day.<br/> Then you will achieve your goal weight of <%= goal_weight_lbs.round(0) %> lbs in <%= snapshot.predicted_time_weeks %> weeks.
+  If you continue to be <%= snapshot.activity_level %>, you can consume <%= snapshot.tdee.round(0) + snapshot.calorie_deficit_or_surplus_per_day %> calories per day.<br/> Then you will achieve your goal weight of <%= goal_weight_lbs.round(0) %> lbs in <%= snapshot.predicted_time %>
 </p>
 
 <h4>Ideal Body Weight</h4>
