@@ -104,7 +104,7 @@ class Snapshot < ApplicationRecord
   
     return "0 days" if parts.empty?
   
-    parts.join(', ').sub(/,([^,]*)$/, ' and\1') # Proper formatting for last part
+    parts.join(', ').sub(/,([^,]*)$/, ', and\1') # Proper formatting for last part
   end
   
   
