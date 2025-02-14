@@ -16,7 +16,7 @@ class AnalyticsController < ApplicationController
     @snapshots_count_data = @snapshots.group_by_day(:created_at).count
     @workout_routines_data = @workout_routines.joins(:exercises).group_by_day('workout_routines.created_at').sum('exercises.sets * exercises.reps * exercises.weight')
     @predicted_time_data = @snapshots.map do |snapshot|
-      [(snapshot.weight_kg / 0.453592).round(2), snapshot.predicted_time.abs]
+      [(snapshot.weight_kg / 0.453592).round(2), snapshot.predicted_time]
     end.compact
     @activity_level_data = @snapshots.group(:activity_level).count
     @predicted_time_calorie_data = @snapshots.map do |snapshot|
