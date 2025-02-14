@@ -20,7 +20,7 @@ class AnalyticsController < ApplicationController
     end.compact
     @activity_level_data = @snapshots.group(:activity_level).count
     @predicted_time_calorie_data = @snapshots.map do |snapshot|
-      [snapshot.predicted_time_weeks.abs, snapshot.calorie_deficit_or_surplus_per_day]
+      [snapshot.predicted_time, snapshot.calorie_deficit_or_surplus_per_day]
     end
   end
 
