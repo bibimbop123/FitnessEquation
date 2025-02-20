@@ -1,7 +1,7 @@
 <ul class="list-group">
   <% @workout_routines.each do |workout_routine| %>
     <%= cache(workout_routine) do %>
-      <li class="list-group-item custom-adrenaline-red-bg">
+      <li class="list-group-item custom-energize-green-bg">
         <%= link_to workout_routine.created_at.strftime("%B %d, %Y"), workout_routine_path(workout_routine), class: "text-decoration-none text-black" %>
       </li>
     <% end %>
