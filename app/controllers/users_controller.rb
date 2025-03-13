@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    @breadcrumbs = [
+      {content: "Welcome", href: root_path},
+      {content: "Home", href: user_path}
+    ]
     @user = current_user
     @snapshots = @user.snapshots.page(params[:snapshot_page]).per(5).order(created_at: :desc)
     @workout_routines = @user.workout_routines.page(params[:workout_routine_page]).per(5).order(created_at: :desc)
@@ -22,6 +26,12 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @breadcrumbs = [
+      {content: "Welcome", href: root_path},
+      {content: "Home", href: user_path},
+      {content: "Edit Profile", href: edit_user_path},
+      {content: "@{current_user.username}", href: user_path(current_user)}
+    ]
     @user = current_user
   end
 

@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   root 'application#home'
 
   # Devise routes for user authentication
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   # User routes
   resources :users, only: %i[show edit update]

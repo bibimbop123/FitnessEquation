@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :track_action
   def home
+    @breadcrumbs = [
+      {content: "Welcome", href: root_path}
+    ]
     render 'layouts/home'
   end
 
