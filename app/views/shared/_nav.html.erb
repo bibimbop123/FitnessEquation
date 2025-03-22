@@ -1,60 +1,73 @@
-    <nav class="navbar navbar-expand-lg navbar-light custom-stealthblack-bg custom-navbar-text-white">
-      <div class="container-fluid custom-red-bg justify-content-between custom-navbar-text-white">
-        <!-- Brand -->
+<nav class="navbar navbar-expand-lg navbar-light custom-stealthblack-bg custom-navbar-text-white">
+  <div class="container-fluid custom-red-bg justify-content-between custom-navbar-text-white">
+    <!-- Brand -->
+    <% if current_user %>
+      <%= link_to user_path(current_user), class: 'navbar-brand d-flex align-items-center custom-navbar-text-white' do %>
+      <%= image_tag asset_path('dumbbell100.png'), 
+      alt: 'Logo', 
+      class: 'img-fluid ms-2', 
+      style: 'width: 40px; height: 40px; border-radius: 10px; filter: invert(20%) sepia(100%) saturate(500%) hue-rotate(0deg) brightness(90%) contrast(100%); margin-left: 20px;margin-right: 20px;', 
+      role: 'img' %>
+
+
+        <span>Fitness Equation</span>
+      <% end %>
+    <% else %>
+      <%= link_to root_path, class: 'navbar-brand d-flex align-items-center custom-navbar-text-white' do %>
+      <%= image_tag asset_path('dumbbell100.png'), 
+      alt: 'Logo', 
+      class: 'img-fluid ms-2', 
+      style: 'width: 40px; height: 40px; border-radius: 10px; filter: invert(20%) sepia(100%) saturate(500%) hue-rotate(0deg) brightness(90%) contrast(100%); margin-left: 20px;margin-right: 20px;', 
+      role: 'img' %>
+      
+      <span class="ms-2">Fitness Equation</span>
+      <% end %>
+    <% end %>
+    <!-- Toggler for Mobile View -->
+    <button class="navbar-toggler custom-adrenaline-red-bg" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse custom-red-bg custom-navbar-text-white" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <% if current_user %>
-          <%= link_to user_path(current_user), class: 'navbar-brand d-flex align-items-center custom-navbar-text-white' do %>
-            <span>Fitness Equation</span>
-          <% end %>
+          <!-- Logged-in State -->
+          <li class="nav-item">
+            <span class="nav-link ms-3 custom-navbar-text-white">
+              Welcome, <%= current_user.email %>
+            </span>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Edit Profile', edit_user_registration_path, class: 'nav-link ms-3 custom-navbar-text-white' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link ms-3 custom-navbar-text-white' %>
+          </li>
         <% else %>
-          <%= link_to root_path, class: 'navbar-brand d-flex align-items-center custom-navbar-text-white' do %>
-            <span>Fitness Equation</span>
-          <% end %>
+          <!-- Logged-out State -->
+          <li class="nav-item">
+            <%= link_to 'Login', new_user_session_path, class: 'nav-link ms-3 custom-navbar-text-white' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link ms-3 custom-navbar-text-white' %>
+          </li>
         <% end %>
-        <!-- Toggler for Mobile View -->
-        <button class="navbar-toggler custom-adrenaline-red-bg" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Navbar Links -->
-        <div class="collapse navbar-collapse custom-red-bg custom-navbar-text-white" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <% if current_user %>
-              <!-- Logged-in State -->
-              <li class="nav-item">
-                <span class="nav-link ms-3 custom-navbar-text-white">
-                  Welcome, <%= current_user.email %>
-                </span>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Edit Profile', edit_user_registration_path, class: 'nav-link ms-3 custom-navbar-text-white' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link ms-3 custom-navbar-text-white' %>
-              </li>
-            <% else %>
-              <!-- Logged-out State -->
-              <li class="nav-item">
-                <%= link_to 'Login', new_user_session_path, class: 'nav-link ms-3 custom-navbar-text-white' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link ms-3 custom-navbar-text-white' %>
-              </li>
-            <% end %>
-            <!-- Dropdown Menu -->
-            <li class="nav-item dropdown ms-3">
-              <a class="nav-link dropdown-toggle custom-navbar-text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Menu
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><%= link_to 'New Weight Prediction', new_snapshot_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'New One Rep Max', new_one_rep_max_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Workout Routines', workout_routines_path, class: 'dropdown-item' %></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><%= link_to 'Weight Snapshots', snapshots_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'One Rep Max Records', one_rep_maxes_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Fitness Analytics', analytics_path, class: 'dropdown-item' %></li>
-              </ul>
-            </li>
+        <!-- Dropdown Menu -->
+        <li class="nav-item dropdown ms-3">
+          <a class="nav-link dropdown-toggle custom-navbar-text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menu
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li><%= link_to 'New Weight Prediction', new_snapshot_path, class: 'dropdown-item' %></li>
+            <li><%= link_to 'New One Rep Max', new_one_rep_max_path, class: 'dropdown-item' %></li>
+            <li><%= link_to 'Workout Routines', workout_routines_path, class: 'dropdown-item' %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to 'Weight Snapshots', snapshots_path, class: 'dropdown-item' %></li>
+            <li><%= link_to 'One Rep Max Records', one_rep_maxes_path, class: 'dropdown-item' %></li>
+            <li><%= link_to 'Fitness Analytics', analytics_path, class: 'dropdown-item' %></li>
           </ul>
-        </div>
-      </div>
-    </nav>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
