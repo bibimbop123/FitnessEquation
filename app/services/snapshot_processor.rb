@@ -55,4 +55,8 @@ class SnapshotProcessor
       goal_weight_lbs: goal_weight_lbs
     }
   end
+
+  def dob
+    @snapshot.user.dob if @snapshot.user.present?
+  end
 end

@@ -25,16 +25,17 @@ class SnapshotsController < ApplicationController
   def new
     @snapshot = Snapshot.new
     @snapshots = Snapshot.where(user: current_user).includes([:user])
+
   end
 
   # GET /snapshots/1/edit
   def edit; end
 
   def create
-    @snapshot = current_user.snapshots.new(snapshot_params)
+    @snapshot = current_user.snapshots.new(snapshot_params) # Associate with current_user
     processor = SnapshotProcessor.new(@snapshot, preprocess_virtual_params)
     processor.call
-
+  
     if @snapshot.save
       redirect_to @snapshot, notice: 'Snapshot was successfully created.'
     else
