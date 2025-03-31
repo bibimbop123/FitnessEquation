@@ -23,12 +23,15 @@
 #
 #  fk_rails_...  (user_id => users.id)
 class Snapshot < ApplicationRecord
+  include Snapable
   include PublicActivity::Model
+
   tracked owner: ->(controller, _model) { controller && controller.current_user }
 
   belongs_to :user, required: true, class_name: 'User', foreign_key: 'user_id', touch: true
   after_create :track_creation
   after_destroy :track_deletion
+  validates :user, presence: true
 
   validates :height_cm, presence: true, numericality: { less_than: 228.6, greater_than: 0 }
   validates :weight_kg, presence: true, numericality: { less_than: 226.8, greater_than: 0 }
@@ -46,5 +49,4 @@ class Snapshot < ApplicationRecord
   validate :calorie_deficit_or_surplus_per_day_must_be_negative_if_weight_greater_than_goal_weight
   validate :calorie_deficit_within_bmr_range
 
-  include Snapshotable
 end

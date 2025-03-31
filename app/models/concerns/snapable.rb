@@ -1,6 +1,6 @@
-module Snapshotable
+module Snapable
   extend ActiveSupport::Concern
-
+  
 
   ACTIVITY_FACTORS = {
     'sedentary' => 1.2,
@@ -10,6 +10,7 @@ module Snapshotable
     'super_active' => 1.9
   }.freeze
 
+  
   def predicted_time
     if weight_kg.nil?
       errors.add(:weight_kg, 'cannot be nil')
