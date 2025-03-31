@@ -29,7 +29,5 @@ class Exercise < ApplicationRecord
   validates :sets, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :weight, presence: true, numericality: { greater_than: 0 }
 
-  def volume
-    reps * sets * weight
-  end
+  include Volumable
 end
