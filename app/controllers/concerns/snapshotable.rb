@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Snapshotable
   extend ActiveSupport::Concern
 
@@ -22,7 +24,6 @@ module Snapshotable
   def new
     @snapshot = Snapshot.new
     @snapshots = Snapshot.where(user: current_user).includes([:user])
-
   end
 
   # GET /snapshots/1/edit
@@ -32,7 +33,7 @@ module Snapshotable
     @snapshot = current_user.snapshots.new(snapshot_params) # Associate with current_user
     processor = SnapshotProcessor.new(@snapshot, preprocess_virtual_params)
     processor.call
-  
+
     if @snapshot.save
       redirect_to @snapshot, notice: 'Snapshot was successfully created.'
     else

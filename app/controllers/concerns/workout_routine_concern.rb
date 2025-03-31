@@ -47,8 +47,6 @@ module WorkoutRoutineConcern
     params.require(:workout_routine).permit(:name, :description)
   end
 
-  private
-
   def set_workout_routine
     @workout_routine = current_user.workout_routines.find(params[:id])
   end

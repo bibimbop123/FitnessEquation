@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Snapable
   extend ActiveSupport::Concern
-  
 
   ACTIVITY_FACTORS = {
     'sedentary' => 1.2,
@@ -10,61 +11,59 @@ module Snapable
     'super_active' => 1.9
   }.freeze
 
-  
   def predicted_time
     if weight_kg.nil?
       errors.add(:weight_kg, 'cannot be nil')
       return
     end
-  
+
     if goal_weight_kg.nil?
       errors.add(:goal_weight_kg, 'cannot be nil')
       return
     end
-  
+
     if calorie_deficit_or_surplus_per_day.nil?
       errors.add(:calorie_deficit_or_surplus_per_day, 'cannot be nil')
       return
     end
-  
+
     weight_difference = (weight_kg - goal_weight_kg).abs
     calorie_difference_per_week = calorie_deficit_or_surplus_per_day * 7 / 7700.0
-  
-    return "Indeterminate time" if calorie_difference_per_week.zero?
-  
+
+    return 'Indeterminate time' if calorie_difference_per_week.zero?
+
     time_in_weeks = (weight_difference / calorie_difference_per_week).ceil
-  
+
     # Extract years
     years = time_in_weeks / 52
     remaining_weeks = time_in_weeks % 52
-  
+
     # Extract months using a more precise conversion
     months = (remaining_weeks / 4.345)
     remaining_weeks = (remaining_weeks % 4.345) # Ensure we only keep the leftover weeks
-  
+
     # Convert any leftover weeks into days (max 6 days)
     days = ((remaining_weeks % 1) * 7)
     remaining_weeks = remaining_weeks.to_f
-  
+
     # Prevent cases where days roll over into a full week
     if days >= 7
       remaining_weeks += 1
       days -= 7
     end
-  
+
     # Formatting output properly
     parts = []
     parts << "#{years.round(0)} #{'year'.pluralize(years)}" if years.positive?
     parts << "#{months.round(0)} #{'month'.pluralize(months)}" if months.positive?
     parts << "#{remaining_weeks.round(0)} #{'week'.pluralize(remaining_weeks)}" if remaining_weeks.positive?
     parts << "#{days.round(0)} #{'day'.pluralize(days)}" if days.positive?
-  
-    return "0 days" if parts.empty?
-  
+
+    return '0 days' if parts.empty?
+
     parts.join(', ').sub(/,([^,]*)$/, ', and\1') # Proper formatting for last part
   end
-  
-  
+
   def bmr
     dob = user.dob
     now = Time.now.utc.to_date
@@ -202,5 +201,4 @@ module Snapable
       recommended_protein_intake_per_day: recommended_protein_intake_per_day(activity_level)
     }
   end
-
 end

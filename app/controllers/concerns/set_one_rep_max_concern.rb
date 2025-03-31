@@ -57,8 +57,6 @@ module SetOneRepMaxConcern
   def one_rep_max_params
     params.require(:one_rep_max).permit(:exercise, :weight_lbs, :reps, :user_id)
   end
-  
-  private
 
   def set_one_rep_max
     @one_rep_max = OneRepMax.find(params[:id])

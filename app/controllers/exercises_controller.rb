@@ -5,5 +5,4 @@ class ExercisesController < ApplicationController
 
   before_action :set_workout_routine
   before_action :set_exercise, only: %i[show edit update destroy]
-
 end

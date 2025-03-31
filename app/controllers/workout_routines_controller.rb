@@ -3,6 +3,4 @@
 class WorkoutRoutinesController < ApplicationController
   include WorkoutRoutineConcern
   before_action :authenticate_user!
-
- 
 end

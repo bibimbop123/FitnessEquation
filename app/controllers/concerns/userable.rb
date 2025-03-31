@@ -1,10 +1,12 @@
-module Userable 
+# frozen_string_literal: true
+
+module Userable
   extend ActiveSupport::Concern
 
   def show
     @breadcrumbs = [
-      {content: "Welcome", href: root_path},
-      {content: "Home", href: user_path}
+      { content: 'Welcome', href: root_path },
+      { content: 'Home', href: user_path }
     ]
     @user = current_user
     @snapshots = @user.snapshots.page(params[:snapshot_page]).per(5).order(created_at: :desc)
@@ -25,10 +27,10 @@ module Userable
 
   def edit
     @breadcrumbs = [
-      {content: "Welcome", href: root_path},
-      {content: "Home", href: user_path},
-      {content: "Edit Profile", href: edit_user_path},
-      {content: "@{current_user.username}", href: user_path(current_user)}
+      { content: 'Welcome', href: root_path },
+      { content: 'Home', href: user_path },
+      { content: 'Edit Profile', href: edit_user_path },
+      { content: '@{current_user.username}', href: user_path(current_user) }
     ]
     @user = current_user
   end

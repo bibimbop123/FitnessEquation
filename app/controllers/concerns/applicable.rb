@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Applicable
   extend ActiveSupport::Concern
 
   def home
     @breadcrumbs = [
-      {content: "Welcome", href: root_path}
+      { content: 'Welcome', href: root_path }
     ]
     render 'layouts/home'
   end

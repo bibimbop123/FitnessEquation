@@ -58,6 +58,5 @@ class SnapshotProcessor
 
   def dob
     @snapshot.user.dob if @snapshot.user.present?
-
   end
 end

@@ -48,5 +48,4 @@ class Snapshot < ApplicationRecord
   validate :calorie_deficit_or_surplus_must_be_positive_if_weight_less_than_goal_weight
   validate :calorie_deficit_or_surplus_per_day_must_be_negative_if_weight_greater_than_goal_weight
   validate :calorie_deficit_within_bmr_range
-
 end
