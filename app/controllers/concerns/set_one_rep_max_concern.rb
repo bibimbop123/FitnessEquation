@@ -8,7 +8,7 @@ module SetOneRepMaxConcern
   end
 
   def index
-    @one_rep_maxes = @one_rep_maxes = OneRepMax.where(user: current_user).order(weight_lbs: :desc).limit(10)
+    @one_rep_maxes = OneRepMax.where(user: current_user).order(weight_lbs: :desc).limit(10)
 
     respond_to do |format|
       format.html
@@ -29,6 +29,7 @@ module SetOneRepMaxConcern
     @one_rep_max.user = current_user
     @one_rep_max.weight_lbs = one_rep_max_params[:weight_lbs].to_f
     @one_rep_max.reps = one_rep_max_params[:reps].to_i
+    @one_rep_maxes = OneRepMax.where(user: current_user).includes([:user])
 
     if @one_rep_max.save
       redirect_to @one_rep_max, notice: 'One Rep Max was successfully created.'
