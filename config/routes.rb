@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  draw(:pwa)
   # Mount Ahoy engine
   mount Ahoy::Engine => '/ahoy'
 
   # Root route
   root 'application#home'
 
-  draw(:pwa)
+
   # Devise routes for user authentication
   devise_for :users, controllers: {
     registrations: 'users/registrations'
