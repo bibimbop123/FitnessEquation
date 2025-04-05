@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # Root route
   root 'application#home'
 
+  draw(:pwa)
   # Devise routes for user authentication
   devise_for :users, controllers: {
     registrations: 'users/registrations'
