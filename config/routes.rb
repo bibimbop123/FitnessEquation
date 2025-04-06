@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   # Root route
   root 'application#home'
 
-
   # Devise routes for user authentication
   devise_for :users, controllers: {
     registrations: 'users/registrations'
