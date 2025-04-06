@@ -151,7 +151,8 @@ module Snapable
     end
   
     # Standard loading phase: 0.3g per kg of bodyweight per day
-    (weight_kg * 0.3).round(2) # rounding to 2 decimal places for clarity
+    intake = (weight_kg * 0.3).round(2)
+    [intake, 25.0].min # rounding to 2 decimal places for clarity
   end
 
   def recommended_creatine_intake_per_day_maintenance_phase
