@@ -100,14 +100,29 @@ module Snapable
     min_weight_kg * 2.20462
   end
 
-  # use boer equation to calculate lean body mass
   def lean_body_mass
-    lean_mass = if user.gender == 'male'
-                  (0.407 * weight_kg) + (0.267 * height_cm) - 19.2
-                else
-                  (0.252 * weight_kg) + (0.473 * height_cm) - 48.3
-                end
-    lean_mass * 2.20462
+    if weight_kg.nil? || height_cm.nil?
+      errors.add(:base, 'Weight and height cannot be nil when calculating lean body mass')
+      return nil
+    end
+
+    bmi = body_mass_index
+    if bmi.nil? || bmi <= 0
+      errors.add(:base, 'BMI must be greater than zero to calculate lean body mass')
+      return nil
+    end
+
+    # Apply Janmahasatian formula based on gender
+    denominator = user.gender == 'male' ? (6680 + (216 * bmi)) : (8780 + (244 * bmi))
+
+    lbm_kg = (9270 * weight_kg) / denominator
+    lbm_lbs = lbm_kg * 2.20462
+
+    lbm_lbs.round(2)
+  rescue StandardError => e
+    Rails.logger.error "Error calculating lean body mass: #{e.message}" if Rails.env.development?
+    errors.add(:base, 'An error occurred while calculating lean body mass')
+    nil
   end
 
   def body_mass_index
