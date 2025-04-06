@@ -62,19 +62,25 @@
    Your ideal body weight is between <%= snapshot.ideal_body_weight_max.round(0) %> and <%= snapshot.ideal_body_weight_min.round(0) %> lbs. 
 </p>
 
-<h4>Recommend Daily Protein Intake</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
-  Your recommended daily protein intake is <%= (snapshot.recommended_protein_intake_per_day(snapshot.activity_level)).round(0) %> grams per day to maintain your lean body mass.
+<h5 class="text-dark mt-4">Recommended Daily Protein Intake</h5>
+<p class="font-weight-bold text-secondary bg-light p-3 rounded shadow-sm">
+  <span class="text-dark">Your recommended daily protein intake:</span> 
+  <span class="text-success"><%= (snapshot.recommended_protein_intake_per_day(snapshot.activity_level)).round(0) %></span> grams per day 
+  to maintain your lean body mass.
 </p>
 
-<h4>Recommend Daily Creatine Intake (Loading phase)</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
-  Your recommended daily creatine intake during the loading phase is <%= (snapshot.recommended_creatine_intake_per_day_loading_phase).round(0) %> grams per day for the first 5-7 days. After that, you can switch to the maintenance phase.
+<h5 class="text-dark mt-4">Recommended Daily Creatine Intake (Loading Phase)</h5>
+<p class="font-weight-bold text-secondary bg-light p-3 rounded shadow-sm">
+  <span class="text-dark">During the loading phase:</span> 
+  <span class="text-success"><%= (snapshot.recommended_creatine_intake_per_day_loading_phase).round(0) %></span> grams per day 
+  for the first 5-7 days. After that, you can switch to the maintenance phase.
 </p>
 
-<h4>Recommend Daily Creatine Intake (Maintenance phase)</h4>
-<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
-  Your recommended daily creatine intake during the maintenance phase is <%= (snapshot.recommended_creatine_intake_per_day_maintenance_phase).round(0) %> grams per day. This will help maintain your muscle creatine stores.
+<h5 class="text-dark mt-4">Recommended Daily Creatine Intake (Maintenance Phase)</h5>
+<p class="font-weight-bold text-secondary bg-light p-3 rounded shadow-sm">
+  <span class="text-dark">During the maintenance phase:</span> 
+  <span class="text-success"><%= (snapshot.recommended_creatine_intake_per_day_maintenance_phase).round(0) %></span> grams per day 
+  to help maintain your muscle creatine stores.
 </p>
 
 <h4>Lean Body Mass</h4>
