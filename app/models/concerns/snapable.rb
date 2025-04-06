@@ -144,6 +144,26 @@ module Snapable
     end
   end
 
+  def recommended_creatine_intake_per_day_loading_phase
+    if weight_kg.nil?
+      errors.add(:weight_kg, 'cannot be nil when calculating creatine intake')
+      return nil
+    end
+  
+    # Standard loading phase: 0.3g per kg of bodyweight per day
+    (weight_kg * 0.3).round(2) # rounding to 2 decimal places for clarity
+  end
+
+  def recommended_creatine_intake_per_day_maintenance_phase
+    if weight_kg.nil?
+      errors.add(:weight_kg, 'cannot be nil when calculating creatine intake')
+      return nil
+    end
+  
+    # Standard maintenance dose: 0.03g per kg of bodyweight
+    (weight_kg * 0.03).round(2)
+  end
+
   private
 
   def calorie_deficit_within_bmr_range
