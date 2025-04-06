@@ -67,6 +67,15 @@
   Your recommended daily protein intake is <%= (snapshot.recommended_protein_intake_per_day(snapshot.activity_level)).round(0) %> grams per day to maintain your lean body mass.
 </p>
 
+<h4>Recommend Daily Creatine Intake (Loading phase)</h4>
+<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
+  Your recommended daily creatine intake during the loading phase is <%= (snapshot.recommended_creatine_intake_per_day_loading_phase).round(0) %> grams per day for the first 5-7 days. After that, you can switch to the maintenance phase.
+</p>
+
+<h4>Recommend Daily Creatine Intake (Maintenance phase)</h4>
+<p class="font-weight-bold text-secondary bg-light p-3 rounded bungee-tint-regular">
+  Your recommended daily creatine intake during the maintenance phase is <%= (snapshot.recommended_creatine_intake_per_day_maintenance_phase).round(0) %> grams per day. This will help maintain your muscle creatine stores.
+</p>
 
 <h4>Lean Body Mass</h4>
 <p>(weight of a person's muscles, bones, ligaments, tendons, and water—essentially everything in the body except fat)</p>
