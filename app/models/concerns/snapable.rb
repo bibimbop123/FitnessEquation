@@ -185,13 +185,13 @@ module Snapable
 
   def recommended_daily_water_intake
     return nil if weight_kg.nil?
-  
+
     base_multiplier = 35 # ml per kg
     water_intake_ml = (weight_kg * base_multiplier).round(2)
-  
+
     # Clamp to safety thresholds
     water_intake_ml = water_intake_ml.clamp(MIN_INTAKE, MAX_INTAKE)
-  
+
     # Convert ml to liters (rounded to 2 decimals)
     (water_intake_ml / 1000.0).round(2)
   rescue StandardError => e
