@@ -42,8 +42,14 @@
  .custom-power-red-bg {
   background-color: #D50000 !important;/* Bootstrap's red color */
 }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .custom-sporty-orange-bg {
-  background-color: #FF6700 !important; /* Bootstrap's red color */
+  background-color: lightsalmon !important;
+  animation: fadeIn 1s ease-out;
 }
 
 .custom-green-border {
