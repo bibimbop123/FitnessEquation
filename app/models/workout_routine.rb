@@ -4,11 +4,16 @@
 #
 # Table name: workout_routines
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id            :bigint           not null, primary key
+#  acute_load    :integer
+#  chronic_load  :integer
+#  mood          :integer
+#  name          :string
+#  sleep_quality :integer
+#  soreness      :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  user_id       :bigint           not null
 #
 # Indexes
 #
@@ -28,6 +33,15 @@ class WorkoutRoutine < ApplicationRecord
   after_destroy :track_deletion
 
   validates :name, presence: true
-
   include Workoutable
+  before_validation :set_default_metrics, if: :new_record?
+  after_initialize :set_default_metrics, if: :new_record?
+  validates :mood, :sleep_quality, :soreness, presence: true,
+                                              numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
+
+  def set_default_metrics
+    self.mood ||= 5
+    self.sleep_quality ||= 5
+    self.soreness ||= 5
+  end
 end

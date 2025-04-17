@@ -40,11 +40,46 @@
               <% end %>
             </tbody>
           </table>
+
+          <p><strong>Mood:</strong> <%= @workout_routine.mood %></p>
+          <p><strong>Sleep Quality:</strong> <%= @workout_routine.sleep_quality %></p>
+          <p><strong>Soreness:</strong> <%= @workout_routine.soreness %></p>
         </div>
       </div>
 
       <div class="container mt-5">
         <h1>Total Volume Lifted: <%= @workout_routine.total_volume %> lbs</h1>
+      </div>
+
+      <div class="container mt-5">
+        <h2>Burnout Metrics</h2>
+        <p><strong>Acute Load:</strong> <%= @workout_routine.acute_load %></p>
+        <p><strong>Chronic Load:</strong> <%= @workout_routine.chronic_load %></p>
+        <p><strong>ACWR:</strong> <%= @workout_routine.acwr.round(2) %></p>
+        <p>Acute:Chronic Workload Ratio. It is a metric used in sports science to monitor training load and assess the risk of injury or burnout. It compares the short-term workload (acute load) to the long-term workload (chronic load) to determine whether an athlete is training at an appropriate intensity.</p>
+        <p><strong>Training Stress Balance (TSB):</strong> <%= @workout_routine.tsb %></p>
+        <p>Positive TSB:
+
+          Indicates that the athlete is well-rested and recovered.
+          May suggest readiness for peak performance.
+        </p>
+        <p>
+          Negative TSB:
+
+          Indicates that the athlete is fatigued due to recent training.
+          A small negative TSB is normal during training phases.
+        </p>
+        <p>
+
+          Very Negative TSB:
+
+          Indicates overtraining or excessive fatigue.
+          May increase the risk of burnout or injury.
+        </p>
+       
+        <p><strong>Burnout Risk Score:</strong> <%= @workout_routine.calculate_burnout_risk_score %></p>
+        </br>
+        <p><strong>ACWR Status:</strong> <%= @workout_routine.acwr_status %></p>
       </div>
       <%= link_to 'Back', workout_routines_path, class: 'btn btn-secondary' %>
     </div>
