@@ -11,7 +11,13 @@ module WorkoutRoutineConcern
     @workout_routines = current_user.workout_routines
   end
 
-  def show; end
+  def show
+    @workout_routine = WorkoutRoutine.find(params[:id])
+    @workout_routine.acute_load = @workout_routine.calculate_acute_load
+    @workout_routine.chronic_load = @workout_routine.calculate_chronic_load
+
+    @workout_routine.save
+  end
 
   def new
     @workout_routine = current_user.workout_routines.new
@@ -30,6 +36,10 @@ module WorkoutRoutineConcern
 
   def update
     if @workout_routine.update(workout_routine_params)
+      @workout_routine.acute_load = @workout_routine.calculate_acute_load
+      @workout_routine.chronic_load = @workout_routine.calculate_chronic_load
+      @workout_routine.burnout_risk_score = @workout_routine.calculate_burnout_risk_score
+      @workout_routine.save
       redirect_to @workout_routine, notice: 'Workout routine was successfully updated.'
     else
       render :edit
@@ -44,7 +54,8 @@ module WorkoutRoutineConcern
   private
 
   def workout_routine_params
-    params.require(:workout_routine).permit(:name, :description)
+    params.require(:workout_routine).permit(:name, :description, :mood, :soreness, :sleep_quality, :acute_load,
+                                            :chronic_load, :burnout_risk_score)
   end
 
   def set_workout_routine

@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_250_119_215_905) do
+ActiveRecord::Schema[7.1].define(version: 20_250_417_000_049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -133,6 +133,11 @@ ActiveRecord::Schema[7.1].define(version: 20_250_119_215_905) do
     t.bigint 'user_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.integer 'acute_load'
+    t.integer 'chronic_load'
+    t.integer 'mood'
+    t.integer 'sleep_quality'
+    t.integer 'soreness'
     t.index ['user_id'], name: 'index_workout_routines_on_user_id'
   end
 
