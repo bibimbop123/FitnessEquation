@@ -37,7 +37,7 @@ module Workoutable
     end
 
     # Divide by 4 to get weekly average
-    4.zero? ? 0 : total_load / 4.0
+    total_load / 4.0
   end
 
   # Calculate ACWR
