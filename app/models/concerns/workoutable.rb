@@ -74,6 +74,6 @@ module Workoutable
     acwr_value = acwr || 0
 
     # Calculate the burnout risk score
-    100 - (acwr_value * 100) + (mood_value * 10) + (sleep_quality_value * 10) - (soreness_value * 10)
+    100 - (acwr * 100) + (mood_value * 10) + (sleep_quality_value * 10) - (soreness_value * 10)
   end
 end
