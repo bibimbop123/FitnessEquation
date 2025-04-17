@@ -53,11 +53,11 @@
 
       <div class="container mt-5">
         <h2>Burnout Metrics</h2>
-        <p><strong>Acute Load:</strong> <%= @workout_routine.acute_load %></p>
-        <p><strong>Chronic Load:</strong> <%= @workout_routine.chronic_load %></p>
+        <p><strong>Acute Load:</strong> <%= @workout_routine.acute_load %> Lbs </p>
+        <p><strong>Chronic Load:</strong> <%= @workout_routine.chronic_load %> Lbs</p>
         <p><strong>ACWR:</strong> <%= @workout_routine.acwr.round(2) %></p>
         <p>Acute:Chronic Workload Ratio. It is a metric used in sports science to monitor training load and assess the risk of injury or burnout. It compares the short-term workload (acute load) to the long-term workload (chronic load) to determine whether an athlete is training at an appropriate intensity.</p>
-        <p><strong>Training Stress Balance (TSB):</strong> <%= @workout_routine.tsb %></p>
+        <p><strong>Training Stress Balance (TSB):</strong> <%= @workout_routine.tsb %> Lbs </p>
         <p>Positive TSB:
 
           Indicates that the athlete is well-rested and recovered.
