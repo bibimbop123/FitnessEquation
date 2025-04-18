@@ -1,20 +1,20 @@
-<div class="text-center custom-clay-red-bg fitness-font">
-  <div class="d-flex justify-content-center custom-clay-red-bg">
-    <div class=" custom-clay-red-bg">
+<div class="container py-5">
+  <div class="text-center mb-5 fitness-font">
+    <h1 class="display-4 fw-bold text-danger">Workout Routines</h1>
+    <%= link_to 'New Workout Routine', new_workout_routine_path, class: 'btn btn-primary mt-3' %>
+  </div>
 
-      <br/>
-      <h1>Workout Routines</h1>
-      <br/>
+  <div class="text-center mb-5">
+    <%= image_tag 'dumbbell.gif', alt: 'lifting weights', class: 'img-fluid w-75 rounded shadow' %>
+  </div>
 
-      <%= link_to 'New Workout Routine', new_workout_routine_path, class: 'btn btn-primary' %>
-      <div>
-        <%= image_tag 'dumbbell.gif', alt: 'lifting weights', class: 'img-fluid my-5 w-80', style: 'border-radius: 15px;' %>
-      </div>
-
-      
-
-      <table class="table mt-3 bg-light">
-        <thead>
+  <div class="card shadow mb-5">
+    <div class="card-header bg-danger text-white">
+      <h3 class="mb-0">Your Routines</h3>
+    </div>
+    <div class="card-body bg-light">
+      <table class="table table-hover align-middle">
+        <thead class="table-dark">
           <tr>
             <th>Name</th>
             <th>Completed</th>
@@ -27,29 +27,35 @@
               <tr>
                 <td><%= routine.name %></td>
                 <td>
-                  <input type="checkbox" class="exercise-checkbox" data-routine-id="<%= routine.id %>">
+                  <input type="checkbox" class="form-check-input exercise-checkbox" data-routine-id="<%= routine.id %>">
                 </td>
                 <td>
-                  <%= link_to 'Show', workout_routine_path(routine), class: 'btn btn-secondary' %>
-                  <%= link_to 'Edit', edit_workout_routine_path(routine), class: 'btn btn-warning' %>
-                  <%= link_to 'Destroy', workout_routine_path(routine), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+                  <%= link_to 'Show', workout_routine_path(routine), class: 'btn btn-outline-secondary btn-sm me-2' %>
+                  <%= link_to 'Edit', edit_workout_routine_path(routine), class: 'btn btn-outline-warning btn-sm me-2' %>
+                  <%= link_to 'Destroy', workout_routine_path(routine), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' %>
                 </td>
               </tr>
             <% end %>
           <% end %>
         </tbody>
       </table>
-      <br/>
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <h2>Volume Goals Based on Training Effort</h2>
-            <%= image_tag 'volume_based_on_training_effort.png', alt: 'Volume based on Training Effort', class: 'img-fluid' %>
-          </div>
-          <div class="col-md-6 mb-3">
-            <h2>Volume Goals Based on Training Goal</h2>
-            <%= image_tag 'volume_based_training_goal.png', alt: 'Volume based on Training Goal', class: 'img-fluid' %>
-          </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card shadow h-100">
+        <div class="card-body text-center">
+          <h4 class="card-title">Volume Goals Based on Training Effort</h4>
+          <%= image_tag 'volume_based_on_training_effort.png', alt: 'Volume based on Training Effort', class: 'img-fluid rounded' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card shadow h-100">
+        <div class="card-body text-center">
+          <h4 class="card-title">Volume Goals Based on Training Goal</h4>
+          <%= image_tag 'volume_based_training_goal.png', alt: 'Volume based on Training Goal', class: 'img-fluid rounded' %>
         </div>
       </div>
     </div>

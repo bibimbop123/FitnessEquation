@@ -63,7 +63,6 @@ module Workoutable
     end
   end
 
-
   def tsb
     chronic_load - acute_load
   end
@@ -73,7 +72,7 @@ module Workoutable
     mood_value = mood || 5
     sleep_quality_value = sleep_quality || 5
     soreness_value = soreness || 5
-    acwr_value = acwr || 0
+    acwr || 0
 
     # Calculate the burnout risk score
     100 - (acwr * 100) + (mood_value * 10) + (sleep_quality_value * 10) - (soreness_value * 10)

@@ -1,42 +1,69 @@
 <div class="container mt-5 custom-iron-white-bg">
-  <h1>Ahoy Analytics</h1>
-  <p>Here you can view the events tracked by Ahoy.</p>
+  <!-- Heading Section -->
+  <div class="text-center mb-4">
+    <h1 class="display-4">Ahoy Analytics</h1>
+    <p class="lead">View and analyze the events tracked by Ahoy for a clearer insight into user interactions.</p>
+  </div>
 
+  <!-- Events Table -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Tracked Events</h3>
+      <p class="card-text">Below are the events captured by Ahoy, providing key data on user interactions.</p>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Event Name</th>
-        <th>Properties</th>
-        <th>Time</th>
-        <th>User</th>
-        <th>Visit</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @ahoy_events.each do |event| %>
-        <tr>
-          <td><%= event.name %></td>
-          <td><%= event.properties %></td>
-          <td><%= event.time %></td>
-          <td><%= event.user.present? ? event.user.email : 'Unknown User' %></td>
-          <td><%= event.visit_id %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Properties</th>
+            <th>Time</th>
+            <th>User</th>
+            <th>Visit ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ahoy_events.each do |event| %>
+            <tr>
+              <td><%= event.name %></td>
+              <td><%= event.properties %></td>
+              <td><%= event.time %></td>
+              <td><%= event.user.present? ? event.user.email : 'Unknown User' %></td>
+              <td><%= event.visit_id %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
+<!-- Visit Analytics Section -->
 <div class="container mt-5 custom-iron-white-bg">
-  <h1>Ahoy Visits Analytics</h1>
-  <p>Here you can view the visits tracked by Ahoy.</p>
+  <!-- Heading Section -->
+  <div class="text-center mb-4">
+    <h1 class="display-4">Ahoy Visits Analytics</h1>
+    <p class="lead">Explore visits tracked by Ahoy, with visual breakdowns across different time periods.</p>
+  </div>
 
-  <h2>Visits by Day</h2>
-  <%= line_chart @visits_by_day, xtitle: "Date", ytitle: "Visits" %>
+  <!-- Visit Analytics by Day, Week, Month -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Visits by Day</h3>
+      <%= line_chart @visits_by_day, xtitle: "Date", ytitle: "Visits", height: "300px" %>
+    </div>
+  </div>
 
-  <h2>Visits by Week</h2>
-  <%= line_chart @visits_by_week, xtitle: "Week", ytitle: "Visits" %>
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Visits by Week</h3>
+      <%= line_chart @visits_by_week, xtitle: "Week", ytitle: "Visits", height: "300px" %>
+    </div>
+  </div>
 
-  <h2>Visits by Month</h2>
-  <%= line_chart @visits_by_month, xtitle: "Month", ytitle: "Visits" %>
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Visits by Month</h3>
+      <%= line_chart @visits_by_month, xtitle: "Month", ytitle: "Visits", height: "300px" %>
+    </div>
+  </div>
 </div>

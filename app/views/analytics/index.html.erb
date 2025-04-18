@@ -1,37 +1,44 @@
 <div class="text-center custom-energize-green-bg fitness-font">
   <div class="d-flex justify-content-center custom-energize-green-bg">
-    <div class="col-12 col-md-10 col-lg-8 mb-5 custom-iron-white-bg">
-      <br/>
-      <h1>Fitness Analytics</h1>
-      <br/>
-      <p>Here you can view your progress over time.</p>
+    <div class="col-12 col-md-10 col-lg-8 mb-5 custom-iron-white-bg p-4 rounded">
+      <h1 class="mb-4">Fitness Analytics Dashboard</h1>
+      <p class="lead">Track and visualize your progress over time with interactive graphs based on your personal data.</p>
 
-        <%= image_tag 'graph.gif', alt: 'What`s the point of all these graphs?', class: 'img-fluid my-5 w-80', style: 'border-radius: 15px;' %>
-        <br/>
-      <h2> Snapshot Weight(Lbs) vs. Time to Reach Goal Weight(Weeks)</h2>
-      <%= line_chart @predicted_time_data, xtitle: "Snapshot weight(Lbs)", ytitle: "Time to Reach Goal Weight (days)"%>
-      <br/>
-      <h2> Time to Reach Goal Weight(Weeks) vs. Calorie Deficit or Surplus</h2>
-      <%= line_chart @predicted_time_calorie_data, xtitle: "Time to Reach Goal Weight (weeks)" , ytitle: "Calorie_deficit_or_surplus" %>
-      <br/>
-      <h2>Time(Days) vs. Weight(Lbs)</h2>
-      <%= line_chart @weight_data, xtitle: "Time (Days)", ytitle: "Weight (lbs)" %>
-      <br/>
+      <%= image_tag 'graph.gif', alt: 'Graph animation', class: 'img-fluid my-4 w-80', style: 'border-radius: 15px;' %>
 
-      <h2> Time(Days) vs. Total Volume Lifted(Lbs)</h2>
-      <%= column_chart @workout_routines_data, xtitle: "Time (Days)", ytitle: "Total Volume (lbs)" %>  
-      <br/>
+      <hr/>
 
-      <h2>Activity levels Counts of Snapshots </h2>
-      <%= pie_chart @activity_level_data, xtitle: "Activity Level", ytitle: "Count" %>
-      <br/>
-      <h2> Time(Days) vs. One Rep Max Count</h2> 
-      <%= column_chart @one_rep_max_count_data, xtitle: "Time (Days)", ytitle: "One Rep Max Count" %>
-      <br/>
-      <h2> Time(Days) vs. Snapshot Count</h2>
-      <%= column_chart @snapshots_count_data, xtitle: "Time (Days)", ytitle: "Snapshot Count" %>
+      <h2 class="mt-5">📉 Snapshot Weight (lbs) vs. Time to Reach Goal Weight (weeks)</h2>
+      <p>This line chart illustrates how your current weight affects the predicted number of weeks required to reach your goal weight based on your calorie deficit or surplus.</p>
+      <%= line_chart @predicted_time_data, xtitle: "Snapshot Weight (lbs)", ytitle: "Weeks to Goal" %>
 
-      <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+      <h2 class="mt-5">⚖️ Time to Reach Goal Weight (weeks) vs. Calorie Deficit/Surplus</h2>
+      <p>This chart shows how daily calorie surplus or deficit directly impacts the duration to achieve your goal weight. Use this to adjust your daily intake for faster or more sustainable results.</p>
+      <%= line_chart @predicted_time_calorie_data, xtitle: "Weeks to Goal", ytitle: "Calorie Δ (per day)" %>
+
+      <h2 class="mt-5">📆 Time (days) vs. Weight (lbs)</h2>
+      <p>Track your weight changes over time to monitor consistency, trends, and plateaus in your journey.</p>
+      <%= line_chart @weight_data, xtitle: "Time (days)", ytitle: "Weight (lbs)" %>
+
+      <h2 class="mt-5">🏋️‍♂️ Time (days) vs. Total Volume Lifted (lbs)</h2>
+      <p>This column chart shows your workout intensity over time, calculated by summing total weight lifted across all exercises. A great way to see training progression.</p>
+      <%= column_chart @workout_routines_data, xtitle: "Time (days)", ytitle: "Total Volume Lifted (lbs)" %>  
+
+      <h2 class="mt-5">🔥 Snapshot Count by Activity Level</h2>
+      <p>This pie chart provides a breakdown of your recorded snapshots based on self-reported activity levels. It helps visualize how your fitness routine intensity varies over time.</p>
+      <%= pie_chart @activity_level_data %>
+
+      <h2 class="mt-5">🏆 Time (days) vs. One Rep Max (ORM) Count</h2> 
+      <p>Track the number of times you've recorded a one-rep max (ORM) over time, offering insight into your strength training progression and milestones.</p>
+      <%= column_chart @one_rep_max_count_data, xtitle: "Time (days)", ytitle: "ORM Count" %>
+
+      <h2 class="mt-5">📊 Time (days) vs. Snapshot Count</h2>
+      <p>This chart displays how frequently you've taken snapshots, providing a view of your tracking habits and commitment consistency.</p>
+      <%= column_chart @snapshots_count_data, xtitle: "Time (days)", ytitle: "Snapshots Taken" %>
+
+      <div class="mt-4">
+        <%= link_to '⬅ Back to Dashboard', root_path, class: 'btn btn-secondary' %>
+      </div>
     </div>
   </div>
 </div>
