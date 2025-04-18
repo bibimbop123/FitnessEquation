@@ -23,20 +23,25 @@ module Workoutable
     )
   end
 
-  # Calculate Acute Load (last 7 days)
+  # Acute Load: Total load over the past 7 days
   def calculate_acute_load
-    Exercise.joins(:workout_routine)
-            .where(workout_routines: { user_id: id })
-            .where('exercises.created_at >= ?', 7.days.ago)
-            .sum('reps * sets * weight')
+    exercises = Exercise.joins(:workout_routine)
+                        .where(workout_routines: { user_id: id })
+                        .where('exercises.created_at >= ?', Time.current - 7.days)
+                        .pluck(:reps, :sets, :weight)
+
+    total_load = exercises.sum { |reps, sets, weight| reps.to_i * sets.to_i * weight.to_f }
+    total_load.round(2)
   end
 
+  # Chronic Load: Average weekly load over the past 4 weeks
   def calculate_chronic_load
-    total_load = Exercise.joins(:workout_routine)
-                         .where(workout_routines: { user_id: id })
-                         .where('exercises.created_at >= ?', 4.weeks.ago)
-                         .sum('reps * sets * weight')
+    exercises = Exercise.joins(:workout_routine)
+                        .where(workout_routines: { user_id: id })
+                        .where('exercises.created_at >= ?', Time.current - 4.weeks)
+                        .pluck(:reps, :sets, :weight)
 
+    total_load = exercises.sum { |reps, sets, weight| reps.to_i * sets.to_i * weight.to_f }
     (total_load / 4.0).round(2)
   end
 
