@@ -1,43 +1,47 @@
-<div class="text-center custom-mist-red-bg fitness-font">
-  <div class="d-flex justify-content-center custom-mist-red-bg">
-    <div class="col-md-4 mb-4 custom-mist-red-bg">
+<div class="text-center custom-mist-red-bg fitness-font py-5">
   <div class="container">
-    <div class="d-flex justify-content-center">
-      <%= image_tag 'delts.gif', alt: 'strength and agility', class: 'img-fluid my-5 w-80', style: 'border-radius: 15px;' %>
+    
+    <!-- Header Image -->
+    <div class="d-flex justify-content-center mb-4">
+      <%= image_tag 'delts.gif', alt: 'Strength and Agility', class: 'img-fluid rounded shadow', style: 'max-width: 80%;' %>
     </div>
-    <h2 class="text-center mb-4">Your One-Rep Max Records</h2>
 
-    <div class="d-flex justify-content-center">
-         <table class="table table-striped w-auto">
-          <thead>
+    <!-- Title -->
+    <h2 class="display-5 fw-bold mb-5">Your One-Rep Max Records</h2>
+
+    <!-- Table -->
+    <div class="table-responsive d-flex justify-content-center">
+      <table class="table table-hover table-bordered shadow w-auto">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Exercise</th>
+            <th scope="col">Weight (lbs)</th>
+            <th scope="col">Reps</th>
+            <th scope="col">One-Rep Max (lbs)</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @one_rep_maxes.each do |one_rep_max| %>
             <tr>
-              <th>Exercise</th>
-              <th>Weight (lbs)</th>
-              <th>Reps</th>
-              <th>One-Rep Max (lbs)</th>
-              <th>Actions</th>
+              <td><%= one_rep_max.exercise %></td>
+              <td><%= one_rep_max.weight_lbs %></td>
+              <td><%= one_rep_max.reps %></td>
+              <td><%= one_rep_max.calculate_one_rep_max %></td>
+              <td>
+                <%= link_to 'Show', one_rep_max, class: 'btn btn-outline-primary btn-sm me-2' %>
+                <%= link_to 'Delete', one_rep_max, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' %>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            <% @one_rep_maxes.each do |one_rep_max| %>
-              <tr>
-                <td><%= one_rep_max.exercise %></td>
-                <td><%= one_rep_max.weight_lbs %></td>
-                <td><%= one_rep_max.reps %></td>
-                <td><%= one_rep_max.calculate_one_rep_max %></td>
-                <td>
-                  <%= link_to 'Show', one_rep_max %>
-                  <%= link_to 'Destroy', one_rep_max, method: :delete, data: { confirm: 'Are you sure?' } %>
-                </td>
-              </tr>
-            <% end %>
+          <% end %>
         </tbody>
       </table>
     </div>
 
-    <div class="text-center mt-4">
-      <%= link_to 'New One-Rep Max', new_one_rep_max_path, class: 'btn btn-primary' %>
+    <!-- New Entry Button -->
+    <div class="mt-5">
+      <%= link_to 'Add New One-Rep Max', new_one_rep_max_path, class: 'btn btn-success btn-lg' %>
     </div>
+
   </div>
-</div>
 </div>

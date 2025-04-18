@@ -140,3 +140,17 @@
 .text-center-placeholder::placeholder {
   text-align: center;
 }
+
+.custom-mist-red-bg {
+  background-color: #f8f9fa; /* Light gray or pastel red if desired */
+}
+
+.fitness-font {
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-fitness-btn {
+  border-radius: 50px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+}
