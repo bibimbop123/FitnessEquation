@@ -52,35 +52,60 @@
       </div>
 
       <div class="container mt-5">
-        <h2>Burnout Metrics</h2>
-        <p><strong>Acute Load:</strong> <%= @workout_routine.acute_load %> Lbs </p>
-        <p><strong>Chronic Load:</strong> <%= @workout_routine.chronic_load %> Lbs</p>
-        <p><strong>ACWR:</strong> <%= @workout_routine.acwr.round(2) %></p>
-        <p>Acute:Chronic Workload Ratio. It is a metric used in sports science to monitor training load and assess the risk of injury or burnout. It compares the short-term workload (acute load) to the long-term workload (chronic load) to determine whether an athlete is training at an appropriate intensity.</p>
-        <p><strong>Training Stress Balance (TSB):</strong> <%= @workout_routine.tsb %> Lbs </p>
-        <p>Positive TSB:
+       <div class="container mt-5">
+        <div class="card aggressive-burnout shadow-lg">
+          <div class="card-body">
+            <h2 class="card-title text-danger fw-bold">🔥 Burnout Metrics</h2>
+          <p><strong>Acute Load:</strong> <%= @workout_routine.acute_load %> lbs</p>
+          <p><strong>Chronic Load:</strong> <%= @workout_routine.chronic_load %> lbs</p>
+          <p><strong>ACWR:</strong> <%= @workout_routine.acwr.round(2) %></p>
+          <p class="text-muted small">
+            Acute:Chronic Workload Ratio — compares your short-term (1 week) load to long-term (4 weeks) load. 
+            Helps you avoid overtraining by identifying rapid spikes in activity.
+          </p>
 
-          Indicates that the athlete is well-rested and recovered.
-          May suggest readiness for peak performance.
-        </p>
-        <p>
-          Negative TSB:
+          <p><strong>Training Stress Balance (TSB):</strong> <%= @workout_routine.tsb %> lbs</p>
+          <p class="text-muted small">
+            Training Stress Balance reflects your recovery state — it’s the difference between your chronic and acute load.
+          </p>
 
-          Indicates that the athlete is fatigued due to recent training.
-          A small negative TSB is normal during training phases.
-        </p>
-        <p>
+          <ul>
+            <li><strong>✅ Positive TSB:</strong> You’re well-rested and ready to go.</li>
+            <li><strong>⚠️ Negative TSB:</strong> Fatigue is building, monitor closely.</li>
+            <li><strong>🚨 Very Negative TSB:</strong> High risk of burnout or injury — rest advised!</li>
+          </ul>
 
-          Very Negative TSB:
+          <p><strong>🔥 Burnout Risk Score:</strong> <%= @workout_routine.calculate_burnout_risk_score %></p>
+          <p class="text-muted small">
+            Burnout Risk Score is based on a combination of ACWR, TSB, and load trends. The higher the number, the more likely you are to be overtrained or fatigued.
+          </p>
 
-          Indicates overtraining or excessive fatigue.
-          May increase the risk of burnout or injury.
-        </p>
-       
-        <p><strong>Burnout Risk Score:</strong> <%= @workout_routine.calculate_burnout_risk_score %></p>
-        </br>
-        <p><strong>ACWR Status:</strong> <%= @workout_routine.acwr_status %></p>
+          <p><strong>🚦 ACWR Status:</strong> <%= @workout_routine.acwr_status %></p>
+          <p class="text-muted small">
+            ACWR Status is determined by how your ratio compares to safe training thresholds.
+          </p>
+
+          <hr>
+          <h5>📊 ACWR Interpretation Scale:</h5>
+          <ul>
+            <li><strong>Below 0.8:</strong> Undertraining — minimal performance gains.</li>
+            <li><strong>0.8 to 1.3:</strong> Safe Zone — optimal balance of load and recovery.</li>
+            <li><strong>1.3 to 1.5:</strong> Elevated Risk — performance may improve, but watch for fatigue.</li>
+            <li><strong>Above 1.5:</strong> Danger Zone — high risk of injury or burnout.</li>
+          </ul>
+
+          <h5>🔥 Burnout Risk Score Scale:</h5>
+          <ul>
+            <li><strong>0–3:</strong> Low Risk — continue training as planned.</li>
+            <li><strong>4–6:</strong> Moderate Risk — monitor recovery and adjust if needed.</li>
+            <li><strong>7–8:</strong> High Risk — reduce load and prioritize rest.</li>
+            <li><strong>9–10:</strong> Critical — immediate rest required to avoid injury or overtraining.</li>
+          </ul>
+
+          </div>
+        </div>
       </div>
+
       <%= link_to 'Back', workout_routines_path, class: 'btn btn-secondary' %>
     </div>
   </div>
