@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center custom-rose-red-bg">
     <div class="col-md-4 mb-4 custom-rose-red-bg">
       <div class="card custom-red-border custom-energize-green-bg">
-        <div class="card-body text-center">
+        <div class="card-body text-center aggressive-pop1">
           <%= render partial: 'snapshot', locals: { snapshot: @snapshot, weightLbs: (@snapshot.weight_kg / 0.453592).round(0), height_feet: (@snapshot.height_cm / 30.48).to_i, height_inches: ((@snapshot.height_cm / 2.54) % 12).round(1), goal_weight_lbs: (@snapshot.goal_weight_kg / 0.453592).round(0) } %>
         </div>
       </div>
