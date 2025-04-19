@@ -80,8 +80,11 @@ module Snapable
   end
 
   def tdee
+    return 0 if bmr.nil? || ACTIVITY_FACTORS[activity_level].nil?
+    
     bmr * ACTIVITY_FACTORS[activity_level]
   end
+  
 
   def ideal_body_weight_max
     base_weight = if user.gender == 'male'
