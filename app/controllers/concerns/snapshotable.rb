@@ -17,6 +17,7 @@ module Snapshotable
     @height_feet = show_values[:height_feet].round(0)
     @height_inches = show_values[:height_inches].round(1)
     @goal_weight_lbs = show_values[:goal_weight_lbs].round(0)
+
     @calorie_deficit_or_surplus_per_day = @snapshot.calorie_deficit_or_surplus_per_day.to_i
   end
 
