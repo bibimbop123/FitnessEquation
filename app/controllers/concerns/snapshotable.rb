@@ -75,6 +75,7 @@ module Snapshotable
   def snapshot_params
     params.require(:snapshot).permit(:weight_kg, :activity_level, :goal_weight_kg, :predicted_time_weeks,
                                      :calorie_deficit_or_surplus_per_day, :gender, :dob)
+                                     
   end
 
   def virtual_params

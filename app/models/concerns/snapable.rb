@@ -4,13 +4,13 @@ module Snapable
   extend ActiveSupport::Concern
 
   ACTIVITY_FACTORS = {
-    'sedentary' => 1.2,
-    'lightly_active' => 1.375,
-    'moderately_active' => 1.55,
-    'very_active' => 1.725,
-    'super_active' => 1.9
+    'Sedentary (Little to no physical activity)' => 1.2,
+    'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)' => 1.375,
+    'Moderately Active (Moderate exercise or sports 3-5 days per week)' => 1.55,
+    'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => 1.725,
+    'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)' => 1.9
   }.freeze
-
+  
   MIN_INTAKE = 250
   MAX_INTAKE = 4000
 

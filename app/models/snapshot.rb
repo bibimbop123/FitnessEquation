@@ -36,13 +36,7 @@ class Snapshot < ApplicationRecord
   validates :height_cm, presence: true, numericality: { less_than: 228.6, greater_than: 0 }
   validates :weight_kg, presence: true, numericality: { less_than: 226.8, greater_than: 0 }
 
-  validates :activity_level, presence: true, inclusion: { in: %w[
-    sedentary
-    lightly_active
-    moderately_active
-    very_active
-    super_active
-  ] }
+  validates :activity_level, presence: true, inclusion: { in: ACTIVITY_FACTORS.keys }
   validates :goal_weight_kg, presence: true, numericality: { greater_than: 0 }
   validates :calorie_deficit_or_surplus_per_day, presence: true, numericality: { less_than: 10_000 }
   validate :calorie_deficit_or_surplus_must_be_positive_if_weight_less_than_goal_weight
