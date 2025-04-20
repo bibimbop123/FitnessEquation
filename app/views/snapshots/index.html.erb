@@ -19,7 +19,7 @@
               <div class="card custom-energize-green-bg border-0 shadow-lg p-4" style="max-width: 500px; width: 100%;">
                 <div class="card-body text-center">
                   <% cache(snapshot) do %>
-                    <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: weight_lbs, height_feet: height_ft, height_inches: height_in, goal_weight_lbs: goal_lbs } %>
+                    <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: weight_lbs, height_feet: height_ft, height_inches: height_in, goal_weight_lbs: goal_lbs} %>
                   <% end %>
 
                   <div class="mt-3">

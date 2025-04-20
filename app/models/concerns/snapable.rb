@@ -3,13 +3,14 @@
 module Snapable
   extend ActiveSupport::Concern
 
-  ACTIVITY_FACTORS = {
-    'Sedentary (Little to no physical activity)' => 1.2,
-    'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)' => 1.375,
-    'Moderately Active (Moderate exercise or sports 3-5 days per week)' => 1.55,
-    'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => 1.725,
-    'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)' => 1.9
+  ACTIVITY_LEVELS = {
+    'Sedentary (Little to no physical activity)' => { factor: 1.2 },
+    'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)' => { factor: 1.375 },
+    'Moderately Active (Moderate exercise or sports 3-5 days per week)' => { factor: 1.55 },
+    'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => { factor: 1.725 },
+    'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)' => { factor: 1.9 }
   }.freeze
+  
 
   PROTEIN_FACTORS = {
     'Sedentary (Little to no physical activity)' => 0.8,
@@ -88,8 +89,28 @@ module Snapable
   end
 
   def tdee
-    
-    bmr * ACTIVITY_FACTORS[activity_level]
+
+    activity_factor = ACTIVITY_LEVELS.fetch(activity_level_mapper(activity_level)).fetch(:factor)
+     bmr * activity_factor
+  end
+
+  def activity_level_mapper (activity_level)
+    return nil unless activity_level
+
+    case activity_level
+    when 'Sedentary (Little to no physical activity)'
+      'sendentary'
+    when 'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)'
+      'lightly_active'
+    when 'Moderately Active (Moderate exercise or sports 3-5 days per week)'
+      'moderately_active'
+    when 'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)'
+      'very_active'
+    when 'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)'
+      'super_active'
+    else
+      nil
+    end
   end
   
 
@@ -157,15 +178,15 @@ module Snapable
 
   def recommended_protein_intake_per_day(activity_level)
     case activity_level
-    when :sedentary
+    when "Sedentary (Little to no physical activity)"
       weight_kg * PROTEIN_FACTORS['Sedentary (Little to no physical activity)']
-    when :lightly_active
+    when "Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)"
       weight_kg * PROTEIN_FACTORS['Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)']
-    when :moderately_active
+    when "Moderately Active (Moderate exercise or sports 3-5 days per week)"
       weight_kg * PROTEIN_FACTORS['Moderately Active (Moderate exercise or sports 3-5 days per week)']
-    when :very_active
+    when "Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)"
       weight_kg * PROTEIN_FACTORS['Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)']
-    when :super_active
+    when "Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)"
       weight_kg * PROTEIN_FACTORS['Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)']
     else
       weight_kg * PROTEIN_FACTORS['Sedentary (Little to no physical activity)']  # Default case

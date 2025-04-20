@@ -6,6 +6,7 @@ module Snapshotable
   # GET /snapshots or /snapshots.json
   def index
     @snapshots = Snapshot.where(user: current_user).includes([:user])
+    
   end
 
   # GET /snapshots/1 or /snapshots/1.json

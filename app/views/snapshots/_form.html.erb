@@ -13,13 +13,14 @@
     <%= f.input :heightInches, label: "Height (inches)" %>
     <%= f.input :goal_weight_lbs, label: "Goal Weight (lbs)" %>
 
-    <%= f.input :activity_level, as: :select, collection: %w[
-    Sedentary (Little to no physical activity)
-    Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)
-    Moderately Active (Moderate exercise or sports 3-5 days per week)
-    Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)
-    Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)
-  ] %>
+   <%= f.input :activity_level, as: :select, collection: [
+      ["Sedentary (little or no exercise)", "sedentary"],
+      ["Lightly active (light exercise/sports 1-3 days/week)", "lightly_active"],
+      ["Moderately active (moderate exercise/sports 3-5 days/week)", "moderately_active"],
+      ["Very active (hard exercise/sports 6-7 days a week)", "very_active"],
+      ["Super active (very hard exercise/sports & physical job or training twice a day)", "super_active"]
+    ], label: "Activity Level" %>
+
 
     <%= f.input :goal_weight_kg %>
     <%= f.input :predicted_time_weeks %>
