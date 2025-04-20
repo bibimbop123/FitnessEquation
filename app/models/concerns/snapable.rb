@@ -10,6 +10,14 @@ module Snapable
     'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => 1.725,
     'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)' => 1.9
   }.freeze
+
+  PROTEIN_FACTORS = {
+    'Sedentary (Little to no physical activity)' => 0.8,
+    'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)' => 1.0,
+    'Moderately Active (Moderate exercise or sports 3-5 days per week)' => 1.2,
+    'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => 1.4,
+    'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)' => 1.6
+  }.freeze
   
   MIN_INTAKE = 250
   MAX_INTAKE = 4000
@@ -80,8 +88,10 @@ module Snapable
   end
 
   def tdee
+    
     bmr * ACTIVITY_FACTORS[activity_level]
   end
+  
 
   def ideal_body_weight_max
     base_weight = if user.gender == 'male'
@@ -148,17 +158,17 @@ module Snapable
   def recommended_protein_intake_per_day(activity_level)
     case activity_level
     when :sedentary
-      weight_kg * 0.8
-    when :moderate_exercise, :endurance_athlete
-      weight_kg * 1.2
-    when :strength_training
-      weight_kg * 1.6
-    when :older_adult
-      weight_kg * 1.0
-    when :weight_loss
-      weight_kg * 2.0
+      weight_kg * PROTEIN_FACTORS['Sedentary (Little to no physical activity)']
+    when :lightly_active
+      weight_kg * PROTEIN_FACTORS['Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)']
+    when :moderately_active
+      weight_kg * PROTEIN_FACTORS['Moderately Active (Moderate exercise or sports 3-5 days per week)']
+    when :very_active
+      weight_kg * PROTEIN_FACTORS['Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)']
+    when :super_active
+      weight_kg * PROTEIN_FACTORS['Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)']
     else
-      weight_kg * 0.8
+      weight_kg * PROTEIN_FACTORS['Sedentary (Little to no physical activity)']  # Default case
     end
   end
 
