@@ -1,14 +1,31 @@
-# frozen_string_literal: true
-
 module Snapable
   extend ActiveSupport::Concern
 
-  ACTIVITY_FACTORS = {
-    'Sedentary (Little to no physical activity)' => 1.2,
-    'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)' => 1.375,
-    'Moderately Active (Moderate exercise or sports 3-5 days per week)' => 1.55,
-    'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => 1.725,
-    'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)' => 1.9
+  included do
+    validates :activity_level, presence: true, inclusion: { in: ACTIVITY_FACTOR.keys.map(&:to_s) }
+  end
+
+  ACTIVITY_FACTOR = { 
+    sedentary: {
+      description: 'Sedentary (Little to no physical activity)',
+      multiplier: 1.2
+    },
+    lightly_active: {
+      description: 'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)',
+      multiplier: 1.375
+    },
+    moderately_active: {
+      description: 'Moderately Active (Moderate exercise or sports 3-5 days per week)',
+      multiplier: 1.55
+    },
+    very_active: {
+      description: 'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)',
+      multiplier: 1.725
+    },
+    super_active: {
+      description: 'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)',
+      multiplier: 1.9
+    }
   }.freeze
 
   PROTEIN_FACTORS = {
@@ -18,7 +35,7 @@ module Snapable
     'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => 1.4,
     'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)' => 1.6
   }.freeze
-  
+
   MIN_INTAKE = 250
   MAX_INTAKE = 4000
 
@@ -80,7 +97,6 @@ module Snapable
     now = Time.now.utc.to_date
     age = now.year - dob.year - (now.month > dob.month || (now.month == dob.month && now.day >= dob.day) ? 0 : 1)
     if user.gender == 'male'
-
       10 * weight_kg + 6.25 * height_cm - 5 * age + 5
     else
       10 * weight_kg + 6.25 * height_cm - 5 * age - 161
@@ -88,10 +104,11 @@ module Snapable
   end
 
   def tdee
-    
-    bmr * ACTIVITY_FACTORS[activity_level]
+    # return nil unless bmr.present? && ACTIVITY_FACTOR[activity_level].present?
+
+    # bmr * ACTIVITY_FACTOR[activity_level][:multiplier]
+    ACTIVITY_FACTOR[activity_level.to_sym][:multiplier] * bmr
   end
-  
 
   def ideal_body_weight_max
     base_weight = if user.gender == 'male'
