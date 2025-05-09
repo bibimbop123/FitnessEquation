@@ -1,8 +1,7 @@
-
-
-## Fitness Equation
+# Fitness Equation <!-- First line should be h1 -->
 
 This is an app that
+
 1. Predicts your weight loss/gain timeline!
 2. Calculates your one rep max for any exercise for any body part or compound lifts!
 3. Records your weightlifting routines to track your progress over time!
@@ -10,9 +9,11 @@ This is an app that
 This project addresses the obesity epidemic in America. Can be used with all populations regardless of race, gender, religion. As a personal trainer, I often couldn't tell my clients when exactly they should reach goal weight in a healthy timeline
 
 ## ERD
+
 ![image](https://github.com/user-attachments/assets/7eed69dc-222f-4e05-8ca6-ae5256b8f556)
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -40,7 +41,7 @@ This project addresses the obesity epidemic in America. Can be used with all pop
 1. Start the Rails server:
 `rails server`
 
-2. Open your browser and navigate to http://localhost:3000
+2. Open your browser and navigate to <http://localhost:3000>
 Follow the on-screen instructions to use the application
 
 ## Contributing
@@ -54,9 +55,11 @@ Contributions are welcome! Please follow these guidelines:
 5. Open a pull request
 
 ## License
+
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
+
 Name: Brian Kim
 Project Github: [https://github.com/bibimbop123/FitnessEquation](https://github.com/bibimbop123/FitnessEquation)
 Project Link: [https://fitnessequation.onrender.com/]

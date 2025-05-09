@@ -12,6 +12,9 @@ Rails.start();
 
 import "ahoy"
 
+// this file is used for global application js
+// this js code will be triggered for every page. i recommend refactoring some of your js to view partial or a a stimulus controller
+
 document.addEventListener("DOMContentLoaded", function() {
   const checkboxes = document.querySelectorAll(".exercise-checkbox");
 

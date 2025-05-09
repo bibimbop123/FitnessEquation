@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# this seems like a full on controller in a concern
 module Exercisable
   extend ActiveSupport::Concern
 
