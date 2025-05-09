@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# OneRepMaxable is more readable
 module Onerepmaxable
   extend ActiveSupport::Concern
 

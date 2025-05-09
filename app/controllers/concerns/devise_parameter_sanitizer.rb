@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# maybe just call this Deviseable for all your devise related code
+
 # app/controllers/concerns/devise_parameter_sanitizer.rb
 module DeviseParameterSanitizer
   extend ActiveSupport::Concern
