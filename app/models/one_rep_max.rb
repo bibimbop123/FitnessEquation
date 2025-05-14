@@ -24,6 +24,7 @@
 #
 class OneRepMax < ApplicationRecord
   include PublicActivity::Model
+  include OneRepMaxable
   tracked owner: ->(controller, _model) { controller && controller.current_user }
 
   belongs_to :user, touch: true
@@ -35,5 +36,5 @@ class OneRepMax < ApplicationRecord
   validates :weight_lbs, numericality: { greater_than: 0 }
   validates :reps, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 10 }
 
-  include Onerepmaxable
+
 end

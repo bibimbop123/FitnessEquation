@@ -23,6 +23,7 @@
 #
 #  fk_rails_...  (user_id => users.id)
 class Snapshot < ApplicationRecord
+  include Analyticable
   include Snapable
   include PublicActivity::Model
 

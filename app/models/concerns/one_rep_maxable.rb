@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Onerepmaxable
+module OneRepMaxable
   extend ActiveSupport::Concern
 
   # Epley formula for 1RM
