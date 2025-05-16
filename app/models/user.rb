@@ -21,6 +21,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  # TODO: store users preferred unit (eg :kg, :lbs, etc.)
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many  :snapshots, class_name: 'Snapshot', foreign_key: 'user_id', dependent: :destroy
