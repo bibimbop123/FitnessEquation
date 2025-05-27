@@ -1,57 +1,72 @@
 <div class="text-center custom-orange-bg fitness-font">
   <div class="d-flex justify-content-center custom-orange-bg">
-    <div class=" custom-orange-bg">
-    <br/>
-  <h2 class="text-center mb-4">Sign up</h2>
-  <br/>
+    <div class="custom-orange-bg">
+      <br/>
+      <h2 class="text-center mb-4">Sign up</h2>
+      <br/>
 
-  <div class="alert alert-info text-center" role="alert">
-    <strong>Note:</strong> Please input your gender and date of birth accurately to get the best results.
-  </div>
+      <div class="alert alert-info text-center" role="alert">
+        <strong>Note:</strong> Please input your gender and date of birth accurately to get the best results.
+      </div>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
-    <%= f.error_notification %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
+        <%= f.error_notification %>
 
-    <div class="form-inputs">
-      <div class="mb-3">
-        <%= f.input :email,
-                    required: true,
-                    autofocus: true,
-                    input_html: { autocomplete: "email", class: 'form-control sans-font' },
-                    label_html: { class: 'form-label' } %>
-      </div>
-      <div class="mb-3">
-        <%= f.input :password,
-                    required: true,
-                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                    input_html: { autocomplete: "new-password", class: 'form-control sans-font' },
-                    label_html: { class: 'form-label' } %>
-      </div>
-      <div class="mb-3">
-        <%= f.input :password_confirmation,
-                    required: true,
-                    input_html: { autocomplete: "new-password", class: 'form-control sans-font' },
-                    label_html: { class: 'form-label' } %>
-      </div>
-      <div class="mb-3">
-        <%= f.label :gender, "Gender", class: "form-label" %>
-        <%= f.select :gender, options_for_select([['Choose your gender', nil], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], @user.gender), {}, class: "form-select", id: "gender" %>
-      </div>
-      <div class="mb-3">
-        <%= f.label :dob, "Date of Birth (DD/MM/YEAR)", class: "form-label" %>
-        <%= f.date_field :dob, class: "form-control", id: "dob" %>
+        <div class="form-inputs">
+          <div class="mb-3">
+            <%= f.input :email,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "email", class: 'form-control sans-font' },
+                        label_html: { class: 'form-label' } %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.input :password,
+                        required: true,
+                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                        input_html: { autocomplete: "new-password", class: 'form-control sans-font', id: 'password' },
+                        label_html: { class: 'form-label' } %>
+            <button type="button" class="btn btn-secondary btn-sm mt-2"
+                    onclick="togglePasswordVisibility('password')">
+              Show/Hide Password
+            </button>
+          </div>
+
+          <div class="mb-3">
+            <%= f.input :password_confirmation,
+                        required: true,
+                        input_html: { autocomplete: "new-password", class: 'form-control sans-font', id: 'password_confirmation' },
+                        label_html: { class: 'form-label' } %>
+            <button type="button" class="btn btn-secondary btn-sm mt-2"
+                    onclick="togglePasswordVisibility('password_confirmation')">
+              Show/Hide Password
+            </button>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :gender, "Gender", class: "form-label" %>
+            <%= f.select :gender,
+                         options_for_select([['Choose your gender', nil], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], @user.gender),
+                         {},
+                         class: "form-select",
+                         id: "gender" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :dob, "Date of Birth (DD/MM/YEAR)", class: "form-label" %>
+            <%= f.date_field :dob, class: "form-control", id: "dob" %>
+          </div>
+        </div>
+
+        <div class="form-actions text-center">
+          <%= f.button :submit, "Sign up", class: "btn btn-primary btn-lg" %>
+        </div>
+      <% end %>
+
+      <div class="text-center mt-3">
+        <%= render "devise/shared/links" %>
       </div>
     </div>
-
-    <div class="form-actions text-center">
-      <%= f.button :submit, "Sign up", class: "btn btn-primary btn-lg" %>
-    </div>
-  <% end %>
-
-  <div class="text-center mt-3">
-    <%= render "devise/shared/links" %>
   </div>
-</div>
-</div>
-</div>
 </div>

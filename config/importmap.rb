@@ -12,3 +12,5 @@ pin 'jquery' # @3.7.1
 pin 'chartkick', to: 'chartkick.js'
 pin 'Chart.bundle', to: 'Chart.bundle.js'
 pin 'ahoy', to: 'ahoy.js'
+pin "password_toggle", preload: true
+
