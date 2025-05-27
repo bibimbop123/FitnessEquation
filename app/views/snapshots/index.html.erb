@@ -1,31 +1,57 @@
-<div class="text-center custom-rose-red-bg fitness-font">
-  <br/>
-  <h1>Weight Gain/Loss Snapshots</h1>
+<div class="text-center custom-rose-red-bg fitness-font py-5">
+  <div class="container">
+    <h1 class="display-4 mb-4">Weight Gain & Loss Snapshots</h1>
 
-  <br/>
+    <div class="mb-5">
+      <%= image_tag "moe.webp", alt: "Progress Visual", class: "img-fluid rounded shadow-lg", style: 'max-width: 80%;' %>
+    </div>
 
-  <%= image_tag "moe.webp", alt: "moe", class:"img-fluid my-5 w-80", style: 'border-radius: 15px;'%>
-  <br/>
-  <br/>
-  <div id="snapshots" class="container">
-    <br/>
-    <div class="row sans-font">
-      <% @snapshots.each do |snapshot| %>
-        <div class="col-md-4 mb-4 custom-rose-red-bg">
-          <div class="card custom-red-border custom-energize-green-bg">
-            <div class="card-body text-center">
-              <% cache(snapshot) do %>
-                <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: (snapshot.weight_kg / 0.453592).round(2), height_feet: (snapshot.height_cm / 30.48).to_i, height_inches: ((snapshot.height_cm / 2.54) % 12).round(2), goal_weight_lbs: (snapshot.goal_weight_kg / 0.453592).round(2) } %>
-                <p>
-                  <%= link_to "Show this snapshot", snapshot, class: "btn btn-primary" %>
-                </p>
-              <% end %>
+    <div id="snapshotCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% @snapshots.each_with_index do |snapshot, index| %>
+          <% weight_lbs = (snapshot.weight_kg / 0.453592).round(2) %>
+          <% height_ft = (snapshot.height_cm / 30.48).to_i %>
+          <% height_in = ((snapshot.height_cm / 2.54) % 12).round(2) %>
+          <% goal_lbs = (snapshot.goal_weight_kg / 0.453592).round(2) %>
+
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+            <div class="d-flex justify-content-center">
+              <div class="card custom-energize-green-bg border-0 shadow-lg p-4" style="max-width: 500px; width: 100%;">
+                <div class="card-body text-center">
+                  <% cache(snapshot) do %>
+                    <%= render partial: 'snapshot', locals: { snapshot: snapshot, weightLbs: weight_lbs, height_feet: height_ft, height_inches: height_in, goal_weight_lbs: goal_lbs } %>
+                  <% end %>
+
+                  <div class="mt-3">
+                    <%= link_to "View Snapshot", snapshot, class: "btn btn-outline-primary btn-sm" %>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#snapshotCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#snapshotCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+
+      <!-- Optional Indicators -->
+      <div class="carousel-indicators mt-4">
+        <% @snapshots.each_with_index do |_, index| %>
+          <button type="button" data-bs-target="#snapshotCarousel" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="<%= 'true' if index == -1 %>" aria-label="Slide <%= index - 1 %>"></button>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <%= link_to "Create New Snapshot", new_snapshot_path, class: "btn btn-success btn-lg" %>
     </div>
   </div>
-
-  <%= link_to "New snapshot", new_snapshot_path %>
 </div>

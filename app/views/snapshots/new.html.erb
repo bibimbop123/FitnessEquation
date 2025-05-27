@@ -1,164 +1,95 @@
-<div class="custom-rose-red-bg">
-  <div class="container custom-rose-red-bg">
-    <div class="container text-center fitness-font custom-rose-red-bg">
-      <br/>
-      <div class="container mt-5">
-        <% if @snapshot.errors.any? %>
-          <div class="card my-4">
-            <div class="card-header bg-danger text-white">
-              <h2><%= pluralize(@snapshot.errors.count, "error") %> prohibited this snapshot from being saved:</h2>
-            </div>
-            <div class="card-body">
-              <ul>
-                <% @snapshot.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
+<div class="custom-rose-red-bg py-5">
+  <div class="container text-center fitness-font">
+       <h1 class="display-5 fw-bold">Progress Predictor</h1>
+
+    <!-- Error Handling -->
+    <% if @snapshot.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(@snapshot.errors.count, "error") %> prevented this snapshot from being saved:</h4>
+        <ul>
+          <% @snapshot.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- CTA Button -->
+    <button type="button" class="btn btn-lg btn-primary my-4 custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#formModal">
+      Calculate Weight Gain/Loss Prediction
+    </button>
+
+    <!-- Image -->
+    <div class="my-5">
+      <%= image_tag 'weight.gif', alt: 'Weight fluctuation', class: 'img-fluid rounded shadow', style: 'max-width: 60%;' %>
+    </div>
+
+    <!-- Info Modal Trigger -->
+    <button type="button" class="btn btn-lg btn-outline-dark custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#infoModal">
+      The Secret to Weight Predictions
+    </button>
+
+    <!-- Info Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content fitness-font">
+          <div class="modal-header">
+            <h5 class="modal-title" id="infoModalLabel">Weight Gain/Loss Prediction Information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        <% end %>
-        <br/>
-        <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#formModal">
-          Calculate Weight Gain/Loss Prediction
-        </button>
-
-        <br/>
-        <br/>
-
-      <%= image_tag 'weight.gif', alt: 'Weight fluctuation', class: 'img-fluid my-5 w-60', style: 'border-radius: 15px;', role: 'img' %>
-      <div class="container custom-orange-bg">
-        <div class="container text-center fitness-font">
-
-            <br/>
-
-            <button type="button" class="btn btn-primary btn-lg custom-fitness-btn" data-bs-toggle="modal" data-bs-target="#infoModal">
-              The Secret to Weight Predictions
-            </button>
-
-            <br/>
-            <br/>
-
-            <!-- Modal -->
-            <div class="modal fade fitness-font" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="infoModalLabel"> Weight Gain/Loss Prediction Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="alert alert-warning" role="alert">
-                      <strong>Disclaimer:</strong> The information provided here is for educational purposes only and should not be considered as medical advice. Always consult with a healthcare professional before making any changes to your diet or exercise routine.
-                    </div>
-                    <h1 class="display-4">To Estimate Your Weight Gain/Loss Snapshot:</h1>
-                    <h2 class="mt-4">Calculate your Basal Metabolic Rate</h2>
-
-                    <h3 class="instruction-font">The Basal Metabolic Rate (BMR) is the number of calories your body needs to perform basic life-sustaining functions (breathing, circulation, cell production, etc.) at rest.</h3>
-
-                    <h3 class="mt-4">Mifflin-St Jeor Equation</h3>
-
-                    <h1 class="mt-4">To calculate BMR, use this formula:</h1>
-
-                    <%= image_tag 'Mifflin.png', alt: 'Mifflin-St Jeor Equation', class: 'img-fluid custom-green-border my-4' %>
-
-                    <h2>Total Daily Energy Expenditure (TDEE) is the number of calories your body uses per day.</h2>
-
-                    <h4>To lose weight, you need to consume fewer calories than your TDEE. To gain weight, you need to consume more calories than your TDEE.</h4>
-
-                    <h1 class="mt-4">To calculate TDEE, use this formula:</h1>
-
-                    <%= image_tag 'tdee.png', alt: 'Total Daily Energy Expenditure', class: 'img-fluid custom-green-border my-4' %>
-
-                    <h1 class="mt-4">To calculate predicted weight loss time in weeks, use this formula:</h1>
-
-                    <%= image_tag 'predictedwlosstime.png', alt: 'Predicted Weight Loss Time Formula', class: 'img-fluid custom-green-border my-4' %>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
+          <div class="modal-body text-start">
+            <div class="alert alert-warning">
+              <strong>Disclaimer:</strong> This tool is for educational purposes only. Consult a healthcare provider before making dietary or training changes.
             </div>
 
-            <div class="text-center">
-              <br/>
-            </div>
+            <h3 class="mb-4">How It Works</h3>
 
-            <!-- Modal -->
-            <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="formModalLabel">Input Your Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="alert alert-info" role="alert">
-                      <strong>Note:</strong>
-                      <strong>Please input your details accurately to get the best weight gain/loss prediction.</strong>
-                    </div>
+            <h4>1. Basal Metabolic Rate (BMR)</h4>
+            <p>The number of calories your body needs to function at rest.</p>
 
-                    <%= simple_form_for(@snapshot, html: { id: 'userForm' }) do |f| %>
-                      <% if @snapshot.errors.any? %>
-                        <div id="error_explanation">
-                          <h2><%= pluralize(@snapshot.errors.count, "error") %> prohibited this snapshot from being saved:</h2>
-                          <ul>
-                            <% @snapshot.errors.full_messages.each do |msg| %>
-                              <li><%= msg %></li>
-                            <% end %>
-                          </ul>
-                        </div>
-                      <% end %>
-                      <div class="mb-3">
-                        <%= f.label :weight_kg, "Weight (in lbs)", class: "form-label" %>
-                        <div class="form-group d-flex">
-                          <%= number_field_tag "snapshot[weightLbs]", nil, class: "form-control me-2", id: "weightLbs", min: 0, placeholder: "Pounds", required: true %>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <%= f.label :height_cm, "Height (in feet and inches)", class: "form-label" %>
-                        <div class="form-group d-flex">
-                          <%= number_field_tag "snapshot[heightFeet]", nil, class: "form-control me-2", id: "heightFeet", min: 0, placeholder: "Feet", required: true %>
-                          <%= number_field_tag "snapshot[heightInches]", nil, class: "form-control", id: "heightInches", min: 0, step: 0.5, placeholder: "Inches", required: true %>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <%= f.label :activity_level, "Activity Level", class: "form-label"%>
-                        <%= f.select :activity_level, options_for_select([
-                      ['Sedentary (Little to no physical activity)', 'sedentary'],
-                      ['Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)', 'lightly_active'],
-                      ['Moderately Active (Moderate exercise or sports 3-5 days per week)', 'moderately_active'],
-                      ['Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)', 'very_active'],
-                      ['Super Active (Very intense exercise, physical training twice daily, or an extremely physically demanding job)', 'super_active']
-                    ]), {}, class: "form-select", id: "activityLevel" %>
-                      </div>
-                      <div class="mb-3">
-                        <%= f.label :goal_weight_lbs, "Goal Weight (in lbs)", class: "form-label" %>
-                        <div class="form-group d-flex">
-                          <%= number_field_tag "snapshot[goal_weight_lbs]", nil, class: "form-control me-2", id: "goalWeightLbs", min: 0, placeholder: "Pounds", required: true %>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <%= f.label :calorie_deficit_or_surplus_per_day, "Calorie Deficit or Surplus per Day", class: "form-label" %>
-                        <%= f.number_field :calorie_deficit_or_surplus_per_day, class: "form-control", id: "calorieDeficitorSurplusPerDay", placeholder: "Use - for deficit, + for surplus", required: true %>
-                      </div>
-                      <div class="form-actions">
-                        <%= f.button :submit, "Calculate Snapshot", class: "btn btn-primary" %>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <h5>Mifflin-St Jeor Formula:</h5>
+            <%= image_tag 'Mifflin.png', alt: 'Mifflin-St Jeor Equation', class: 'img-fluid custom-green-border my-4' %>
 
-            <div class="text-center">
-              <%= link_to "Back to snapshots", snapshots_path %>
-            </div>
+            <h4>2. Total Daily Energy Expenditure (TDEE)</h4>
+            <p>The number of calories you burn each day based on activity level.</p>
+            <%= image_tag 'tdee.png', alt: 'Total Daily Energy Expenditure', class: 'img-fluid custom-green-border my-4' %>
 
-            <br/>
-
+            <h4>3. Predicted Weight Change Timeline</h4>
+            <%= image_tag 'predictedwlosstime.png', alt: 'Predicted Weight Loss Time', class: 'img-fluid custom-green-border my-4' %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Form Modal -->
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content fitness-font">
+          <div class="modal-header">
+            <h5 class="modal-title" id="formModalLabel">Input Your Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="alert alert-info">
+              <strong>Note:</strong> Enter accurate info to receive personalized predictions.
+            </div>
+
+            <%= render "form", snapshot: @snapshot  %>
+
+      
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back Link -->
+    <div class="text-center mt-5">
+      <%= link_to "Back to Snapshots", snapshots_path, class: "btn btn-outline-secondary" %>
+    </div>
+    
   </div>
+</div>

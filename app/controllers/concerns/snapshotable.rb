@@ -17,6 +17,7 @@ module Snapshotable
     @height_feet = show_values[:height_feet].round(0)
     @height_inches = show_values[:height_inches].round(1)
     @goal_weight_lbs = show_values[:goal_weight_lbs].round(0)
+
     @calorie_deficit_or_surplus_per_day = @snapshot.calorie_deficit_or_surplus_per_day.to_i
   end
 
@@ -75,6 +76,7 @@ module Snapshotable
   def snapshot_params
     params.require(:snapshot).permit(:weight_kg, :activity_level, :goal_weight_kg, :predicted_time_weeks,
                                      :calorie_deficit_or_surplus_per_day, :gender, :dob)
+                                     
   end
 
   def virtual_params

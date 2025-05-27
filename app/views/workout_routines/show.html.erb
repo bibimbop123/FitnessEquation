@@ -40,12 +40,73 @@
               <% end %>
             </tbody>
           </table>
+
+          <p><strong>Mood:</strong> <%= @workout_routine.mood %></p>
+          <p><strong>Sleep Quality:</strong> <%= @workout_routine.sleep_quality %></p>
+          <p><strong>Soreness:</strong> <%= @workout_routine.soreness %></p>
         </div>
       </div>
 
       <div class="container mt-5">
         <h1>Total Volume Lifted: <%= @workout_routine.total_volume %> lbs</h1>
       </div>
+
+      <div class="container mt-5">
+       <div class="container mt-5">
+   <div class="card shadow-lg border-success aggressive-pop1">
+      <div class="card-body">
+        <h2 class="card-title text-success fw-bold">🔥 Burnout Metrics</h2>
+
+        <p><strong>Acute Load:</strong> <%= @workout_routine.acute_load %> lbs</p>
+        <p><strong>Chronic Load:</strong> <%= @workout_routine.chronic_load %> lbs</p>
+        <p><strong>ACWR:</strong> <%= @workout_routine.acwr.round(2) %></p>
+        <p class="text-muted small">
+          The Acute:Chronic Workload Ratio (ACWR) compares short-term training load (1 week) to long-term load (4 weeks). 
+          It helps identify sudden increases in training that may increase injury or burnout risk.
+        </p>
+
+        <p><strong>Training Stress Balance (TSB):</strong> <%= @workout_routine.tsb %> lbs</p>
+        <p class="text-muted small">
+          TSB indicates your current recovery state — calculated as Chronic Load minus Acute Load. A higher value typically means you're more recovered.
+        </p>
+
+        <ul class="list-unstyled mb-4">
+          <li><strong>✅ Positive TSB:</strong> You're well-recovered and primed for performance.</li>
+          <li><strong>⚠️ Slightly Negative TSB:</strong> Moderate fatigue — monitor your recovery.</li>
+          <li><strong>🚨 Highly Negative TSB:</strong> Elevated fatigue — consider rest to prevent overtraining.</li>
+        </ul>
+
+        <p><strong>🔥 Burnout Resilience Score:</strong> <%= @workout_routine.calculate_burnout_risk_score %> / 100</p>
+        <p class="text-muted small">
+          This score reflects your overall resilience against burnout based on your ACWR, soreness, mood, and sleep quality. 
+          <strong>Higher scores indicate better resilience and lower burnout risk.</strong>
+        </p>
+
+        <p><strong>🚦 ACWR Status:</strong> <%= @workout_routine.acwr_status %></p>
+        <p class="text-muted small">
+          This status is based on where your ACWR falls within safe training thresholds.
+        </p>
+
+        <hr>
+        <h5>📊 ACWR Interpretation Guide:</h5>
+        <ul>
+          <li><strong>Below 0.8:</strong> Undertraining — minimal performance adaptation.</li>
+          <li><strong>0.8 to 1.3:</strong> Optimal Zone — ideal load-to-recovery balance.</li>
+          <li><strong>1.3 to 1.5:</strong> Caution — performance gains possible, but fatigue may build.</li>
+          <li><strong>Above 1.5:</strong> Danger Zone — high risk of injury and burnout.</li>
+        </ul>
+
+        <h5>🔥 Burnout Resilience Score Scale:</h5>
+        <ul>
+          <li><strong>80–100:</strong> Excellent — Low burnout risk, keep training smart.</li>
+          <li><strong>60–79:</strong> Good — Manageable fatigue, monitor weekly trends.</li>
+          <li><strong>40–59:</strong> Moderate — Increased risk, recovery should be a focus.</li>
+          <li><strong>Below 40:</strong> High Risk — Prioritize rest and reduce training load.</li>
+        </ul>
+      </div>
+    </div>
+      </div>
+
       <%= link_to 'Back', workout_routines_path, class: 'btn btn-secondary' %>
     </div>
   </div>

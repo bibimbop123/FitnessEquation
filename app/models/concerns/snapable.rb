@@ -1,14 +1,39 @@
-# frozen_string_literal: true
-
 module Snapable
   extend ActiveSupport::Concern
 
-  ACTIVITY_FACTORS = {
-    'sedentary' => 1.2,
-    'lightly_active' => 1.375,
-    'moderately_active' => 1.55,
-    'very_active' => 1.725,
-    'super_active' => 1.9
+  included do
+    validates :activity_level, presence: true, inclusion: { in: ACTIVITY_FACTOR.keys.map(&:to_s) }
+  end
+
+  ACTIVITY_FACTOR = { 
+    sedentary: {
+      description: 'Sedentary (Little to no physical activity)',
+      multiplier: 1.2
+    },
+    lightly_active: {
+      description: 'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)',
+      multiplier: 1.375
+    },
+    moderately_active: {
+      description: 'Moderately Active (Moderate exercise or sports 3-5 days per week)',
+      multiplier: 1.55
+    },
+    very_active: {
+      description: 'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)',
+      multiplier: 1.725
+    },
+    super_active: {
+      description: 'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)',
+      multiplier: 1.9
+    }
+  }.freeze
+
+  PROTEIN_FACTORS = {
+    'Sedentary (Little to no physical activity)' => 0.8,
+    'Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)' => 1.0,
+    'Moderately Active (Moderate exercise or sports 3-5 days per week)' => 1.2,
+    'Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)' => 1.4,
+    'Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)' => 1.6
   }.freeze
 
   MIN_INTAKE = 250
@@ -19,60 +44,109 @@ module Snapable
       errors.add(:weight_kg, 'cannot be nil')
       return
     end
-
+  
     if goal_weight_kg.nil?
       errors.add(:goal_weight_kg, 'cannot be nil')
       return
     end
-
+  
     if calorie_deficit_or_surplus_per_day.nil?
       errors.add(:calorie_deficit_or_surplus_per_day, 'cannot be nil')
       return
     end
-
-    weight_difference = (weight_kg - goal_weight_kg).abs
-    calorie_difference_per_week = calorie_deficit_or_surplus_per_day * 7 / 7700.0
-
+  
+    # Convert kg to lbs if needed
+    weight_lb = weight_kg * 2.20462
+    goal_weight_lb = goal_weight_kg * 2.20462
+  
+    weight_difference = (weight_lb - goal_weight_lb).abs
+    calorie_difference_per_week = calorie_deficit_or_surplus_per_day * 7
+  
     return 'Indeterminate time' if calorie_difference_per_week.zero?
-
-    time_in_weeks = (weight_difference / calorie_difference_per_week).ceil
-
-    # Extract years
+  
+    time_in_weeks = (weight_difference * 3500 / calorie_difference_per_week).ceil
+  
     years = time_in_weeks / 52
     remaining_weeks = time_in_weeks % 52
-
-    # Extract months using a more precise conversion
+  
     months = (remaining_weeks / 4.345)
-    remaining_weeks = (remaining_weeks % 4.345) # Ensure we only keep the leftover weeks
-
-    # Convert any leftover weeks into days (max 6 days)
+    remaining_weeks = (remaining_weeks % 4.345)
+  
     days = ((remaining_weeks % 1) * 7)
     remaining_weeks = remaining_weeks.to_f
-
-    # Prevent cases where days roll over into a full week
+  
     if days >= 7
       remaining_weeks += 1
       days -= 7
     end
-
-    # Formatting output properly
+  
     parts = []
     parts << "#{years.round(0)} #{'year'.pluralize(years)}" if years.positive?
     parts << "#{months.round(0)} #{'month'.pluralize(months)}" if months.positive?
     parts << "#{remaining_weeks.round(0)} #{'week'.pluralize(remaining_weeks)}" if remaining_weeks.positive?
     parts << "#{days.round(0)} #{'day'.pluralize(days)}" if days.positive?
-
+  
     return '0 days' if parts.empty?
-
-    parts.join(', ').sub(/,([^,]*)$/, ', and\1') # Proper formatting for last part
+  
+    parts.join(', ').sub(/,([^,]*)$/, ', and\1')
   end
-
+  def predicted_time
+    if weight_kg.nil?
+      errors.add(:weight_kg, 'cannot be nil')
+      return
+    end
+  
+    if goal_weight_kg.nil?
+      errors.add(:goal_weight_kg, 'cannot be nil')
+      return
+    end
+  
+    if calorie_deficit_or_surplus_per_day.nil?
+      errors.add(:calorie_deficit_or_surplus_per_day, 'cannot be nil')
+      return
+    end
+  
+    # Convert kg to lbs if needed
+    weight_lb = weight_kg * 2.20462
+    goal_weight_lb = goal_weight_kg * 2.20462
+  
+    weight_difference = (weight_lb - goal_weight_lb).abs
+    calorie_difference_per_week = calorie_deficit_or_surplus_per_day * 7
+  
+    return 'Indeterminate time' if calorie_difference_per_week.zero?
+  
+    time_in_weeks = (weight_difference * 3500 / calorie_difference_per_week.abs).ceil
+  
+    years = time_in_weeks / 52
+    remaining_weeks = time_in_weeks % 52
+  
+    months = (remaining_weeks / 4.345)
+    remaining_weeks = (remaining_weeks % 4.345)
+  
+    days = ((remaining_weeks % 1) * 7)
+    remaining_weeks = remaining_weeks.to_f
+  
+    if days >= 7
+      remaining_weeks += 1
+      days -= 7
+    end
+  
+    parts = []
+    parts << "#{years.round(0)} #{'year'.pluralize(years)}" if years.positive?
+    parts << "#{months.round(0)} #{'month'.pluralize(months)}" if months.positive?
+    parts << "#{remaining_weeks.round(0)} #{'week'.pluralize(remaining_weeks)}" if remaining_weeks.positive?
+    parts << "#{days.round(0)} #{'day'.pluralize(days)}" if days.positive?
+  
+    return '0 days' if parts.empty?
+  
+    parts.join(', ').sub(/,([^,]*)$/, ', and\1')
+  end    
+  
   def bmr
     dob = user.dob
     now = Time.now.utc.to_date
     age = now.year - dob.year - (now.month > dob.month || (now.month == dob.month && now.day >= dob.day) ? 0 : 1)
     if user.gender == 'male'
-
       10 * weight_kg + 6.25 * height_cm - 5 * age + 5
     else
       10 * weight_kg + 6.25 * height_cm - 5 * age - 161
@@ -80,7 +154,10 @@ module Snapable
   end
 
   def tdee
-    bmr * ACTIVITY_FACTORS[activity_level]
+    # return nil unless bmr.present? && ACTIVITY_FACTOR[activity_level].present?
+
+    # bmr * ACTIVITY_FACTOR[activity_level][:multiplier]
+    ACTIVITY_FACTOR[activity_level.to_sym][:multiplier] * bmr
   end
 
   def ideal_body_weight_max
@@ -148,17 +225,17 @@ module Snapable
   def recommended_protein_intake_per_day(activity_level)
     case activity_level
     when :sedentary
-      weight_kg * 0.8
-    when :moderate_exercise, :endurance_athlete
-      weight_kg * 1.2
-    when :strength_training
-      weight_kg * 1.6
-    when :older_adult
-      weight_kg * 1.0
-    when :weight_loss
-      weight_kg * 2.0
+      weight_kg * PROTEIN_FACTORS['Sedentary (Little to no physical activity)']
+    when :lightly_active
+      weight_kg * PROTEIN_FACTORS['Lightly Active (Light exercise or sports 1-3 days per week or moderate physical activity)']
+    when :moderately_active
+      weight_kg * PROTEIN_FACTORS['Moderately Active (Moderate exercise or sports 3-5 days per week)']
+    when :very_active
+      weight_kg * PROTEIN_FACTORS['Very Active (Hard exercise or sports 6-7 days per week or a physically demanding job)']
+    when :super_active
+      weight_kg * PROTEIN_FACTORS['Super Active (Very intense exercise physical training twice daily or an extremely physically demanding job)']
     else
-      weight_kg * 0.8
+      weight_kg * PROTEIN_FACTORS['Sedentary (Little to no physical activity)']  # Default case
     end
   end
 
@@ -185,13 +262,13 @@ module Snapable
 
   def recommended_daily_water_intake
     return nil if weight_kg.nil?
-  
+
     base_multiplier = 35 # ml per kg
     water_intake_ml = (weight_kg * base_multiplier).round(2)
-  
+
     # Clamp to safety thresholds
     water_intake_ml = water_intake_ml.clamp(MIN_INTAKE, MAX_INTAKE)
-  
+
     # Convert ml to liters (rounded to 2 decimals)
     (water_intake_ml / 1000.0).round(2)
   rescue StandardError => e

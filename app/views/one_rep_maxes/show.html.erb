@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center custom-mist-red-bg">
     <div class="col-md-4 mb-4 custom-mist-red-bg">
       <div class="card custom-red-border">
-        <div class="card-body text-center">
+        <div class="card-body text-center aggressive-pop">
           <h3 class="card-title"><%= @one_rep_max.exercise %></h3>
           <p class="card-text">
             <strong>Weight Lifted:</strong> <%= @one_rep_max.weight_lbs %> lbs
@@ -14,13 +14,42 @@
             <strong>One-Rep Max:</strong> <%= @one_rep_max.calculate_one_rep_max %> lbs
           </p>
           <p class="card-text">
-            <strong> Relative Strength:</strong> <%= @one_rep_max.calculate_relative_strength %> lbs
+            <strong>Relative Strength:</strong> <%= @one_rep_max.calculate_relative_strength %> lbs
           </p>
         </div>
       </div>
     </div>
   </div>
-    <p>(relative strength is calculated by the last snapshots weight)</p>
+
+  <p>(relative strength is calculated by the last snapshot's weight)</p>
+
+  <div class="text-center my-5">
+    <%= image_tag 'weightzones.png', alt: '💪 Weight Training Zones Based on % of One-Rep Max (1RM)', class: 'img-fluid rounded shadow w-75' %>
+  </div>
+
+  <div class="card-body text-center aggressive-pop">
+    <h3 class="card-title"><%= @one_rep_max.exercise %></h3>
+    <p class="card-text">
+      <strong>Based on your One Rep Max, if you are training for Endurance:</strong>
+      <%= (@one_rep_max.calculate_one_rep_max * 0.65).round(2) %> - <%= (@one_rep_max.calculate_one_rep_max * 0.5).round(2) %> lbs
+    </p>
+    <p class="card-text">
+      <strong>Based on your One Rep Max, if you are training for Hypertrophy:</strong>
+      <%= (@one_rep_max.calculate_one_rep_max * 0.75).round(2) %> - <%= (@one_rep_max.calculate_one_rep_max * 0.65).round(2) %> lbs
+    </p>
+    <p class="card-text">
+      <strong>Based on your One Rep Max, if you are training for Strength:</strong>
+      <%= (@one_rep_max.calculate_one_rep_max * 0.85).round(2) %> - <%= (@one_rep_max.calculate_one_rep_max * 0.75).round(2) %> lbs
+    </p>
+    <p class="card-text">
+      <strong>Based on your One Rep Max, if you are training for Power:</strong>
+      <%= (@one_rep_max.calculate_one_rep_max * 0.95).round(2) %> - <%= (@one_rep_max.calculate_one_rep_max * 0.85).round(2) %> lbs
+    </p>
+    <p class="card-text">
+      <strong>Based on your One Rep Max, if you are training for Maximum Strength:</strong>
+      <%= @one_rep_max.calculate_one_rep_max %> lbs
+    </p>
+  </div>
 
   <div class="d-flex justify-content-center mt-4">
     <%= link_to "Back to One-Rep Maxes", one_rep_maxes_path, class: "btn btn-primary mx-2" %>
