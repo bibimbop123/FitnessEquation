@@ -19,7 +19,8 @@
                         required: false,
                         input_html: { autocomplete: "current-password", class: 'form-control sans-font', id: 'password' },
                         label_html: { class: 'form-label' } %>
-            <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="togglePasswordVisibility('password')">Show/Hide Password</button>
+          <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="togglePasswordVisibility('password')">Show/Hide Password</button>
+
           </div>
           <div class="form-check mb-3">
             <%= f.input :remember_me, as: :boolean, input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } if devise_mapping.rememberable? %>

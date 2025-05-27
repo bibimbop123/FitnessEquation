@@ -20,29 +20,27 @@
                         input_html: { autocomplete: "email", class: 'form-control sans-font' },
                         label_html: { class: 'form-label' } %>
           </div>
+        <div class="mb-3">
+          <%= f.input :password,
+                      required: true,
+                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password", class: 'form-control sans-font', id: 'password' },
+                      label_html: { class: 'form-label' } %>
+          <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="togglePasswordVisibility('password')">
+            Show/Hide Password
+          </button>
+        </div>
 
-          <div class="mb-3">
-            <%= f.input :password,
-                        required: true,
-                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                        input_html: { autocomplete: "new-password", class: 'form-control sans-font', id: 'password' },
-                        label_html: { class: 'form-label' } %>
-            <button type="button" class="btn btn-secondary btn-sm mt-2"
-                    onclick="togglePasswordVisibility('password')">
-              Show/Hide Password
-            </button>
-          </div>
+        <div class="mb-3">
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: { autocomplete: "new-password", class: 'form-control sans-font', id: 'password_confirmation' },
+                      label_html: { class: 'form-label' } %>
+          <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="togglePasswordVisibility('password_confirmation')">
+            Show/Hide Confirm
+          </button>
+        </div>
 
-          <div class="mb-3">
-            <%= f.input :password_confirmation,
-                        required: true,
-                        input_html: { autocomplete: "new-password", class: 'form-control sans-font', id: 'password_confirmation' },
-                        label_html: { class: 'form-label' } %>
-            <button type="button" class="btn btn-secondary btn-sm mt-2"
-                    onclick="togglePasswordVisibility('password_confirmation')">
-              Show/Hide Password
-            </button>
-          </div>
 
           <div class="mb-3">
             <%= f.label :gender, "Gender", class: "form-label" %>

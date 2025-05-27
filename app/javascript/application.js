@@ -45,3 +45,5 @@ import "Chart.bundle"
 document.addEventListener("DOMContentLoaded", function() {
   ahoy.track("Viewed Analytics Page");
 });
+
+import "password_toggle"
