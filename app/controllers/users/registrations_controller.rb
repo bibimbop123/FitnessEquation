@@ -17,6 +17,7 @@ module Users
 
     # GET /resource/edit
     def edit
+      # this is nice
       @breadcrumbs = [
         { content: 'Welcome', href: root_path },
         { content: 'Edit Profile' },

@@ -5,7 +5,7 @@ module Snapable
     validates :activity_level, presence: true, inclusion: { in: ACTIVITY_FACTOR.keys.map(&:to_s) }
   end
 
-  ACTIVITY_FACTOR = { 
+  ACTIVITY_FACTOR = {
     sedentary: {
       description: 'Sedentary (Little to no physical activity)',
       multiplier: 1.2
@@ -44,50 +44,50 @@ module Snapable
       errors.add(:weight_kg, 'cannot be nil')
       return
     end
-  
+
     if goal_weight_kg.nil?
       errors.add(:goal_weight_kg, 'cannot be nil')
       return
     end
-  
+
     if calorie_deficit_or_surplus_per_day.nil?
       errors.add(:calorie_deficit_or_surplus_per_day, 'cannot be nil')
       return
     end
-  
+
     # Convert kg to lbs if needed
     weight_lb = weight_kg * 2.20462
     goal_weight_lb = goal_weight_kg * 2.20462
-  
+
     weight_difference = (weight_lb - goal_weight_lb).abs
     calorie_difference_per_week = calorie_deficit_or_surplus_per_day * 7
-  
+
     return 'Indeterminate time' if calorie_difference_per_week.zero?
-  
+
     time_in_weeks = (weight_difference * 3500 / calorie_difference_per_week).ceil
-  
+
     years = time_in_weeks / 52
     remaining_weeks = time_in_weeks % 52
-  
+
     months = (remaining_weeks / 4.345)
     remaining_weeks = (remaining_weeks % 4.345)
-  
+
     days = ((remaining_weeks % 1) * 7)
     remaining_weeks = remaining_weeks.to_f
-  
+
     if days >= 7
       remaining_weeks += 1
       days -= 7
     end
-  
+
     parts = []
     parts << "#{years.round(0)} #{'year'.pluralize(years)}" if years.positive?
     parts << "#{months.round(0)} #{'month'.pluralize(months)}" if months.positive?
     parts << "#{remaining_weeks.round(0)} #{'week'.pluralize(remaining_weeks)}" if remaining_weeks.positive?
     parts << "#{days.round(0)} #{'day'.pluralize(days)}" if days.positive?
-  
+
     return '0 days' if parts.empty?
-  
+
     parts.join(', ').sub(/,([^,]*)$/, ', and\1')
   end
   def predicted_time
@@ -95,53 +95,53 @@ module Snapable
       errors.add(:weight_kg, 'cannot be nil')
       return
     end
-  
+
     if goal_weight_kg.nil?
       errors.add(:goal_weight_kg, 'cannot be nil')
       return
     end
-  
+
     if calorie_deficit_or_surplus_per_day.nil?
       errors.add(:calorie_deficit_or_surplus_per_day, 'cannot be nil')
       return
     end
-  
+
     # Convert kg to lbs if needed
     weight_lb = weight_kg * 2.20462
     goal_weight_lb = goal_weight_kg * 2.20462
-  
+
     weight_difference = (weight_lb - goal_weight_lb).abs
     calorie_difference_per_week = calorie_deficit_or_surplus_per_day * 7
-  
+
     return 'Indeterminate time' if calorie_difference_per_week.zero?
-  
+
     time_in_weeks = (weight_difference * 3500 / calorie_difference_per_week.abs).ceil
-  
+
     years = time_in_weeks / 52
     remaining_weeks = time_in_weeks % 52
-  
+
     months = (remaining_weeks / 4.345)
     remaining_weeks = (remaining_weeks % 4.345)
-  
+
     days = ((remaining_weeks % 1) * 7)
     remaining_weeks = remaining_weeks.to_f
-  
+
     if days >= 7
       remaining_weeks += 1
       days -= 7
     end
-  
+
     parts = []
     parts << "#{years.round(0)} #{'year'.pluralize(years)}" if years.positive?
     parts << "#{months.round(0)} #{'month'.pluralize(months)}" if months.positive?
     parts << "#{remaining_weeks.round(0)} #{'week'.pluralize(remaining_weeks)}" if remaining_weeks.positive?
     parts << "#{days.round(0)} #{'day'.pluralize(days)}" if days.positive?
-  
+
     return '0 days' if parts.empty?
-  
+
     parts.join(', ').sub(/,([^,]*)$/, ', and\1')
-  end    
-  
+  end
+
   def bmr
     dob = user.dob
     now = Time.now.utc.to_date

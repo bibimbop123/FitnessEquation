@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# same here, it seems like this should just be a controller
 module SetOneRepMaxConcern
   extend ActiveSupport::Concern
 
