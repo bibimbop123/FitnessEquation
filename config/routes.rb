@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # Root route
   root 'application#home'
 
+  get '/donate', to: 'pages#donate'
   # Devise routes for user authentication
   devise_for :users, controllers: {
     registrations: 'users/registrations'
@@ -38,4 +39,6 @@ Rails.application.routes.draw do
 
   # Activities routes
   get 'activities/index'
+
+
 end
