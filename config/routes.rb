@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   # Analytics routes
   get 'analytics', to: 'analytics#index'
+
+  # I recommend using snake case
   get 'ahoyanalytics', to: 'analytics#ahoyanalytics'
 
   # Activities routes

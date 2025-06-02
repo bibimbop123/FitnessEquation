@@ -11,6 +11,7 @@ module Analyticable
     @total_volume_lifted = @workout_routines.joins(:exercises).sum('exercises.sets * exercises.reps * exercises.weight')
     @one_rep_maxes = OneRepMax.where(user: current_user)
 
+    # NOTE: seems like these queries could be in the model
     # Chartkick data
     @weight_data = @snapshots.map { |snapshot| [snapshot.created_at, (snapshot.weight_kg / 0.453592).round(2)] }
     @one_rep_max_data = @one_rep_maxes.map { |one_rep_max| [one_rep_max.created_at, one_rep_max.calculate_one_rep_max] }

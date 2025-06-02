@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# nice hack 😄
 class KeepAliveJob < ApplicationJob
   queue_as :default
 

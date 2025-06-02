@@ -1,0 +1,1 @@
+like that these files are all lower case. I recommend keeping a consistent naming scheme (eg all 1 word or snake case, etc.)
